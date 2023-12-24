@@ -1,114 +1,48 @@
 import { useState } from 'react';
 import Cabecalho from '../../components/cabecalho';
 import './index.scss';
+import { estruturaObjeto } from '../../api/jsonAPI';
+import Collection from '../../components/collection';
 
 export default function Landpage() {
 
     const [jsonString, setJsonString] = useState('');
-    const [jsonObj, setJsonObj] = useState({});
+    const [jsonObj, setJsonObj] = useState();
 
-    function tipoValor(valor) {
-        let tipo = typeof (valor);
+    async function buscarEstruturaObjeto() {
+        try {
+            let object = await estruturaObjeto(JSON.parse(jsonString));
+            console.log(object);
+            setJsonObj(object);
 
-        if (tipo === 'object' && valor.length) {
-            return 'array'
-        } else {
-            return tipo;
+        } catch (error) {
+            console.log(error);
         }
-    }
-
-    function construirModelo(objeto, nivel, nome) {
-
-        console.log(objeto, nivel, nome);
-
-        if (tipoValor(objeto) === 'array') {
-            return (
-                // retornar um componente especial com filhos caso seja um array
-                <Array nome={nome}>
-                    {objeto.map(item => {
-                        if (tipoValor(item) === 'array' || tipoValor(item) === 'object') {
-                            return construirModelo(item, nivel + 1)
-                        }
-
-                        return (
-                            <li>{item}</li>
-                        )
-                    }
-                    )
-                    }
-                </Array>
-            )
-        }
-
-        if (tipoValor(objeto) === 'object' && nivel > 1) {
-            //retornar um componente especial com filhos caso seja um objeto filho
-            console.log(objeto);
-
-            return (
-                <NestedObject nome={nome}>
-                    {Object.keys(objeto).map(chave => {
-                        if (tipoValor(objeto[chave]) === 'array' || tipoValor(objeto[chave]) === 'object') {
-                            return construirModelo(objeto[chave], nivel + 1, chave)
-                        }
-
-                        return (
-                            <li>{chave}: {objeto[chave]}</li>
-                        )
-                    }
-                    )
-                    }
-                </NestedObject>
-            )
-        }
-
-        return Object.keys(objeto).map(chave => {
-            if (tipoValor(objeto[chave]) === 'array' || tipoValor(objeto[chave]) === 'object') {
-                return construirModelo(objeto[chave], nivel + 1, chave)
-            }
-
-            return (
-                <li>
-                    {chave}: {objeto[chave]}
-                </li>
-            )
-        }
-        )
     }
 
     return (
-        <div className="pagina landpage">
+        <div className="pagina pagina-landpage">
             <Cabecalho />
 
-            <textarea placeholder='Escreva seu JSON aqui!' value={jsonString} onChange={e => setJsonString(e.target.value)} />
+            <main>
+                <h1>Create models from JSON Objects!</h1>
+                <h2>Insert a JSON Object below to create a model from it.</h2>
 
-            <button onClick={() => setJsonObj(JSON.parse(jsonString))}>funcionar</button>
+                <div className='json-textarea'>
+                    <textarea rows="20" value={jsonString} onChange={e => setJsonString(e.target.value)} />
 
-            <ul>
-                {construirModelo(jsonObj, 1)}
-            </ul>
+                    <button onClick={buscarEstruturaObjeto}>
+                        <img src="/assets/images/right-arrow.svg" alt="" />
+                    </button>
+                </div>
 
+                    {jsonObj &&
+                        <div className='modelo-result'>
+                            <Collection data={jsonObj} />
+                        </div>
+                    }  
+                
+            </main>
         </div>
     )
-
-    function Array({ children, nome }) {
-        return (
-            <li>
-                <h4>{nome}</h4>
-                <ol>
-                    {children}
-                </ol>
-            </li>
-        )
-    }
-
-    function NestedObject({ children, nome }) {
-        return (
-            <li>
-                <h4>{nome}</h4>
-                <ul>
-                    {children}
-                </ul>
-            </li>
-        )
-    }
 }
