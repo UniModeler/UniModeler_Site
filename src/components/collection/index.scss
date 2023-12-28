@@ -31,13 +31,11 @@
         align-items: center;
         width: 100%;
 
-        padding: 0 11px;
-
         > div {
             width: 100%;
             display: flex;
-            padding: 7px 0;
             justify-content: space-between;
+            padding: 7px 11px;
 
             > div {
                 display: flex;
@@ -49,19 +47,22 @@
                 margin-right: 10px;
             }
 
-            h3, h4 {
+            h3, h4, span {
                 font-size: 12px;
                 font-weight: 700;
             }
 
-            h4 {
+            h4, span {
                 font-style: italic;
+            }
+
+            span {
+                margin-left: 10px;
             }
         }
 
-        .collection-field {
+        > .collection-field {
             padding: 0;
-            padding-left: 16px;
         }
     }    
 }

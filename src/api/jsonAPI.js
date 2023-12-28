@@ -1,7 +1,7 @@
 import api from "./apiURL";
 
-export async function estruturaObjeto(obj) {
-    let resp = await api.post('/structure', obj);
+export async function estruturaObjeto(jsString) {
+    let resp = await api.post('/structure', {jsString: jsString});
 
     return resp.data;
 }

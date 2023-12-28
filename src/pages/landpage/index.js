@@ -6,14 +6,13 @@ import Collection from '../../components/collection';
 
 export default function Landpage() {
 
-    const [jsonString, setJsonString] = useState('');
-    const [jsonObj, setJsonObj] = useState();
+    const [jsString, setJsString] = useState('');
+    const [model, setModel] = useState();
 
     async function buscarEstruturaObjeto() {
         try {
-            let object = await estruturaObjeto(JSON.parse(jsonString));
-            console.log(object);
-            setJsonObj(object);
+            let modelInfo = await estruturaObjeto(jsString);
+            setModel(modelInfo)
 
         } catch (error) {
             console.log(error);
@@ -29,16 +28,16 @@ export default function Landpage() {
                 <h2>Insert a JSON Object below to create a model from it.</h2>
 
                 <div className='json-textarea'>
-                    <textarea rows="20" value={jsonString} onChange={e => setJsonString(e.target.value)} />
+                    <textarea rows="20" value={jsString} onChange={e => setJsString(e.target.value)} />
 
                     <button onClick={buscarEstruturaObjeto}>
                         <img src="/assets/images/right-arrow.svg" alt="" />
                     </button>
                 </div>
 
-                    {jsonObj &&
+                    {model &&
                         <div className='modelo-result'>
-                            <Collection data={jsonObj} />
+                            <Collection data={model} />
                         </div>
                     }  
                 
