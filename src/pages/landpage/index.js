@@ -4,10 +4,17 @@ import './index.scss';
 import { estruturaObjeto } from '../../api/jsonAPI';
 import Collection from '../../components/collection';
 
+import { toPng } from 'html-to-image';
+import download from 'downloadjs';
+import { useXarrow } from 'react-xarrows';
+
 export default function Landpage() {
 
     const [jsString, setJsString] = useState('');
     const [model, setModel] = useState();
+    const [showButton, setShowButton] = useState(true);
+
+    const updateXarrow = useXarrow();
 
     async function buscarEstruturaObjeto() {
         try {
@@ -17,6 +24,19 @@ export default function Landpage() {
         } catch (error) {
             console.log(error);
         }
+    }
+
+    function baixarImagem() {
+        setShowButton(false);
+
+        setTimeout(() => {
+            toPng(document.getElementById('schema'))
+                .then(function (dataUrl) {
+                    download(dataUrl, 'schema.png');
+                });
+                
+            setShowButton(true);
+        }, 2000)        
     }
 
     return (
@@ -35,12 +55,16 @@ export default function Landpage() {
                     </button>
                 </div>
 
-                    {model &&
-                        <div className='modelo-result'>
-                            <Collection data={model} />
-                        </div>
-                    }  
-                
+                {model &&
+                    <div className='modelo-result' id='schema' onMouseMove={updateXarrow}>
+                        <button onClick={baixarImagem} style={{display: showButton ? 'flex' : 'none'}}>
+                            <img src="/assets/images/image.svg" alt="" />
+                        </button>
+
+                        <Collection data={model} />
+                    </div>
+                }
+
             </main>
         </div>
     )
