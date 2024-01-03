@@ -61,7 +61,9 @@ export default function Landpage() {
                             <img src="/assets/images/image.svg" alt="" />
                         </button>
 
-                        <Collection data={model} />
+                        {model.map(entity => 
+                            <Collection entity={entity} />
+                        )}
                     </div>
                 }
 

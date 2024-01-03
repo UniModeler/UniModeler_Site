@@ -13,6 +13,8 @@ export default function Arrow({ prop, collectionName }) {
                 end={`${collectionName}_${prop.name}`}
                 color={corSeta}
                 dashness={{ strokeLen: 10, nonStrokeLen: 5, animation: 5 }}
+                startAnchor={['right', 'left']}
+                endAnchor={['right', 'left']}
             />    
         </Xwrapper> 
     )
