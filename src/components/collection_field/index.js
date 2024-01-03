@@ -4,16 +4,16 @@ import Arrow from "./arrow";
 import { typeFormat } from "../../api/generalFunctions";
 import { useXarrow } from "react-xarrows";
 
-export default function CollectionField({ atributos, collectionName, nestLevel, updateHeight }) {
+export default function CollectionField({ atributos, collectionName, nestLevel }) {
 
     if (!nestLevel) nestLevel = 0;
 
     return atributos.map(prop =>
-        <CollectionCell prop={prop} collectionName={collectionName} nestLevel={nestLevel} updateHeight={updateHeight}/>
+        <CollectionCell prop={prop} collectionName={collectionName} nestLevel={nestLevel}/>
     )
 }
 
-function CollectionCell({ prop, collectionName, nestLevel, updateHeight }) {
+function CollectionCell({ prop, collectionName, nestLevel }) {
 
     const [showAttributes, setShowAttributes] = useState(false);
     const [showDescription, setShowDescription] = useState(false);
@@ -40,7 +40,7 @@ function CollectionCell({ prop, collectionName, nestLevel, updateHeight }) {
 
                 <div className="type">
                     {prop.attributes &&
-                        <button onClick={() => { setShowAttributes(!showAttributes); updateXarrow(); updateHeight(); }}>
+                        <button onClick={() => { setShowAttributes(!showAttributes); updateXarrow(); }}>
                             <img src={showAttributes ?
                                 '/assets/images/arrow-down.svg' :
                                 '/assets/images/arrow-right.svg'
@@ -57,7 +57,7 @@ function CollectionCell({ prop, collectionName, nestLevel, updateHeight }) {
                 <Arrow prop={prop} collectionName={collectionName} />
             }
 
-            {prop.attributes && showAttributes && <CollectionField atributos={prop.attributes} collectionName={collectionName} nestLevel={nestLevel + 1} updateHeight={updateHeight}/>}
+            {prop.attributes && showAttributes && <CollectionField atributos={prop.attributes} collectionName={collectionName} nestLevel={nestLevel + 1}/>}
         </div>
     )
 }

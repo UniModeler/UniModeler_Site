@@ -7,6 +7,7 @@ import Collection from '../../components/collection';
 import { toPng } from 'html-to-image';
 import download from 'downloadjs';
 import { useXarrow } from 'react-xarrows';
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 export default function Landpage() {
 
@@ -15,6 +16,10 @@ export default function Landpage() {
     const [showButton, setShowButton] = useState(true);
 
     const updateXarrow = useXarrow();
+
+    const [disableZoom, setDisableZoom] = useState(false);
+    const disable = () => setDisableZoom(true);
+    const enable = () => setDisableZoom(false);
 
     async function buscarEstruturaObjeto() {
         try {
@@ -34,9 +39,9 @@ export default function Landpage() {
                 .then(function (dataUrl) {
                     download(dataUrl, 'schema.png');
                 });
-                
+
             setShowButton(true);
-        }, 2000)        
+        }, 2000)
     }
 
     return (
@@ -56,15 +61,21 @@ export default function Landpage() {
                 </div>
 
                 {model &&
-                    <div className='modelo-result' id='schema' onMouseMove={updateXarrow}>
-                        <button onClick={baixarImagem} style={{display: showButton ? 'flex' : 'none'}}>
-                            <img src="/assets/images/image.svg" alt="" />
-                        </button>
+                    <section className="sec-schema">
+                        <TransformWrapper disabled={disableZoom} minScale={0.2} initialPositionX={0}>
+                            <TransformComponent>
+                                <div className='modelo-result' id='schema' onMouseMove={updateXarrow}>
+                                    <button onClick={baixarImagem} style={{ display: showButton ? 'flex' : 'none' }}>
+                                        <img src="/assets/images/image.svg" alt="" />
+                                    </button>
 
-                        {model.map(entity => 
-                            <Collection entity={entity} />
-                        )}
-                    </div>
+                                    {model.map(entity =>
+                                        <Collection entity={entity} disableZoom={disable} enableZoom={enable} />
+                                    )}
+                                </div>
+                            </TransformComponent>
+                        </TransformWrapper>
+                    </section>
                 }
 
             </main>
