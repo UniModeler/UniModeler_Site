@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Cabecalho from '../../components/cabecalho';
 import './index.scss';
-import { estruturaObjeto } from '../../api/jsonAPI';
+import { estruturaObjeto } from '../../api/structuresAPI';
 import CollectionsFlow from './collectionsFlow';
 import { ReactFlowProvider } from 'reactflow';
 

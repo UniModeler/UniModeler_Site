@@ -2,28 +2,18 @@ import { useEffect } from "react";
 import ReactFlow, { Background, useNodesState, useReactFlow } from "reactflow";
 import 'reactflow/dist/style.css'
 import Collection from "../../components/collection";
+import { createCollectionNodes } from "../../api/structuresAPI";
 
-const nodeTypes = {collectionNode: Collection};
+const nodeTypes = {collection: Collection};
 
 export default function CollectionsFlow({ structure }) {
 
     const [nodes, setNodes, onNodesChange] = useNodesState([]);
 
     useEffect(() => {
-      let nodes = [];
-      let id = 1;
+      let nodes = createCollectionNodes(structure);
 
-      structure.forEach(entity => {
-        nodes.push({
-            id: String(id),
-            position: {x: 300 * (id - 2), y: 0},
-            type: 'collectionNode',
-            data: entity
-        })
-
-        id++;
-      });      
-
+      console.log(nodes);
       setNodes(nodes);
 
     }, [structure])
