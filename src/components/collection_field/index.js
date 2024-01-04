@@ -1,15 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CollectionIcon from "../collection_icon";
-import Arrow from "./arrow";
 import { typeFormat } from "../../api/generalFunctions";
-import { useXarrow } from "react-xarrows";
 
 export default function CollectionField({ atributos, collectionName, nestLevel }) {
 
     if (!nestLevel) nestLevel = 0;
 
     return atributos.map(prop =>
-        <CollectionCell prop={prop} collectionName={collectionName} nestLevel={nestLevel}/>
+        <CollectionCell prop={prop} collectionName={collectionName} nestLevel={nestLevel} />
     )
 }
 
@@ -18,14 +16,32 @@ function CollectionCell({ prop, collectionName, nestLevel }) {
     const [showAttributes, setShowAttributes] = useState(false);
     const [showDescription, setShowDescription] = useState(false);
 
-    const updateXarrow = useXarrow();
+    const [id, setId] = useState('');
+
+    useEffect(() => { 
+        let id;
+
+        if (prop.key) {
+            id = collectionName;
+
+            if (prop.references) {
+                id += '_foreign_key';
+            }
+            else {
+                id += '_primary_key';
+            }
+        }
+
+        setId(id);
+
+    }, [collectionName, prop]);
 
     return (
         <div className="collection-field">
 
             <div style={{ paddingLeft: `${11 + 28 * nestLevel}px` }}
-                 id={prop.key && `${collectionName}_${prop.name}`}
-                 className={showDescription && "description"}
+                id={id}
+                className={showDescription && "description"}
             >
                 <div className="name">
                     <CollectionIcon prop={prop} />
@@ -40,7 +56,7 @@ function CollectionCell({ prop, collectionName, nestLevel }) {
 
                 <div className="type">
                     {prop.attributes &&
-                        <button onClick={() => { setShowAttributes(!showAttributes); updateXarrow(); }}>
+                        <button onClick={() => setShowAttributes(!showAttributes)}>
                             <img src={showAttributes ?
                                 '/assets/images/arrow-down.svg' :
                                 '/assets/images/arrow-right.svg'
@@ -53,11 +69,7 @@ function CollectionCell({ prop, collectionName, nestLevel }) {
                 </div>
             </div>
 
-            {prop.key === 'foreign key' &&
-                <Arrow prop={prop} collectionName={collectionName} />
-            }
-
-            {prop.attributes && showAttributes && <CollectionField atributos={prop.attributes} collectionName={collectionName} nestLevel={nestLevel + 1}/>}
+            {prop.attributes && showAttributes && <CollectionField atributos={prop.attributes} collectionName={collectionName} nestLevel={nestLevel + 1} />}
         </div>
     )
 }
