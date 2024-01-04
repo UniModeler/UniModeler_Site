@@ -2,17 +2,19 @@ import { useState } from 'react';
 import Cabecalho from '../../components/cabecalho';
 import './index.scss';
 import { estruturaObjeto } from '../../api/jsonAPI';
-import Collection from '../../components/collection';
+import CollectionsFlow from './collectionsFlow';
+import { ReactFlowProvider } from 'reactflow';
+
 
 export default function WorkStation() {
 
     const [jsString, setJsString] = useState('');
-    const [model, setModel] = useState();
+    const [structure, setStructure] = useState();
 
     async function buscarEstruturaObjeto() {
         try {
-            let modelInfo = await estruturaObjeto(jsString);
-            setModel(modelInfo)
+            let struct = await estruturaObjeto(jsString);
+            setStructure(struct)
 
         } catch (error) {
             console.log(error);
@@ -24,9 +26,6 @@ export default function WorkStation() {
             <Cabecalho />
 
             <main>
-                <h1>Create models from JSON Objects!</h1>
-                <h2>Insert a JSON Object below to create a model from it.</h2>
-
                 <div className='json-textarea'>
                     <textarea rows="20" value={jsString} onChange={e => setJsString(e.target.value)} />
 
@@ -35,15 +34,16 @@ export default function WorkStation() {
                     </button>
                 </div>
 
-                {model &&
-                    <section className="sec-schema">
-                        <div className='modelo-result'>
-                            {model.map(entity =>
-                                <Collection entity={entity} />
-                            )}
-                        </div>
-                    </section>
-                }
+                <ReactFlowProvider>
+                    {structure &&
+                        <section className="sec-schema">
+                            <div className='modelo-result'>
+                                <CollectionsFlow structure={structure} />
+                            </div>
+                        </section>
+                    }    
+                </ReactFlowProvider>
+                
             </main>
         </div>
     )
