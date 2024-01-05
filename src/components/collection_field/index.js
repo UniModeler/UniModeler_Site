@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import CollectionIcon from "../collection_icon";
 import { typeFormat } from "../../api/generalFunctions";
 
@@ -20,7 +20,7 @@ function CollectionCell({ prop, collectionName, nestLevel }) {
         <div className="collection-field">
 
             <div style={{ paddingLeft: `${11 + 28 * nestLevel}px` }}
-                 className={showDescription && "description"}
+                className={showDescription && "description"}
             >
                 <div className="name">
                     <CollectionIcon prop={prop} />
@@ -48,7 +48,13 @@ function CollectionCell({ prop, collectionName, nestLevel }) {
                 </div>
             </div>
 
-            {prop.attributes && showAttributes && <CollectionField atributos={prop.attributes} collectionName={collectionName} nestLevel={nestLevel + 1} />}
+            {prop.attributes &&
+                <div style={{ display: showAttributes ? 'flex' : 'none' }}>
+                    <CollectionField atributos={prop.attributes}
+                        collectionName={collectionName}
+                        nestLevel={nestLevel + 1} />
+                </div>
+            }
         </div>
     )
 }

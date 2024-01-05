@@ -1,4 +1,6 @@
+import { MarkerType } from "reactflow";
 import api from "./apiURL";
+import randomColor from 'randomcolor';
 
 export async function estruturaObjeto(jsString) {
     let resp = await api.post('/structure', { jsString: jsString });
@@ -9,7 +11,6 @@ export async function estruturaObjeto(jsString) {
 export function createCollectionNodes(structure) {
     let nodes = [];
     let collectionCounter = 1;
-    let fieldsCounter = 1;
 
     for (let entity of structure) {
         nodes.push({
@@ -18,36 +19,42 @@ export function createCollectionNodes(structure) {
             type: 'collection',
             data: entity
         })
-        
-        createFieldNodes(entity.attributes, entity,`collection_${entity.entity}`)
+
         collectionCounter++;
     }
 
     return nodes;
+}
 
-    function createFieldNodes(attributes, entity, parentNode) {
-        for (let attribute of attributes) {
-            let id;
+export function createEdges(structure) {
+    let edges = [];
 
-            if (attribute.key) {
-                id = !attribute.references ?
-                    `${entity.entity}_primary_key` :
-                    `${entity.entity}_foreign_key_${attribute.references}`
-            } else 
-                id = String(fieldsCounter);
+    for (let collection of structure) {
+        exploreAttributes(collection.attributes, collection.entity);
+    }
 
-            nodes.push({
-                id: id,
-                type: 'default',
-                position: {x: 0, y: fieldsCounter * 30},
-                data: {label: fieldsCounter},
-                parentNode: parentNode
-            });
+    return edges;
 
-            fieldsCounter++;
+    function exploreAttributes(attributes, collectionName) {
+        for (let prop of attributes) {
+            if (prop.references) {
+                let color = randomColor({luminosity: 'dark'});
 
-            if (attribute.attributes) 
-                createFieldNodes(attribute.attributes, entity, parentNode)
+                edges.push({
+                    id: `${prop.references}-->${collectionName}_${prop.name}`,
+                    source: `collection_${prop.references}`,
+                    target: `collection_${collectionName}`,
+                    targetHandle: Math.random().toFixed(0) === '1' ? 'left' : 'right',
+                    style: { strokeWidth: '7px', stroke: color }, 
+                    markerEnd: { type: MarkerType.ArrowClosed, color: color, width: 20, heigth: 20 },
+                    animated: true,
+                    type: 'smoothstep'
+                })
+            }
+                
+            if (prop.attributes)
+                exploreAttributes(prop.attributes, collectionName)
         }
     }
 }
+

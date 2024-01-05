@@ -10,6 +10,7 @@
     "acorn": "^8.11.2",
     "axios": "^1.6.2",
     "classnames": "^2.5.1",
+    "html-to-image": "^1.11.11",
     "lodash": "^4.17.21",
     "prop-types": "^15.8.1",
     "randomcolor": "^0.6.2",

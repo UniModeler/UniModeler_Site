@@ -34,16 +34,14 @@ export default function WorkStation() {
                     </button>
                 </div>
 
-                <ReactFlowProvider>
-                    {structure &&
-                        <section className="sec-schema">
-                            <div className='modelo-result'>
-                                <CollectionsFlow structure={structure} />
-                            </div>
-                        </section>
-                    }    
-                </ReactFlowProvider>
-                
+                {structure &&
+                    <section className="sec-schema">
+                        <div className='modelo-result'>
+                            <CollectionsFlow structure={structure} />
+                        </div>
+                    </section>
+                }
+
             </main>
         </div>
     )
