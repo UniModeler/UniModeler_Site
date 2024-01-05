@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import ReactFlow, { Background, useNodesState, useReactFlow } from "reactflow";
+import ReactFlow, { Background, useNodesState } from "reactflow";
 import 'reactflow/dist/style.css'
 import Collection from "../../components/collection";
 import { createCollectionNodes } from "../../api/structuresAPI";
@@ -13,7 +13,6 @@ export default function CollectionsFlow({ structure }) {
     useEffect(() => {
       let nodes = createCollectionNodes(structure);
 
-      console.log(nodes);
       setNodes(nodes);
 
     }, [structure])

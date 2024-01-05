@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import CollectionIcon from "../collection_icon";
 import { typeFormat } from "../../api/generalFunctions";
 
@@ -16,32 +16,11 @@ function CollectionCell({ prop, collectionName, nestLevel }) {
     const [showAttributes, setShowAttributes] = useState(false);
     const [showDescription, setShowDescription] = useState(false);
 
-    const [id, setId] = useState('');
-
-    useEffect(() => { 
-        let id;
-
-        if (prop.key) {
-            id = collectionName;
-
-            if (prop.references) {
-                id += '_foreign_key';
-            }
-            else {
-                id += '_primary_key';
-            }
-        }
-
-        setId(id);
-
-    }, [collectionName, prop]);
-
     return (
         <div className="collection-field">
 
             <div style={{ paddingLeft: `${11 + 28 * nestLevel}px` }}
-                id={id}
-                className={showDescription && "description"}
+                 className={showDescription && "description"}
             >
                 <div className="name">
                     <CollectionIcon prop={prop} />
