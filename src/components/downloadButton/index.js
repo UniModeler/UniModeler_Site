@@ -10,8 +10,8 @@ function downloadImage(dataUrl) {
   a.click();
 }
 
-const imageWidth = 6144;
-const imageHeight = 4572;
+const imageWidth = 3072;
+const imageHeight = 2304;
 
 function DownloadButton() {
   const { getNodes } = useReactFlow();
