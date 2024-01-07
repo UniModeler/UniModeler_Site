@@ -24,7 +24,7 @@ export default function SideBar({ jsString, setJsString, buscarEstruturaObjeto }
 
         setTimeout(() => {
             setShowBar(true)
-        }, 300)
+        }, 500)
     }
 
     return (
@@ -48,7 +48,7 @@ export default function SideBar({ jsString, setJsString, buscarEstruturaObjeto }
             </Sidebar>
 
 
-            <Sidebar collapsed={!showMenu} collapsedWidth='0px' width='527px' transitionDuration={300}>
+            <Sidebar collapsed={!showMenu} collapsedWidth='0px' width='527px' transitionDuration={500}>
                 {menu === 'structure' &&
                     <StructureMenu jsString={jsString}
                         setJsString={setJsString}

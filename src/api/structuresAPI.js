@@ -45,8 +45,8 @@ export function createEdges(structure) {
                     source: `collection_${prop.references}`,
                     target: `collection_${collectionName}`,
                     targetHandle: Math.random().toFixed(0) === '1' ? 'left' : 'right',
-                    style: { strokeWidth: '7px', stroke: color }, 
-                    markerEnd: { type: MarkerType.ArrowClosed, color: color, width: 20, heigth: 20 },
+                    style: { strokeWidth: '3px', stroke: color }, 
+                    markerEnd: { type: MarkerType.ArrowClosed, color: color, width: 10, heigth: 10 },
                     animated: true,
                     type: 'smoothstep'
                 })

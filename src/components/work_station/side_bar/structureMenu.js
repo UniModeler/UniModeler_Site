@@ -21,6 +21,7 @@ export default function StructureMenu({jsString, setJsString, buscarEstruturaObj
                     defaultValue="// Escreva seu modelo estruturado em javascript "
                     value={jsString}
                     onChange={value => setJsString(value)}
+                    options={{minimap: {enabled: false}}}
             />
         </section>
     )
