@@ -1,19 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CollectionIcon from "../collection_icon";
-import { typeFormat } from "../../api/generalFunctions";
+import { typeFormat } from "../../../api/generalFunctions";
 
-export default function CollectionField({ atributos, collectionName, nestLevel }) {
+export default function CollectionField({ atributos, collectionName, nestLevel, allShow }) {
 
     if (!nestLevel) nestLevel = 0;
 
     return atributos.map(prop =>
-        <CollectionCell prop={prop} collectionName={collectionName} nestLevel={nestLevel} />
+        <CollectionCell prop={prop} collectionName={collectionName} nestLevel={nestLevel} allShow={allShow} />
     )
 }
 
-function CollectionCell({ prop, collectionName, nestLevel }) {
+function CollectionCell({ prop, collectionName, nestLevel, allShow }) {
 
     const [showInfo, setShowInfo] = useState(false);
+
+    useEffect(() => {
+        setShowInfo(allShow);
+    }, [allShow])
 
     return (
         <div className="collection-field">
@@ -58,7 +62,8 @@ function CollectionCell({ prop, collectionName, nestLevel }) {
             {prop.attributes && showInfo &&
                 <CollectionField atributos={prop.attributes}
                     collectionName={collectionName}
-                    nestLevel={nestLevel + 1} />
+                    nestLevel={nestLevel + 1} 
+                    allShow={allShow}/>
             }
         </div>
     )

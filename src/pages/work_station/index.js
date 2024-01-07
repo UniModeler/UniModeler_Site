@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import Cabecalho from '../../components/cabecalho';
+import Cabecalho from '../../components/work_station/cabecalho';
 import './index.scss';
 import { estruturaObjeto } from '../../api/structuresAPI';
 import CollectionsFlow from './collectionsFlow';
+import ActionsBar from '../../components/work_station/actions_bar';
+import SideBar from '../../components/work_station/side_bar';
 import { ReactFlowProvider } from 'reactflow';
-
 
 export default function WorkStation() {
 
@@ -22,27 +23,21 @@ export default function WorkStation() {
     }
 
     return (
-        <div className="pagina pagina-landpage">
-            <Cabecalho />
+        <ReactFlowProvider>
+            <div className="pagina workstation">
+                <main>
+                    <Cabecalho />
+                    <ActionsBar />
 
-            <main>
-                <div className='json-textarea'>
-                    <textarea rows="20" value={jsString} onChange={e => setJsString(e.target.value)} />
+                    <SideBar jsString={jsString}
+                        setJsString={setJsString}
+                        buscarEstruturaObjeto={buscarEstruturaObjeto}
+                    />
 
-                    <button onClick={buscarEstruturaObjeto}>
-                        <img src="/assets/images/right-arrow.svg" alt="" />
-                    </button>
-                </div>
+                </main>
 
-                {structure &&
-                    <section className="sec-schema">
-                        <div className='modelo-result'>
-                            <CollectionsFlow structure={structure} />
-                        </div>
-                    </section>
-                }
-
-            </main>
-        </div>
+                <CollectionsFlow structure={structure} />
+            </div>
+        </ReactFlowProvider>
     )
 }

@@ -1,0 +1,124 @@
+.workstation .sidebar {
+    display: flex;
+    position: absolute;
+    right: 0;
+    height: 100%;
+
+    background-color: #202020;
+    border: 2px #292929 solid;
+    border-top: none;
+
+    .sidebar-container {
+        display: flex;
+        flex-direction: column;
+
+        padding-top: 82px;
+        padding-left: 16px;
+        gap: 118px;
+        height: 100%;
+
+        >div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 35px;
+        }
+
+        .rotate-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            padding-top: 9px;
+            border-top: 5px #6B6B6B solid;
+            transform: rotate(90deg);
+
+            gap: 8px;
+            cursor: pointer;
+
+            >h3 {
+                font-size: 18px;
+                color: #DCDCDC;
+                font-weight: 400;
+            }
+        }
+    }
+
+    aside {
+        border-right: none !important;
+    
+        > div {
+            background: none !important;
+        }
+    }
+
+    .menu {
+        display: flex;
+        flex-direction: column;
+        color: #DCDCDC;
+
+        padding: 25px 18px;
+
+        > .title {
+            display: flex;
+            align-items: center;
+            width: min-content;
+
+            gap: 8px;
+            border-top: 5px solid #6B6B6B;
+            padding-top: 9px;
+            margin-bottom: 25px;
+
+            img {
+                width: 18px;
+                height: 14px;
+            }
+
+            h3 {
+                font-size: 18px;
+                font-weight: 400;
+            }
+        }
+
+        hr {
+            border: 1px #333333 solid;
+        }
+    }
+
+    .structure-menu {
+        > button {
+            background: none;
+            border: none;        
+            font-size: 14px;
+            color: #DCDCDC;
+            margin-bottom: 14px;
+
+            cursor: pointer;
+
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            width: min-content;
+
+            img {
+                width: 13px;
+                height: 13px;
+                margin-right: 4px;
+            }
+
+            h4 {
+                font-size: 14px;
+                font-weight: 400;
+            }
+        }
+
+        hr {
+            margin-bottom: 25px;
+        }
+
+        > section * {
+            font-family: inherit;
+        }
+    }
+}

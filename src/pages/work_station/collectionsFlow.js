@@ -5,7 +5,7 @@ import Collection from "../../components/collection";
 import { createCollectionNodes, createEdges } from "../../api/structuresAPI";
 import DownloadButton from "../../components/downloadButton";
 
-const nodeTypes = {collection: Collection};
+const nodeTypes = { collection: Collection };
 
 export default function CollectionsFlow({ structure }) {
 
@@ -13,30 +13,28 @@ export default function CollectionsFlow({ structure }) {
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 
     useEffect(() => {
-      let nodes = createCollectionNodes(structure);
-      let edges = createEdges(structure);  
+        if (structure) {
+            let nodes = createCollectionNodes(structure);
+            let edges = createEdges(structure);
 
-      console.log(edges);
-
-      setNodes(nodes);
-      setEdges(edges)
-
+            setNodes(nodes);
+            setEdges(edges);
+        }
     }, [structure])
 
     return (
-        <ReactFlowProvider>
-            <ReactFlow 
-                    nodes={nodes}
-                    onNodesChange={onNodesChange} 
-                    nodeTypes={nodeTypes}
-                    edges={edges}
-                    onEdgesChange={onEdgesChange}
-                    fitView
-                >
-                        
-                <Background variant='dots' gap={12} size={2} />
-                <DownloadButton />
-            </ReactFlow>    
-        </ReactFlowProvider>
+        <ReactFlow
+            nodes={nodes}
+            onNodesChange={onNodesChange}
+            nodeTypes={nodeTypes}
+            edges={edges}
+            onEdgesChange={onEdgesChange}
+            fitView
+            style={{ background: '#333333' }}
+        >
+
+            <Background variant='dots' gap={12} size={5} color="#2F2A2A" />
+            <DownloadButton />
+        </ReactFlow>
     )
 }

@@ -38,7 +38,7 @@ export function createEdges(structure) {
     function exploreAttributes(attributes, collectionName) {
         for (let prop of attributes) {
             if (prop.references) {
-                let color = randomColor({luminosity: 'dark'});
+                let color = randomColor({luminosity: 'light'});
 
                 edges.push({
                     id: `${prop.references}-->${collectionName}_${prop.name}`,

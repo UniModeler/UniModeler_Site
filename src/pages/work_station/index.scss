@@ -1,118 +1,17 @@
-.pagina-landpage {
-    color: var(--preto-textos);
+.workstation {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
 
-    >main {
-        display: flex;
-        flex-direction: column;
-        text-align: center;
-        align-items: center;
+    > main {
         width: 100%;
-
-        padding: 60px 20px;
-
-        >h1 {
-            font-size: 38px;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-
-        >h2 {
-            font-size: 22px;
-            font-weight: 400;
-            margin-bottom: 30px;
-        }
-
-        .json-textarea {
-            max-width: 1000px;
-            width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        position: absolute;
+        
+        * {
+            z-index: 1;
             position: relative;
-            margin-bottom: 60px;
-
-            >textarea {
-                width: 100%;
-                font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-                border-radius: 3px;
-
-                background-color: #464646;
-                color: #FFF;
-                padding: 10px;
-            }
-
-            >button {
-                position: absolute;
-                right: 20px;
-                bottom: 20px;
-
-                border: none;
-                background: #56E39F;
-                padding: 18px;
-                border-radius: 100px;
-
-                cursor: pointer;
-                transition: 0.3s;
-
-                >img {
-                    position: relative;
-                    left: 4px;
-                    top: 2px;
-
-                    width: 40px;
-                    height: 40px;
-                }
-            }
-
-            >button:hover {
-                transform: scale(1.05);
-            }
-        }
-
-        .sec-schema {
-            border: 1px solid #222222;
-            border-radius: 5px;
-            width: 100%;
-            position: relative;
-
-            >button {
-                position: absolute;
-                top: 15px;
-                right: 15px;
-
-                background: rgba($color: #000000, $alpha: 0.5);
-                padding: 8px;
-                border: 1px solid #000;
-                border-radius: 5px;
-
-                display: flex;
-                justify-content: center;
-                align-items: center;
-
-                z-index: 1;
-
-                cursor: pointer;
-
-                img {
-                    width: 25px;
-                    height: 25px;
-                }
-            }
-
-            >button:hover {
-                background-color: #999999;
-            }
-        }
-
-        .modelo-result {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-
-            position: relative;
-
-            padding: 8px;
-            width: 100%;
-            height: 100vh;
-            gap: 20px;
         }
     }
 }

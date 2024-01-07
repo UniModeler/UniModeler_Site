@@ -1,8 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
-
-:root{
-  --azul-claro: #DBEDF7;
-  --preto-textos: #000000e6;
+@font-face {
+  font-family: "Merge One";
+  src: url("../public/assets/fonts/MergeOne-Regular.ttf") format('truetype');
 }
 
 * {
@@ -10,15 +9,3 @@
   box-sizing: border-box;
   font-family: 'Inter';
 }
-
-.pagina {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    min-height: 100vh;
-
-    main {
-      flex-grow: 1;
-    }
-} 

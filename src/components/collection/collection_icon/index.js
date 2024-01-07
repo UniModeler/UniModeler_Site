@@ -1,5 +1,5 @@
 export default function CollectionIcon({prop}) {
-    let img = "/assets/images/icons/";
+    let img = "/assets/images/collection_icons/";
 
     if (prop.key) {
         img += prop.key === 'primary key' ? 'id.svg' : 'foreign.svg'
