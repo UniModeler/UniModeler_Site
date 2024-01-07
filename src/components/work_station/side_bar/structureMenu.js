@@ -1,9 +1,9 @@
 import Editor from '@monaco-editor/react';
 
-export default function StructureMenu({jsString, setJsString, buscarEstruturaObjeto}) {
+export default function StructureMenu({jsString, setJsString, buscarEstruturaObjeto, closeMenu}) {
     return (
         <section className="menu structure-menu">
-            <div className="title">
+            <div className="title" onClick={closeMenu}>
                 <img src="/assets/images/icons/keys.svg" alt="" />
                 <h3>Structure</h3>
             </div>

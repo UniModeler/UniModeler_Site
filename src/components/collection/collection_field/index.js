@@ -23,7 +23,7 @@ function CollectionCell({ prop, collectionName, nestLevel, allShow }) {
         <div className="collection-field">
 
             <div style={{ paddingLeft: `${11 + 28 * nestLevel}px` }}
-                className={showInfo && "description"}
+                className={showInfo ? "description" : ''}
             >
                 <div className="name">
                     <CollectionIcon prop={prop} />
