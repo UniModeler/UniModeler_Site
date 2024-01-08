@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { Sidebar } from 'react-pro-sidebar';
 import './index.scss';
 import StructureMenu from './structureMenu';
-import ObjectMenu from './objectMenu';
+import ObjectsMenu from './objectsMenu';
 
-export default function SideBar({ jsString, setJsString, buscarEstruturaObjeto }) {
+export default function SideBar({ jsString, setJsString, buscarEstruturaObjeto, structure }) {
 
     const [showBar, setShowBar] = useState(true);
     const [showMenu, setShowMenu] = useState(false);
@@ -16,7 +16,7 @@ export default function SideBar({ jsString, setJsString, buscarEstruturaObjeto }
         setTimeout(() => {
             setShowMenu(true)
             setMenu(myMenu);
-        }, 300)
+        }, 200)
     }
 
     const closeMenu = () => {
@@ -24,12 +24,12 @@ export default function SideBar({ jsString, setJsString, buscarEstruturaObjeto }
 
         setTimeout(() => {
             setShowBar(true)
-        }, 500)
+        }, 400)
     }
 
     return (
         <section className="sidebar">
-            <Sidebar collapsed={!showBar} collapsedWidth='0px' width='55px' transitionDuration={300}>
+            <Sidebar collapsed={!showBar} collapsedWidth='0px' width='55px' transitionDuration={200}>
                 <div className='sidebar-container'>
                     <div>
                         <div className='rotate-container' onClick={() => openMenu('structure')}>
@@ -48,16 +48,16 @@ export default function SideBar({ jsString, setJsString, buscarEstruturaObjeto }
             </Sidebar>
 
 
-            <Sidebar collapsed={!showMenu} collapsedWidth='0px' width='527px' transitionDuration={500}>
+            <Sidebar collapsed={!showMenu} collapsedWidth='0px' width='527px' transitionDuration={400}>
                 {menu === 'structure' &&
                     <StructureMenu jsString={jsString}
-                        setJsString={setJsString}
-                        buscarEstruturaObjeto={buscarEstruturaObjeto} 
-                        closeMenu={closeMenu}/>
+                                   setJsString={setJsString}
+                                   buscarEstruturaObjeto={buscarEstruturaObjeto} 
+                                   closeMenu={closeMenu}/>
                 }
 
                 {menu === 'objects' &&
-                    <ObjectMenu />
+                    <ObjectsMenu closeMenu={closeMenu} structure={structure}/>
                 }
             </Sidebar>
         </section>

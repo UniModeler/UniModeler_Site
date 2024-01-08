@@ -52,8 +52,8 @@ function CollectionCell({ prop, collectionName, nestLevel, allShow }) {
 
                     <button onClick={() => setShowInfo(!showInfo)}>
                         <img src={showInfo ?
-                            '/assets/images/arrow-down.svg' :
-                            '/assets/images/arrow-right.svg'
+                            '/assets/images/icons/arrow-down.svg' :
+                            '/assets/images/icons/arrow-right.svg'
                         } alt="" />
                     </button>
                 </div>

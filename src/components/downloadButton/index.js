@@ -22,7 +22,7 @@ function DownloadButton({ children }) {
       const transform = getViewportForBounds(nodesBounds, imageWidth, imageHeight, 0.5, 2);
 
       let url = await toPng(document.querySelector('.react-flow__viewport'), {
-        backgroundColor: '#FF00FF',
+        backgroundColor: '#333333',
         width: imageWidth,
         height: imageHeight,
         style: {

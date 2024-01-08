@@ -9,8 +9,7 @@ export default function Collection({ data }) {
     const [allShow, setAllShow] = useState(false);
     
     return (
-        <section className="collection">
-
+        <section className="canvas-collection">
             <NodeToolbar position={Position.Top} isVisible={toolBarVisible} align='end'>
                 <button onClick={() => setAllShow(!allShow)}>
                     {allShow ?
@@ -23,7 +22,7 @@ export default function Collection({ data }) {
             <header>
                 <h2>{data.entity}</h2>
                 <button onClick={() => setToolBarVisible(!toolBarVisible)}>
-                    <img src="/assets/images/menu.svg" alt="" />
+                    <img src="/assets/images/icons/menu.svg" alt="" />
                 </button>
             </header>
 

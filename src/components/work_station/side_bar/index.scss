@@ -46,8 +46,8 @@
 
     aside {
         border-right: none !important;
-    
-        > div {
+
+        >div {
             background: none !important;
         }
     }
@@ -57,28 +57,42 @@
         flex-direction: column;
         color: #DCDCDC;
 
-        padding: 25px 18px;
+        height: 100%;
 
-        > .title {
+        >.title {
+
             display: flex;
-            align-items: center;
-            width: min-content;
+            flex-direction: row;
+            gap: 7px;
+            margin-bottom: 25px;
 
             cursor: pointer;
 
-            gap: 8px;
-            border-top: 5px solid #6B6B6B;
-            padding-top: 9px;
-            margin-bottom: 25px;
+            >img {
+                width: 20px;
+                height: 20px;
 
-            img {
-                width: 18px;
-                height: 14px;
+                align-self: flex-end;
             }
 
-            h3 {
-                font-size: 18px;
-                font-weight: 400;
+            div {
+                display: flex;
+                align-items: center;
+                width: min-content;
+
+                gap: 8px;
+                border-top: 5px solid #6B6B6B;
+                padding-top: 9px;
+
+                img {
+                    width: 18px;
+                    height: 14px;
+                }
+
+                h3 {
+                    font-size: 18px;
+                    font-weight: 400;
+                }
             }
         }
 
@@ -88,9 +102,12 @@
     }
 
     .structure-menu {
-        > button {
+
+        padding: 25px 18px;
+
+        >button {
             background: none;
-            border: none;        
+            border: none;
             font-size: 14px;
             color: #DCDCDC;
             margin-bottom: 14px;
@@ -119,8 +136,156 @@
             margin-bottom: 25px;
         }
 
-        > section * {
+        >section * {
             font-family: inherit;
+        }
+    }
+
+    .object-menu {
+
+        padding: 25px 0;
+
+        >.title,
+        hr {
+            margin-left: 18px;
+            margin-right: 18px;
+        }
+
+        button {
+            cursor: pointer;
+            padding: 0;
+            border: none;
+            background: none;
+
+            height: min-content;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .entities {
+            padding-top: 46px;
+            padding-bottom: 46px;
+            height: min-content;
+
+            >h4 {
+                font-size: 18px;
+                font-weight: 700;
+                text-transform: uppercase;
+
+                margin-left: 18px;
+            }
+
+            >div {
+                display: flex;
+                flex-direction: column;
+                gap: 18px;
+                padding-top: 28px;
+            }
+
+            .collection {
+                display: flex;
+                flex-direction: column;
+
+                >.title {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 12px 18px;
+
+                    > div {
+                        display: flex;
+                        align-items: center;
+                        gap: 9px;
+
+                        img {
+                            width: 24px;
+                            height: 24px;
+                        }
+
+                        h5 {
+                            font-size: 18px;
+                            font-weight: 700;
+                        }
+                    }
+
+                    >button img {
+                        width: 18px;
+                        height: 18px;
+                    }
+                }
+
+                >.attributes {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1px;
+
+                    .attribute {
+                        display: flex;
+                        flex-direction: column;
+                        background-color: #393939;
+
+                        padding: 3px 18px;
+                        gap: 6px;
+
+                        .title {
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+
+                            > div {
+                                display: flex;
+                                flex-direction: row;
+                                gap: 7px;
+
+                                button img {
+                                    width: 24px;
+                                    height: 24px;
+                                }
+
+                                > .info {
+                                    display: flex;
+                                    flex-direction: column;
+                                    align-self: center;
+
+                                    h6 {
+                                        font-size: 16px;
+                                        font-weight: 500;
+                                    } 
+                                    
+                                    div {
+                                        display: flex;
+                                        flex-direction: column;
+                                    }
+                                
+                                    p {
+                                        font-size: 14px;
+                                        font-weight: 400;
+                                        font-style: italic;
+                                        margin-top: 18px;
+                                    }
+
+                                    p:last-child {
+                                        margin-bottom: 18px;
+                                    }
+                                }                                
+                            }
+
+                            >h6 {
+                                font-size: 16px;
+                                font-weight: 500;
+                                text-align: right;
+                            }
+                        }
+
+                        .attribute {
+                            padding-right: 0;
+                        }
+                    }
+                }
+            }
         }
     }
 }

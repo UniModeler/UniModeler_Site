@@ -4,8 +4,12 @@ export default function StructureMenu({jsString, setJsString, buscarEstruturaObj
     return (
         <section className="menu structure-menu">
             <div className="title" onClick={closeMenu}>
-                <img src="/assets/images/icons/keys.svg" alt="" />
-                <h3>Structure</h3>
+                <div>
+                    <img src="/assets/images/icons/keys.svg" alt="" />
+                    <h3>Structure</h3>    
+                </div>
+
+                <img src="/assets/images/icons/pin.svg" alt="" />
             </div>
 
             <button onClick={buscarEstruturaObjeto}>
@@ -15,13 +19,13 @@ export default function StructureMenu({jsString, setJsString, buscarEstruturaObj
 
             <hr/>
 
-            <Editor height={'300px'} 
+            <Editor height={'calc(100% - 250px)'} 
+                    width={'100%'}
                     theme='vs-dark'
                     defaultLanguage="javascript"
-                    defaultValue="// Escreva seu modelo estruturado em javascript "
                     value={jsString}
                     onChange={value => setJsString(value)}
-                    options={{minimap: {enabled: false}}}
+                    options={{minimap: {enabled: false}, quickSuggestions: false}}
             />
         </section>
     )
