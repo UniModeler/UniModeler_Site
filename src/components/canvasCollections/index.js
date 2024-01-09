@@ -11,12 +11,14 @@ export default function Collection({ data }) {
     return (
         <section className="canvas-collection">
             <NodeToolbar position={Position.Top} isVisible={toolBarVisible} align='end'>
-                <button onClick={() => setAllShow(!allShow)}>
-                    {allShow ?
-                        'Hide all attributes' :
-                        'Show all attributes'
-                    }
-                </button>
+                <ul className='node-options'>
+                    <button onClick={() => setAllShow(!allShow)}>
+                        {allShow ?
+                            'Hide all attributes' :
+                            'Show all attributes'
+                        }
+                    </button>    
+                </ul>
             </NodeToolbar>
 
             <header>

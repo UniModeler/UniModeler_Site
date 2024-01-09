@@ -1,3 +1,33 @@
+.react-flow__node-toolbar .node-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    border-radius: 4px;
+
+    button {
+        font-size: 11px;
+        font-family: 'Inter';
+        font-weight: 500;
+        padding: 5px 10px;
+
+        color:#404040;
+        background-color: #FFF;
+        border: none;
+        border-bottom: 1px #404040 solid;
+
+        transition: 0.3s;
+        cursor: pointer;
+    }
+
+    button:last-child {
+        border-bottom: none;
+    }
+
+    button:hover {
+        background-color: #dadada;
+    }
+}
+
 .canvas-collection {
     display: flex;
     flex-direction: column;
@@ -26,7 +56,7 @@
             text-align: center;
         }
 
-        > button {
+        >button {
             background: none;
             border: none;
             position: absolute;
