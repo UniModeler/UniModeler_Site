@@ -1,9 +1,26 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useReactFlow } from "reactflow";
 
 export default function CollectionInfo({ infoCollection }) {
 
     const [showInside, setShowInside] = useState(false);
     const [showInCanvas, setShowInCanvas] = useState(true);
+    let { getNodes, setNodes } = useReactFlow();
+
+    let id = `collection_${infoCollection.entity}`;
+    let nodes = getNodes();
+    let thisCollection = useMemo(() => {
+        return nodes.filter(entity => entity.id === id)[0]
+    }, []);
+
+    useEffect(() => {        
+        if (!showInCanvas) {
+            setNodes(nodes.filter(entity => entity.id !== id));
+        } else {
+            nodes.push(thisCollection);
+            setNodes(nodes);
+        }
+    }, [showInCanvas])
 
     return (
         <section className="collection">
@@ -41,7 +58,6 @@ function CollectionField({ attribute }) {
     const [showInfo, setShowInfo] = useState(false);
 
     return (
-
         <section className="attribute">
             <div className="title">
                 <div>
