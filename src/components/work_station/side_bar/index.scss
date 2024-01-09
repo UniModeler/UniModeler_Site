@@ -2,7 +2,7 @@
     display: flex;
     position: absolute;
     right: 0;
-    height: 100%;
+    height: calc(100% - 115px);
 
     background-color: #202020;
     border: 2px #292929 solid;
@@ -142,8 +142,6 @@
     }
 
     .object-menu {
-
-        height: calc(100% + 180px);
         padding: 25px 0;
 
         >.title,

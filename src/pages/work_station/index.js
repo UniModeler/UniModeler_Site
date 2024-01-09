@@ -7,6 +7,9 @@ import ActionsBar from '../../components/work_station/actions_bar';
 import SideBar from '../../components/work_station/side_bar';
 import { ReactFlowProvider } from 'reactflow';
 import initialString from './initialJs';
+import ToasterContainer from '../../components/toast';
+import toast from 'react-hot-toast';
+import { get } from 'local-storage';
 
 export default function WorkStation() {
 
@@ -19,7 +22,7 @@ export default function WorkStation() {
             setStructure(struct)
 
         } catch (error) {
-            console.log(error);
+            toast.error(error.response.data)
         }
     }
 
@@ -30,6 +33,9 @@ export default function WorkStation() {
     return (
         <ReactFlowProvider>
             <div className="pagina workstation">
+                
+                <ToasterContainer />
+
                 <main>
                     <Cabecalho />
                     <ActionsBar />

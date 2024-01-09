@@ -1,14 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Sidebar } from 'react-pro-sidebar';
 import './index.scss';
 import StructureMenu from './structureMenu';
 import ObjectsMenu from './objectsMenu';
+import { useEdges } from 'reactflow';
+import t from '../../../api/multiLanguage';
+import useTranslations from '../../../api/multiLanguage';
 
 export default function SideBar({ jsString, setJsString, buscarEstruturaObjeto, structure }) {
 
     const [showBar, setShowBar] = useState(true);
     const [showMenu, setShowMenu] = useState(false);
     const [menu, setMenu] = useState('structure');
+
+    const translations = useTranslations('sideBar');
 
     const openMenu = (myMenu) => {
         setShowBar(false);
@@ -34,14 +39,14 @@ export default function SideBar({ jsString, setJsString, buscarEstruturaObjeto, 
                     <div>
                         <div className='rotate-container' onClick={() => openMenu('structure')}>
                             <img src="/assets/images/icons/keys.svg" alt="" />
-                            <h3>Structure</h3>
+                            <h3>{translations.tituloEstrutura}</h3>
                         </div>
                     </div>
 
                     <div>
                         <div className='rotate-container' onClick={() => openMenu('objects')}>
                             <img src="/assets/images/icons/leaves.svg" alt="" />
-                            <h3>Objects</h3>
+                            <h3>{translations.tituloObjetos}</h3>
                         </div>
                     </div>
                 </div>
