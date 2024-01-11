@@ -12,7 +12,7 @@ export default function StructureMenu({jsString, setJsString, buscarEstruturaObj
             <div className="title" onClick={closeMenu}>
                 <div>
                     <img src="/assets/images/icons/keys.svg" alt="" />
-                    <h3>{translations.tituloEstrutura}</h3>    
+                    <h3>{translations.menus.structure.title}</h3>    
                 </div>
 
                 <img src="/assets/images/icons/pin.svg" alt="" />

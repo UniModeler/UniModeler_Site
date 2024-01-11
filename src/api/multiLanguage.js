@@ -2,17 +2,13 @@ import { useEffect, useState } from 'react';
 
 export default function useTranslations(component) {
     
-    const [translations, setTranslations] = useState({});
+    const [translations, setTranslations] = useState(translate(component));
 
-    useEffect(() => {
-        setTranslations(translate(component));
-    }, [])
-    
     return translations;
 }
 
 function translate(component) {
-    let language = 'pt_br';
+    let language = 'en';
     
     return translations[language][component];
 }
@@ -20,10 +16,11 @@ function translate(component) {
 const translations = {
     en: {
         sideBar: {
-            botaoAtualizar: 'Update',
-            entidades: 'Entities',
-            tituloEstrutura: 'Structure',
-            tituloObjetos: 'Objects'
+            menus: {
+                structure: {
+                    title: 'Structure'
+                }
+            },
         }
     },
 
