@@ -10,7 +10,7 @@ export default function ObjectsMenu({ closeMenu, structure }) {
             <div className="title" onClick={closeMenu}>
                 <div>
                     <img src="/assets/images/icons/leaves.svg" alt="" />
-                    <h3>{translations.tituloObjetos}</h3>
+                    <h3>{translations.menus.objects.title}</h3>
                 </div>
 
                 <img src="/assets/images/icons/pin.svg" alt="" />
@@ -20,7 +20,7 @@ export default function ObjectsMenu({ closeMenu, structure }) {
 
             {structure &&
                 <div className="entities">
-                    <h4>{translations.entidades} ({structure.length})</h4>
+                    <h4>{translations.menus.objects.entitiesTitle} ({structure.length})</h4>
 
                     <div>
                         {structure.map(collection =>

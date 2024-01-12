@@ -1,15 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { get } from 'local-storage';
 
 export default function useTranslations(component) {
-    
-    const [translations, setTranslations] = useState(translate(component));
+
+    const [translations] = useState(translate(component));
 
     return translations;
 }
 
 function translate(component) {
-    let language = 'en';
+    let language = get('language');
     
+    if(!language) language = 'en';
+
     return translations[language][component];
 }
 
@@ -18,7 +21,12 @@ const translations = {
         sideBar: {
             menus: {
                 structure: {
-                    title: 'Structure'
+                    title: 'Structure',
+                    button: 'Update'
+                },
+                objects: {
+                    title: 'Objects',
+                    entitiesTitle: 'Entities'
                 }
             },
         }
@@ -26,10 +34,16 @@ const translations = {
 
     pt_br: {
         sideBar: {
-            botaoAtualizar: 'Atualizar',
-            entidades: 'Entidades',        
-            tituloEstrutura: 'Estrutura',
-            tituloObjetos: 'Objetos'
+            menus: {
+                structure: {
+                    title: 'Estrutura',
+                    button: 'Atualizar'
+                },
+                objects: {
+                    title: 'Objetos',
+                    entitiesTitle: 'Entidades'
+                }
+            },
         }
-    }
+    },
 }

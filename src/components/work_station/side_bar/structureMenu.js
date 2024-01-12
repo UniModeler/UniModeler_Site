@@ -20,7 +20,7 @@ export default function StructureMenu({jsString, setJsString, buscarEstruturaObj
 
             <button onClick={buscarEstruturaObjeto}>
                 <img src="/assets/images/icons/loading.svg" alt="" />
-                <h4>{translations.botaoAtualizar}</h4>    
+                <h4>{translations.menus.structure.button}</h4>    
             </button>
 
             <hr/>

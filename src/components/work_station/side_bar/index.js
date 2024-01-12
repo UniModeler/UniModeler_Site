@@ -39,14 +39,14 @@ export default function SideBar({ jsString, setJsString, buscarEstruturaObjeto, 
                     <div>
                         <div className='rotate-container' onClick={() => openMenu('structure')}>
                             <img src="/assets/images/icons/keys.svg" alt="" />
-                            <h3>{translations.tituloEstrutura}</h3>
+                            <h3>{translations.menus.structure.title}</h3>
                         </div>
                     </div>
 
                     <div>
                         <div className='rotate-container' onClick={() => openMenu('objects')}>
                             <img src="/assets/images/icons/leaves.svg" alt="" />
-                            <h3>{translations.tituloObjetos}</h3>
+                            <h3>{translations.menus.objects.title}</h3>
                         </div>
                     </div>
                 </div>
