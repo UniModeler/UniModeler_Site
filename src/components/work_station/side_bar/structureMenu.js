@@ -25,7 +25,7 @@ export default function StructureMenu({jsString, setJsString, buscarEstruturaObj
 
             <hr/>
 
-            <Editor height={'calc(100% - 250px)'} 
+            <Editor height={'calc(100% - 150px)'} 
                     width={'100%'}
                     theme='vs-dark'
                     defaultLanguage="javascript"
