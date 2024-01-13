@@ -3,38 +3,46 @@ import './index.scss';
 import { createSharedLink } from '../../../api/sharedLinksAPI';
 import toast from 'react-hot-toast';
 import { useLocation } from 'react-router-dom';
+import useTranslations from '../../../api/multiLanguage';
 
 export default function ActionsBar({ jsString }) {
 
-    let location = useLocation();
+    const [translation, replace] = useTranslations('actionsBar');
 
     async function copy(linkInfo) {
-
         let url = window.location.href;
-        let copyUrl = url.slice(0, url.search('\\?')) + '?sharedLink=' + linkInfo.code;
+        let queryIndex = url.search('\\?')
+
+        queryIndex = queryIndex !== -1 ? queryIndex : url.length;
+
+        let copyUrl = url.slice(0, queryIndex) + '?sharedLink=' + linkInfo.code;
 
         await navigator.clipboard.writeText(copyUrl)
 
-        toast.success('Copied to clipboard', {position: 'top-center'});
+        toast.success(translation.shareButton.copyText, {position: 'top-center'});
     }
 
     async function shareLink() {
         try {
             let linkInfo = await createSharedLink(jsString);
 
-            toast.success(
-                <div>
-                    Here is your shared link. You can make this {linkInfo.remaining} more times.
+            toast.success(t =>
+                <div className='cont-button'>
+                    <p>{replace(translation.shareButton.shareText, [linkInfo.remaining])}</p>
 
-                    <button onClick={() => copy(linkInfo)}>Copy</button>
+                    <button onClick={() => {copy(linkInfo); toast.dismiss(t.id);}}>
+                        <img src="/assets/images/icons/copy-button.svg" alt="" />
+                    </button>
                 </div>, 
                 {
-                    position: 'top-center'
+                    position: 'top-center',
+                    duration: 60000,
+                    className: 'button-share-link'
                 }
             )
 
         } catch (error) {
-            toast.error(error.response.data)
+            toast.error(error.response.data.erro)
         }
     }
 

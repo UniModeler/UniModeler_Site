@@ -5,15 +5,27 @@ export default function useTranslations(component) {
 
     const [translations] = useState(translate(component));
 
-    return translations;
+    return [translations, replace];
 }
 
 function translate(component) {
     let language = get('language');
     
-    if(!language) language = 'en';
+    if(!language) language = 'pt_br';
 
     return translations[language][component];
+}
+
+function replace(translation, replacements) {
+
+    let t = translation;
+
+    for(let r of replacements) {
+        console.log(r);
+        t = t.replace('%\?', r)
+    }
+
+    return t;
 }
 
 const translations = {
@@ -29,6 +41,12 @@ const translations = {
                     entitiesTitle: 'Entities'
                 }
             },
+        },
+        actionsBar: {
+            shareButton: {
+                shareText: 'Here is your share link. You can do this %? more times.',
+                copyText: 'Copied to clipboard!'
+            }
         }
     },
 
@@ -44,6 +62,12 @@ const translations = {
                     entitiesTitle: 'Entidades'
                 }
             },
+        },
+        actionsBar: {
+            shareButton: {
+                shareText: 'Aqui está seu link compartilhável. Você pode fazer isso mais %? vezes.',
+                copyText: 'Copiado!'
+            }
         }
     },
 }

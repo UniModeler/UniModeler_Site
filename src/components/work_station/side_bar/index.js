@@ -13,7 +13,7 @@ export default function SideBar({ jsString, setJsString, buscarEstruturaObjeto, 
     const [showMenu, setShowMenu] = useState(false);
     const [menu, setMenu] = useState('structure');
 
-    const translations = useTranslations('sideBar');
+    const [translations] = useTranslations('sideBar');
 
     const openMenu = (myMenu) => {
         setShowBar(false);

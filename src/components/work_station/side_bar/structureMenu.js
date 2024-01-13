@@ -5,7 +5,7 @@ import useTranslations from '../../../api/multiLanguage';
 
 export default function StructureMenu({jsString, setJsString, buscarEstruturaObjeto, closeMenu}) {
 
-    const translations = useTranslations('sideBar');
+    const [translations] = useTranslations('sideBar');
 
     return (
         <section className="menu structure-menu">

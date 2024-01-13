@@ -3,7 +3,7 @@ import CollectionInfo from "./collectionInfo";
 
 export default function ObjectsMenu({ closeMenu, structure }) {
 
-    const translations = useTranslations('sideBar');
+    const [translations] = useTranslations('sideBar');
 
     return (
         <section className="menu object-menu">

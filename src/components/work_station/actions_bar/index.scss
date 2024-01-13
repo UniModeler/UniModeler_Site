@@ -1,7 +1,7 @@
 .workstation .actions-bar {
     display: flex;
     background-color: #202020;
-    border-bottom: 2px #292929 solid ;
+    border-bottom: 2px #292929 solid;
 
     width: 100%;
     padding: 8px;
@@ -36,14 +36,65 @@
     .not-logged {
         >button {
             cursor: default;
-            
+
             >img {
                 opacity: 0.4;
             }
         }
 
-        > button:hover {
+        >button:hover {
             background-color: #363636;
+        }
+    }
+}
+
+.button-share-link {
+
+    padding: 15px !important;
+    max-width: 370px !important;
+
+    > div {
+        margin: 0;
+    } 
+
+    .cont-button {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        margin-left: 10px;
+
+        p {
+            font-size: 14px;
+        }
+
+        button {
+            background: none;
+            border: none;
+            border-left: 1px #858585 solid;
+
+            cursor: pointer;
+
+            padding: 4px;
+            padding-left: 10px;
+            margin-left: 10px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img {
+                width: 20px;
+                height: 20px;
+                transition: 0.2s;
+            }
+        }
+
+        button:hover{
+            img {
+                transform: scale(1.05);
+            }
         }
     }
 }
