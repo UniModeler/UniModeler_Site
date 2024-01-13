@@ -1,4 +1,3 @@
-import { useReactFlow } from 'reactflow';
 import DownloadButton from '../../downloadButton';
 import './index.scss';
 import { createSharedLink } from '../../../api/sharedLinksAPI';
@@ -7,13 +6,14 @@ import { useLocation } from 'react-router-dom';
 
 export default function ActionsBar({ jsString }) {
 
-    let { getNodes } = useReactFlow();
     let location = useLocation();
 
     async function copy(linkInfo) {
-        await navigator.clipboard.writeText(
-            `https://${window.location.hostname}/workstation?sharedLink=${linkInfo.code}`
-        )
+
+        let url = window.location.href;
+        let copyUrl = url.slice(0, url.search('\\?')) + '?sharedLink=' + linkInfo.code;
+
+        await navigator.clipboard.writeText(copyUrl)
 
         toast.success('Copied to clipboard', {position: 'top-center'});
     }
@@ -24,7 +24,7 @@ export default function ActionsBar({ jsString }) {
 
             toast.success(
                 <div>
-                    Here is your shared link. You can make this {linkInfo.remaining} times.
+                    Here is your shared link. You can make this {linkInfo.remaining} more times.
 
                     <button onClick={() => copy(linkInfo)}>Copy</button>
                 </div>, 
