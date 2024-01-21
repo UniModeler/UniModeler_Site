@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import Cabecalho from '../../components/work_station/cabecalho';
+import Cabecalho from '../../components/work_space/cabecalho';
 import './index.scss';
 import { estruturaObjeto } from '../../api/structuresAPI';
 import CollectionsFlow from './collectionsFlow';
-import ActionsBar from '../../components/work_station/actions_bar';
-import SideBar from '../../components/work_station/side_bar';
+import ActionsBar from '../../components/work_space/actions_bar';
+import SideBar from '../../components/work_space/side_bar';
 import { ReactFlowProvider } from 'reactflow';
 import initialString from './initialJs';
 import ToasterContainer from '../../components/toast';
@@ -12,7 +12,7 @@ import toast from 'react-hot-toast';
 import { useLocation } from 'react-router-dom';
 import { getSharedLink } from '../../api/sharedLinksAPI';
 
-export default function WorkStation() {
+export default function WorkSpace() {
 
     const query = new URLSearchParams(useLocation().search);
     const [jsString, setJsString] = useState();
@@ -62,7 +62,7 @@ export default function WorkStation() {
 
     return (
         <ReactFlowProvider>
-            <div className="pagina workstation">
+            <div className="pagina workspace">
 
                 <ToasterContainer />
 
