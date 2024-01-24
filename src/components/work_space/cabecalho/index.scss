@@ -4,7 +4,7 @@
     justify-content: space-between;
     align-items: center;
 
-    padding: 14px 12px;
+    padding: 8px 12px;
     width: 100%;
 
     background-color: #292929;
@@ -12,24 +12,21 @@
     box-shadow: 0 4px 4px 0 rgba($color: #000000, $alpha: 0.15);
 
     >.logo {
+        width: 100%;
         display: flex;
         align-items: center;
-        gap: 8px;
 
         img {
-            width: 23px;
-            height: 23px;
-        }
-
-        h1 {
-            font-size: 20px;
-            font-family: "Merge One";
-            font-weight: 400;
-        }
+            width: 143px;
+            height: 37px;
+        }   
     }
 
     .project-name {
+        width: 100%;
+
         display: flex;
+        justify-content: center;
         align-items: center;
         gap: 2px;
         color: #DCDCDC;
@@ -50,15 +47,57 @@
         }
     }
 
-    > button {
-        border: none;       
-        background-color: #9535E5;
-        color: #FFF;
+    .user {
+        width: 100%;
 
-        border-radius: 3px;
-        font-size: 10px;
-        font-weight: 500;
+        display: flex;
+        justify-content: flex-end;
 
-        padding: 8px;
+        > .btn-login {
+            border: none;       
+            background-color: #9535E5;
+            color: #FFF;
+    
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: 500;
+    
+            padding: 8px;
+            cursor: pointer;
+
+            transition: 0.1s;
+        }
+
+        > .btn-login:hover {
+            scale: 1.05;
+        }
+
+        .user-menu {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            height: 30px;
+
+            background-color: #424242;
+            padding: 4px;
+            border-radius: 10000px;
+
+            > div {
+                padding: 4px 7px;
+                margin-right: 5px;
+                background-color: #9635E5;
+                border-radius: 10000px;
+
+                font-size: 14px;
+                font-weight: 500;
+                text-transform: uppercase;
+            }
+
+            img {
+                width: 11px;
+                height: 11px;
+                margin-right: 5px;
+            }
+        }
     }
 }

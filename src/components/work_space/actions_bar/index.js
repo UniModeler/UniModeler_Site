@@ -2,12 +2,13 @@ import DownloadButton from '../../downloadButton';
 import './index.scss';
 import { createSharedLink } from '../../../api/sharedLinksAPI';
 import toast from 'react-hot-toast';
-import { useLocation } from 'react-router-dom';
 import useTranslations from '../../../api/multiLanguage';
+import { useState } from 'react';
 
 export default function ActionsBar({ jsString }) {
 
     const [translation, replace] = useTranslations('actionsBar');
+    const [logged, setLogged] = useState(true)
 
     async function copy(linkInfo) {
         let url = window.location.href;
@@ -48,7 +49,7 @@ export default function ActionsBar({ jsString }) {
 
     return (
         <section className="actions-bar">
-            <div className="not-logged">
+            <div className={logged ? '' : 'not-logged'}>
                 <button>
                     <img src="/assets/images/icons/save.svg" alt="" />
                 </button>

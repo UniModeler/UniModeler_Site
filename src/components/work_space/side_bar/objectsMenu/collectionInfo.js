@@ -13,7 +13,7 @@ export default function CollectionInfo({ infoCollection }) {
         return nodes.filter(entity => entity.id === id)[0]
     }, []);
 
-    useEffect(() => {        
+    useEffect(() => {
         if (!showInCanvas) {
             setNodes(nodes.filter(entity => entity.id !== id));
         } else {
@@ -42,13 +42,15 @@ export default function CollectionInfo({ infoCollection }) {
                 </button>
             </div>
 
-            <div className="attributes">
-                {showInside &&
-                    infoCollection.attributes.map(attribute =>
-                        <CollectionField attribute={attribute} />
-                    )
-                }
-            </div>
+            {showInside &&
+                <div className="attributes">
+                    {
+                        infoCollection.attributes.map(attribute =>
+                            <CollectionField attribute={attribute} />
+                        )
+                    }
+                </div>
+            }
         </section>
     )
 }
@@ -77,15 +79,15 @@ function CollectionField({ attribute }) {
                                 }
 
                                 {attribute.example &&
-                                    <p> Ex:{attribute.example}</p>
+                                    <p>Ex: {attribute.example}</p>
                                 }
 
                                 {attribute.optional &&
-                                    <p> Opcional</p>
+                                    <p>Opcional</p>
                                 }
 
                                 {attribute.references &&
-                                    <p> References to: {attribute.references}</p>
+                                    <p>References to: "{attribute.references}"</p>
                                 }
                             </div>
                         }

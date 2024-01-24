@@ -1,7 +1,7 @@
 import Editor from '@monaco-editor/react';
-import t from '../../../api/multiLanguage';
-import { useEffect, useState } from 'react';
-import useTranslations from '../../../api/multiLanguage';
+import useTranslations from '../../../../api/multiLanguage';
+
+import './index.scss';
 
 export default function StructureMenu({jsString, setJsString, buscarEstruturaObjeto, closeMenu}) {
 
@@ -15,7 +15,7 @@ export default function StructureMenu({jsString, setJsString, buscarEstruturaObj
                     <h3>{translations.menus.structure.title}</h3>    
                 </div>
 
-                <img src="/assets/images/icons/pin.svg" alt="" />
+                <img src="/assets/images/icons/close-arrow.svg" alt="" />
             </div>
 
             <button onClick={buscarEstruturaObjeto}>

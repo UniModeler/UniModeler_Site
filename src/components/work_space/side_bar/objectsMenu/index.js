@@ -1,5 +1,7 @@
-import useTranslations from "../../../api/multiLanguage";
+import useTranslations from "../../../../api/multiLanguage";
 import CollectionInfo from "./collectionInfo";
+
+import './index.scss';
 
 export default function ObjectsMenu({ closeMenu, structure }) {
 
@@ -13,7 +15,7 @@ export default function ObjectsMenu({ closeMenu, structure }) {
                     <h3>{translations.menus.objects.title}</h3>
                 </div>
 
-                <img src="/assets/images/icons/pin.svg" alt="" />
+                <img src="/assets/images/icons/close-arrow.svg" alt="" />
             </div>
 
             <hr />
@@ -24,10 +26,7 @@ export default function ObjectsMenu({ closeMenu, structure }) {
 
                     <div>
                         {structure.map(collection =>
-                            <> 
                                 <CollectionInfo infoCollection={collection}/>
-                                <hr />
-                            </>
                         )}
                     </div>
                 </div>

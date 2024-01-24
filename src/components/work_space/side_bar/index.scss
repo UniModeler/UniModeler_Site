@@ -2,7 +2,7 @@
     display: flex;
     position: absolute;
     right: 0;
-    height: calc(100% - 115px);
+    height: calc(100% - 111px);
 
     background-color: #202020;
     border: 2px #292929 solid;
@@ -17,7 +17,7 @@
         gap: 118px;
         height: 100%;
 
-        >div {
+        > div {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -30,15 +30,15 @@
             align-items: center;
 
             padding-top: 9px;
-            border-top: 5px #6B6B6B solid;
+            border-top: 5px #6b6b6b solid;
             transform: rotate(90deg);
 
             gap: 8px;
             cursor: pointer;
 
-            >h3 {
+            > h3 {
                 font-size: 18px;
-                color: #DCDCDC;
+                color: #dcdcdc;
                 font-weight: 400;
             }
         }
@@ -47,7 +47,7 @@
     aside {
         border-right: none !important;
 
-        >div {
+        > div {
             background: none !important;
         }
     }
@@ -55,22 +55,25 @@
     .menu {
         display: flex;
         flex-direction: column;
-        color: #DCDCDC;
+        color: #dcdcdc;
 
         height: 100%;
+        padding: 25px 18px;
 
-        >.title {
-
+        > .title {
             display: flex;
             flex-direction: row;
-            gap: 7px;
+            justify-content: space-between;
+            align-self: flex-end;
+
+            width: 100%;
             margin-bottom: 25px;
 
             cursor: pointer;
 
-            >img {
-                width: 20px;
-                height: 20px;
+            > img {
+                width: 24px;
+                height: 24px;
 
                 align-self: flex-end;
             }
@@ -81,7 +84,7 @@
                 width: min-content;
 
                 gap: 8px;
-                border-top: 5px solid #6B6B6B;
+                border-top: 5px solid #6b6b6b;
                 padding-top: 9px;
 
                 img {
@@ -98,193 +101,6 @@
 
         hr {
             border: 1px #333333 solid;
-        }
-    }
-
-    .structure-menu {
-
-        padding: 25px 18px;
-
-        >button {
-            background: none;
-            border: none;
-            font-size: 14px;
-            color: #DCDCDC;
-            margin-bottom: 14px;
-
-            cursor: pointer;
-
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-
-            width: min-content;
-
-            img {
-                width: 13px;
-                height: 13px;
-                margin-right: 4px;
-            }
-
-            h4 {
-                font-size: 14px;
-                font-weight: 400;
-            }
-        }
-
-        hr {
-            margin-bottom: 25px;
-        }
-
-        >section * {
-            font-family: inherit;
-        }
-    }
-
-    .object-menu {
-        padding: 25px 0;
-
-        >.title,
-        hr {
-            margin-left: 18px;
-            margin-right: 18px;
-        }
-
-        button {
-            cursor: pointer;
-            padding: 0;
-            border: none;
-            background: none;
-
-            height: min-content;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .entities {
-            padding-top: 46px;
-            padding-bottom: 46px;
-            height: min-content;
-
-            >h4 {
-                font-size: 18px;
-                font-weight: 700;
-                text-transform: uppercase;
-
-                margin-left: 18px;
-            }
-
-            >div {
-                display: flex;
-                flex-direction: column;
-                gap: 18px;
-                padding-top: 28px;
-            }
-
-            .collection {
-                display: flex;
-                flex-direction: column;
-
-                >.title {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
-                    align-items: center;
-                    padding: 12px 18px;
-
-                    > div {
-                        display: flex;
-                        align-items: center;
-                        gap: 9px;
-
-                        img {
-                            width: 24px;
-                            height: 24px;
-                        }
-
-                        h5 {
-                            font-size: 18px;
-                            font-weight: 700;
-                        }
-                    }
-
-                    >button img {
-                        width: 18px;
-                        height: 18px;
-                    }
-                }
-
-                >.attributes {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 1px;
-
-                    .attribute {
-                        display: flex;
-                        flex-direction: column;
-                        background-color: #393939;
-
-                        padding: 3px 18px;
-                        gap: 6px;
-
-                        .title {
-                            display: flex;
-                            flex-direction: row;
-                            justify-content: space-between;
-
-                            > div {
-                                display: flex;
-                                flex-direction: row;
-                                gap: 7px;
-
-                                button img {
-                                    width: 24px;
-                                    height: 24px;
-                                }
-
-                                > .info {
-                                    display: flex;
-                                    flex-direction: column;
-                                    align-self: center;
-
-                                    h6 {
-                                        font-size: 16px;
-                                        font-weight: 500;
-                                    } 
-                                    
-                                    div {
-                                        display: flex;
-                                        flex-direction: column;
-                                    }
-                                
-                                    p {
-                                        font-size: 14px;
-                                        font-weight: 400;
-                                        font-style: italic;
-                                        margin-top: 18px;
-                                    }
-
-                                    p:last-child {
-                                        margin-bottom: 18px;
-                                    }
-                                }                                
-                            }
-
-                            >h6 {
-                                font-size: 16px;
-                                font-weight: 500;
-                                text-align: right;
-                            }
-                        }
-
-                        .attribute {
-                            padding-right: 0;
-                        }
-                    }
-                }
-            }
         }
     }
 }

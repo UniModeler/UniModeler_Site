@@ -1,0 +1,137 @@
+.object-menu {
+    button {
+        cursor: pointer;
+        padding: 0;
+        border: none;
+        background: none;
+
+        height: min-content;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .entities {
+        padding-top: 46px;
+        padding-bottom: 46px;
+        height: min-content;
+
+        > h4 {
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        > div {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding-top: 28px;
+        }
+
+        .collection {
+            display: flex;
+            flex-direction: column;
+
+            > .title {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 18px 0;
+
+                > div {
+                    display: flex;
+                    align-items: center;
+                    gap: 9px;
+
+                    img {
+                        width: 24px;
+                        height: 24px;
+                    }
+
+                    h5 {
+                        font-size: 18px;
+                        font-weight: 700;
+                    }
+                }
+
+                > button {
+                    padding-right: 9px;
+
+                    img {
+                        width: 18px;
+                        height: 18px;
+                    }
+                }
+            }
+
+            > .attributes {
+                display: flex;
+                flex-direction: column;
+                background-color: #313131;
+                padding: 10px 0;
+                border-radius: 3px;
+
+                .attribute {
+                    display: flex;
+                    flex-direction: column;
+                    padding: 0 20px;
+
+                    .title {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        padding: 10px 0;
+
+                        > div {
+                            display: flex;
+                            flex-direction: row;
+                            gap: 7px;
+
+                            button img {
+                                width: 24px;
+                                height: 24px;
+                            }
+
+                            > .info {
+                                display: flex;
+                                flex-direction: column;
+                                align-self: center;
+
+                                h6 {
+                                    font-size: 16px;
+                                    font-weight: 500;
+                                }
+
+                                div {
+                                    display: flex;
+                                    flex-direction: column;
+                                }
+
+                                p {
+                                    font-size: 14px;
+                                    font-weight: 400;
+                                    font-style: italic;
+                                    margin-top: 10px;
+                                    margin-bottom: 5px;
+                                }
+                            }
+                        }
+
+                        > h6 {
+                            font-size: 16px;
+                            font-weight: 500;
+                            text-align: right;
+                        }
+                    }
+
+                    .attribute {
+                        padding-right: 0;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,11 +1,14 @@
 import './index.scss';
+import { useState } from 'react';
 
 export default function Cabecalho() {
+
+    const [logged, setLogged] = useState(true);
+
     return (
         <header className='cabecalho'>
             <div className="logo">
                 <img src="/assets/images/logo.svg" alt="" />
-                <h1>UniModeler</h1>
             </div>
 
             <div className='project-name'>
@@ -16,7 +19,16 @@ export default function Cabecalho() {
                 </button>
             </div>
 
-            <button>Guest</button>
+            <div className="user">
+                {!logged ?
+                    <button className="btn-login">Login</button> :
+                    
+                    <div className="user-menu">
+                        <div>B</div>
+                        <img src="/assets/images/icons/chevron-down.svg" alt="" />
+                    </div>
+                }
+            </div>
         </header>
     )
 }
