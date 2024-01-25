@@ -7,6 +7,7 @@
         align-self: center;
 
         width: 100%;
+        max-width: 1720px;
         padding: 34px 20px;
         
         display: flex;
@@ -16,7 +17,8 @@
         > div {
 
             display: flex;
-            align-items: center;            
+            align-items: center; 
+            margin-bottom: 24px;           
 
             h2 {
                 font-size: 20px;
@@ -24,12 +26,27 @@
                 margin-right: 5px;
             }
 
-            h3 {
-                font-size: 30px;
-                font-weight: 700;
+            button {
+                background: none;
+                border: none;
+                padding: 0;
+            
+                h3 {
+                    color: #FFF;
+    
+                    font-size: 30px;
+                    font-weight: 700;
+    
+                    position: relative;
+                    top: -2px;
 
-                position: relative;
-                top: -2px;
+                    transition: 0.3s;
+                    cursor: pointer;
+                }
+
+                h3:hover {
+                    transform: translateY(-2px);
+                }
             }
         }
 
@@ -41,11 +58,66 @@
 
             > div {
                 background-color: #383838;
-
                 height: 250px;
                 width: 100%;
 
                 border-radius: 5px;
+            }
+
+            > .project {
+                background: url('../../../public/assets/images/project_image.png');
+                background-position: center center;
+
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+
+                cursor: pointer;
+                transition: 0.3s;
+
+                .shadow {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+
+                    width: 100%;
+                    border-bottom-left-radius: 5px;
+                    border-bottom-right-radius: 5px;
+
+                    background: linear-gradient(180deg, rgba(40,40,40,0.3) 0%, rgba(40,40,40, 0.9) 100%);
+                    box-shadow: 0 -8px 10px 0 rgba(40,40,40,0.3);
+
+                    padding: 16px 11px 16px 18px;
+
+                    > div {
+                        h3 {
+                            font-size: 18px;
+                            font-weight: 600;
+                            margin-bottom: 3px;
+                        }
+
+                        p {
+                            font-size: 12px;
+                            font-weight: 500;
+                        }
+                    }
+
+                    > button {
+                        padding: 0;
+                        background: none;
+                        border: none;
+                        cursor: pointer;
+
+                        > img {
+                            width: 28px;
+                            height: 30px;
+                        }
+                    }
+                }
+            }
+
+            > .project:hover {
+                transform: scale(1.03);
             }
         }
     }

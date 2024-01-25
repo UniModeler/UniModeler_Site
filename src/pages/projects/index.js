@@ -10,18 +10,34 @@ export default function Projects() {
             <main>
                 <div>
                     <h2>Meus Projetos</h2>
-                    <h3>+</h3>
+                    <button><h3>+</h3></button>
                 </div>
 
                 <section className="container-projects">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+                    <Project />
+
+                    <div className="no-project"></div>
                 </section>
             </main>
 
             <Footer />
+        </div>
+    )
+}
+
+function Project(props) {
+    return (
+        <div className="project">
+            <div className="shadow">
+                <div>
+                    <h3>PsicoSystem</h3>
+                    <p>Alterado há 10 horas</p>
+                </div>
+
+                <button>
+                    <img src="/assets/images/icons/menu-vertical.svg" alt="" />
+                </button>
+            </div>
         </div>
     )
 }
