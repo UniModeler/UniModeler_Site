@@ -84,8 +84,9 @@
                     border-bottom-left-radius: 5px;
                     border-bottom-right-radius: 5px;
 
-                    background: linear-gradient(180deg, rgba(40,40,40,0.3) 0%, rgba(40,40,40, 0.9) 100%);
-                    box-shadow: 0 -8px 10px 0 rgba(40,40,40,0.3);
+                    background-color: rgba(40,40,40);
+                    background: linear-gradient(180deg, rgba(40,40,40,0.3) 0%, rgba(40,40,40, 0.9) 90%);
+                    box-shadow: 0 -8px 10px 4px rgba(40,40,40,0.3);
 
                     padding: 16px 11px 16px 18px;
 
