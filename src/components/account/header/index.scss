@@ -1,0 +1,61 @@
+.accounts-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    
+    width: 100%;
+
+    padding: 8px 20px;
+
+    background-color: #292929;
+    color: #FFF;
+
+    .welcome {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 13px;
+
+        img {
+            width: 36px;
+            height: 36px;
+            
+            position: relative;
+            top: -2px;
+        }
+
+        h2 {
+            font-size: 16px;
+            font-weight: 500;
+        }
+    }
+
+    .user-menu {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 30px;
+
+        background-color: #424242;
+        padding: 4px;
+        border-radius: 10000px;
+
+        > div {
+            padding: 4px 7px;
+            margin-right: 5px;
+            background-color: #9635E5;
+            border-radius: 10000px;
+
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        img {
+            width: 11px;
+            height: 11px;
+            margin-right: 5px;
+        }
+    }
+}
