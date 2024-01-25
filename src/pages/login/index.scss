@@ -41,6 +41,7 @@
             > div {
                 display: flex;
                 flex-direction: column;
+                width: 100%;
                 gap: 11px;
 
                 > input {
@@ -71,6 +72,13 @@
                     border: none;
 
                     margin-bottom: 2px;
+
+                    cursor: pointer;
+                    transition: 0.3s;
+                }
+
+                > button:hover {
+                    transform: scale(1.03);
                 }
 
                 > div {
