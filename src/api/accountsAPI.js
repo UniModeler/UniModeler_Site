@@ -1,13 +1,22 @@
 import api from "./apiURL";
 
-export async function registerAccount(userInfo) {
-    let [r] = await api.post('/accounts/login', userInfo);
+export async function registerAccount(name, email, password, company, expertise) {
+    let r = await api.post('/accounts/register', {
+        name: name, 
+        email: email,
+        password: password,
+        company: company,
+        expertise: expertise
+    });
 
-    return r;
+    return r.data;
 }
 
-export async function loginAccount(userInfo) {
-    let [r] = await api.post('/accounts/register', userInfo);
+export async function loginAccount(email, password) {
+    let r = await api.post('/accounts/login', {
+        email: email,
+        password: password
+    });
 
-    return r;
+    return r.data;
 }
