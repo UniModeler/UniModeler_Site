@@ -1,4 +1,4 @@
-import useTranslations from "../../../../api/multiLanguage";
+import useTranslations from "../../../../api/generalFunctions/multiLanguage";
 import CollectionInfo from "./collectionInfo";
 
 import './index.scss';

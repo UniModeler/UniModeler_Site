@@ -2,7 +2,7 @@ import DownloadButton from '../../downloadButton';
 import './index.scss';
 import { createSharedLink } from '../../../api/sharedLinksAPI';
 import toast from 'react-hot-toast';
-import useTranslations from '../../../api/multiLanguage';
+import useTranslations from '../../../api/generalFunctions/multiLanguage';
 import { useState } from 'react';
 
 export default function ActionsBar({ jsString }) {
@@ -32,7 +32,7 @@ export default function ActionsBar({ jsString }) {
                     <p>{replace(translation.shareButton.shareText, [linkInfo.remaining])}</p>
 
                     <button onClick={() => {copy(linkInfo); toast.dismiss(t.id);}}>
-                        <img src="/assets/images/icons/copy-button.svg" alt="" />
+                        <img src="/assets/images/icons/copy.svg" alt="" />
                     </button>
                 </div>, 
                 {
