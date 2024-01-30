@@ -62,7 +62,7 @@ export default function WorkSpace() {
 
     return (
         <ReactFlowProvider>
-            <div className="pagina workspace">
+            <div className="page workspace">
 
                 <ToasterContainer />
 

@@ -3,11 +3,13 @@ import { Toaster } from 'react-hot-toast';
 
 export default function ToasterContainer({props}) {
 
-    let position = props.position ? props.position : 'bottom-left';
+    if(!props) {
+        props = {}
+    }
 
     return (
         <Toaster 
-            position={position}
+            position={props.position ? props.position : 'bottom-left'}
             reverseOrder
             containerClassName='cont-toaster'
             toastOptions={{
