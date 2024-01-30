@@ -11,7 +11,7 @@ export default function Cabecalho() {
     useEffect(() => {
         let login = get('user-login');
 
-        if(login) {
+        if (login) {
             setLogged(login);
         }
     }, [])
@@ -35,12 +35,12 @@ export default function Cabecalho() {
             <div className="user">
                 {!logged ?
                     <button className="btn-login" onClick={() => navigate('/login')}>Login</button> :
-                    
+
                     <div className="user-menu">
-                        <div style={{background: logged.profileColor}}>
+                        <div style={{ background: logged.profileColor }}>
                             {logged.info.name.charAt(0)}
                         </div>
-                        
+
                         <img src="/assets/images/icons/chevron-down.svg" alt="" />
                     </div>
                 }
