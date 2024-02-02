@@ -1,11 +1,8 @@
 import { useParams } from "react-router-dom";
 import WorkSpace from "..";
-import { getSharedLink } from "../../../api/services/sharedLinksAPI";
-import { useEffect, useMemo, useRef, useState } from "react";
-import toast from "react-hot-toast";
+import { useEffect, useState } from "react";
 import { getProject, updateProject } from "../../../api/services/projectsAPI";
 import callApi from "../../../api/callAPI";
-import Timer from "../../../util/timer";
 
 export default function ProjectWorkspace() {
 
