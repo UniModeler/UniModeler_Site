@@ -3,7 +3,7 @@ import './index.scss';
 import {Link} from 'react-router-dom';
 import ToasterContainer from '../../components/toast';
 import toast from 'react-hot-toast';
-import { loginAccount } from '../../api/accountsAPI';
+import { loginAccount } from '../../api/services/accountsAPI';
 
 import {set} from 'local-storage'
 

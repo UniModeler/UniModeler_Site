@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { get } from 'local-storage';
 
-export default function Cabecalho() {
+export default function Cabecalho({projectInfo}) {
 
     const [logged, setLogged] = useState(false);
 
@@ -25,7 +25,7 @@ export default function Cabecalho() {
             </div>
 
             <div className='project-name'>
-                <h2>E-commerce Loja de Roupa</h2>
+                <h2>{projectInfo ? projectInfo.info.name : 'Guest'}</h2>
 
                 <button>
                     <img src="/assets/images/icons/chevron-down.svg" alt="" />

@@ -1,4 +1,4 @@
-import api from "./apiURL";
+import api from "../apiURL";
 
 export async function registerAccount(name, email, password, company, expertise) {
     let r = await api.post('/accounts/register', {

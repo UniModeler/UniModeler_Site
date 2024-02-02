@@ -4,8 +4,8 @@ import './index.scss';
 import StructureMenu from './structureMenu';
 import ObjectsMenu from './objectsMenu';
 import { useEdges } from 'reactflow';
-import t from '../../../api/generalFunctions/multiLanguage';
-import useTranslations from '../../../api/generalFunctions/multiLanguage';
+import t from '../../../util/multiLanguage';
+import useTranslations from '../../../util/multiLanguage';
 
 export default function SideBar({ jsString, setJsString, buscarEstruturaObjeto, structure }) {
 

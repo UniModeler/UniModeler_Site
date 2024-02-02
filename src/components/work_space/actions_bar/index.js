@@ -1,22 +1,21 @@
-import DownloadButton from '../../downloadButton';
+import DownloadButton from '../../react-flow/downloadButton';
 import './index.scss';
-import { createSharedLink } from '../../../api/sharedLinksAPI';
+import { createSharedLink } from '../../../api/services/sharedLinksAPI';
 import toast from 'react-hot-toast';
-import useTranslations from '../../../api/generalFunctions/multiLanguage';
+import useTranslations from '../../../util/multiLanguage';
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 export default function ActionsBar({ jsString }) {
 
     const [translation, replace] = useTranslations('actionsBar');
-    const [logged, setLogged] = useState(true)
+    const [logged, setLogged] = useState(true);
+    const {pathname} = useLocation();
 
     async function copy(linkInfo) {
         let url = window.location.href;
-        let queryIndex = url.search('\\?')
 
-        queryIndex = queryIndex !== -1 ? queryIndex : url.length;
-
-        let copyUrl = url.slice(0, queryIndex) + '?sharedLink=' + linkInfo.code;
+        let copyUrl = url.replace(pathname, '/workspace/shareLink/' + linkInfo.code);
 
         await navigator.clipboard.writeText(copyUrl)
 

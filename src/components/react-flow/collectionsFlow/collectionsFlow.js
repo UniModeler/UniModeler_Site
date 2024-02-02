@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import ReactFlow, { Background, ReactFlowProvider, useEdgesState, useNodesState } from "reactflow";
+import ReactFlow, { Background, useEdgesState, useNodesState } from "reactflow";
 import 'reactflow/dist/style.css'
-import Collection from "../../components/canvasCollections";
-import { createCollectionNodes, createEdges } from "../../api/structuresAPI";
-import DownloadButton from "../../components/downloadButton";
+import Collection from "../canvasCollections";
+import { createCollectionNodes, createEdges } from "../../../api/services/structuresAPI";
+import DownloadButton from "../downloadButton";
 
 const nodeTypes = { collection: Collection };
 

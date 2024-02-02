@@ -1,4 +1,4 @@
-import api from "./apiURL";
+import api from "../apiURL";
 
 export async function createSharedLink(jsString) {
     let r = await api.post('/link', {jsString: jsString});

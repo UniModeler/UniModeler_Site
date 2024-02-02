@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import CollectionIcon from "../collection_icon";
-import { typeFormat } from "../../../api/generalFunctions/generalFunctions";
+import { typeFormat } from "../../../../util/generalFunctions";
 
 export default function CollectionField({ atributos, collectionName, nestLevel, allShow }) {
 

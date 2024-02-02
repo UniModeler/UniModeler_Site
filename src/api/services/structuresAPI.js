@@ -1,5 +1,5 @@
 import { MarkerType } from "reactflow";
-import api from "./apiURL";
+import api from "../apiURL";
 import randomColor from 'randomcolor';
 
 export async function estruturaObjeto(jsString) {

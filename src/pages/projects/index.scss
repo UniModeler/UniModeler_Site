@@ -1,7 +1,7 @@
 .projects {
     background-color: #333333;
     color: #FFF;
-    
+
     main {
         flex-grow: 1;
         align-self: center;
@@ -9,16 +9,16 @@
         width: 100%;
         max-width: 1720px;
         padding: 34px 20px;
-        
+
         display: flex;
         flex-direction: column;
         align-items: flex-start;
 
-        > div {
+        >div {
 
             display: flex;
-            align-items: center; 
-            margin-bottom: 24px;           
+            align-items: center;
+            margin-bottom: 24px;
 
             h2 {
                 font-size: 20px;
@@ -30,13 +30,13 @@
                 background: none;
                 border: none;
                 padding: 0;
-            
+
                 h3 {
                     color: #FFF;
-    
+
                     font-size: 30px;
                     font-weight: 700;
-    
+
                     position: relative;
                     top: -2px;
 
@@ -56,7 +56,7 @@
             grid-template-columns: 1fr 1fr 1fr 1fr;
             gap: 19px;
 
-            > div {
+            >section {
                 background-color: #383838;
                 height: 250px;
                 width: 100%;
@@ -64,63 +64,186 @@
                 border-radius: 5px;
             }
 
-            > .project {
-                background: url('../../../public/assets/images/project_image.png');
-                background-position: center center;
+            >.project {
+                position: relative;
 
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-end;
+                >div {
+                    border-radius: 5px;
 
-                cursor: pointer;
-                transition: 0.3s;
+                    height: 100%;
+                    background: url('../../../public/assets/images/project_image.png');
+                    background-position: center center;
+                    background-size: cover;
+                    background-repeat: no-repeat;
 
-                .shadow {
                     display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
+                    flex-direction: column;
+                    justify-content: flex-end;
 
-                    width: 100%;
-                    border-bottom-left-radius: 5px;
-                    border-bottom-right-radius: 5px;
+                    transition: 0.3s;
 
-                    background-color: rgba(40,40,40);
-                    background: linear-gradient(180deg, rgba(40,40,40,0.3) 0%, rgba(40,40,40, 0.9) 90%);
-                    box-shadow: 0 -8px 10px 4px rgba(40,40,40,0.3);
+                    .shadow {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
 
-                    padding: 16px 11px 16px 18px;
+                        width: 100%;
+                        border-bottom-left-radius: 4px;
+                        border-bottom-right-radius: 4px;
 
-                    > div {
-                        h3 {
-                            font-size: 18px;
-                            font-weight: 600;
-                            margin-bottom: 3px;
-                        }
+                        background-color: rgba(40, 40, 40);
+                        background: linear-gradient(180deg, rgba(40, 40, 40, 0.3) 0%, rgba(40, 40, 40, 0.9) 90%);
+                        box-shadow: 0 -8px 10px 4px rgba(40, 40, 40, 0.3);
 
-                        p {
-                            font-size: 12px;
-                            font-weight: 500;
+                        padding: 16px 11px 16px 18px;
+
+                        >div {
+                            h3, input {
+                                font-size: 18px;
+                                font-weight: 600;
+                                margin-bottom: 3px;
+                                padding: 0;
+
+                                background: none;
+                                border: none;
+                                padding: none;
+
+                                color: #FFF;
+                            }
+
+                            > div, input {
+                                width: 100%;
+                            }
+
+                            input:focus-visible {
+                                outline: none;
+                            }
+
+                            p {
+                                font-size: 12px;
+                                font-weight: 500;
+                            }
                         }
                     }
+                }
 
-                    > button {
-                        padding: 0;
-                        background: none;
-                        border: none;
-                        cursor: pointer;
+                >button {
+                    transition: 0.3s;
 
-                        > img {
-                            width: 28px;
-                            height: 30px;
+                    padding: 0;
+                    background: none;
+                    border: none;
+                    cursor: pointer;
+                    
+                    position: absolute;
+                    right: 11px;
+                    bottom: 14px;
+                    z-index: 1;
+
+                    >img {
+                        width: 28px;
+                        height: 30px;
+                    }
+
+                    input {
+                        display: none;
+                    }
+                }
+
+                .menu {
+                    cursor: default;
+                    transition: 0.3s;
+                    width: 150px;
+                    z-index: 1;
+
+                    display: flex;
+                    flex-direction: column;
+                    background-color: #CACACA;
+                    gap: 1px;
+
+                    position: absolute;
+                    top: 5px;
+                    left: 28px;
+
+                    > .group {
+                        display: flex;
+                        flex-direction: column;
+                        
+                        background-color: #E7E7E7;
+
+                        > button {
+                            padding: 5px 14px;
+                            background-color: transparent;
+
+                            font-size: 14px;
+                            font-weight: 600;
+                            color: #4F4F4F;
+
+                            border: none;
+                            margin: none;
+
+                            text-align: left;
+                            transition: 0.3s;
+                        }
+
+                        > button:hover {
+                            background-color: rgba(40, 40, 40, 0.1);
                         }
                     }
                 }
             }
 
-            > .project:hover {
-                transform: scale(1.03);
+            >.project > div:hover {
+                transform: scale(1.015);
+
+                ~ button {
+                    transform: translate(2px, 2px);
+                }
             }
         }
     }
+}
 
+.delete-alert {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 10px;
+    border-radius: 5px;
+
+    background-color: #333333;
+    color: #FFF;
+    box-shadow: 0 0 25px 10px rgba(35, 35, 35, 0.25);
+
+    > p {
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    > div {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+        align-self: flex-end;
+
+        > button {
+            border: 1px solid #404040;
+            color: #FFF;
+
+            padding: 4px 8px;
+            cursor: pointer;
+        }
+        
+        > .btn-yes {
+            background-color: rgba(0, 184, 168, 0.25);
+        }
+
+        > .btn-no {
+            background-color: rgba(184, 37, 0, 0.25);
+        }
+    }
+}
+
+.react-confirm-alert-overlay {
+    background-color: rgba(40, 40, 40, 0.8) !important;
 }

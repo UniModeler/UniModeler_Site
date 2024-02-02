@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './index.scss';
 import ToasterContainer from '../../components/toast';
 import toast from 'react-hot-toast';
-import { registerAccount } from '../../api/accountsAPI';
+import { registerAccount } from '../../api/services/accountsAPI';
 
 import { set } from 'local-storage';
 

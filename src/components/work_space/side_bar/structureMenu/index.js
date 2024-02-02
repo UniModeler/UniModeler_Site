@@ -1,5 +1,5 @@
 import Editor from '@monaco-editor/react';
-import useTranslations from '../../../../api/generalFunctions/multiLanguage';
+import useTranslations from '../../../../util/multiLanguage';
 
 import './index.scss';
 
