@@ -32,7 +32,6 @@ export default function ProjectWorkspace() {
 
     useEffect(() => {
         getIt();
-        
     }, []);
 
     useEffect(() => {

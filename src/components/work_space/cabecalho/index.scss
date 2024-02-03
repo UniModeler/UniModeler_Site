@@ -31,9 +31,27 @@
         gap: 2px;
         color: #DCDCDC;
 
-        h2 {
+        h2, input {
+            color: #FFF;
             font-size: 14px;
             font-weight: 600;
+
+            border: none;
+            background: transparent;
+            padding: none;
+        
+            width: max-content;
+            text-align: center;
+            min-width: 200px;
+        }
+
+        > div {
+            width: min-content;
+        }
+
+        input:focus-visible {
+            border-bottom: 1px solid rgba($color: #ffffff, $alpha: 0.15);
+            outline: none;
         }
 
         button {
