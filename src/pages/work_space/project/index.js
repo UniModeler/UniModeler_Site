@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import WorkSpace from "..";
 import { useEffect, useState } from "react";
 import { getProject, updateProject } from "../../../api/services/projectsAPI";
@@ -10,9 +10,16 @@ export default function ProjectWorkspace() {
     const [projectInfo, setProjectInfo] = useState();
     const [projectModel, setProjectModel] = useState();
 
+    const navigate = useNavigate();
+
     async function getIt() {
-        let data = await callApi(getProject, [id]);
+        let data = await callApi(getProject, id);
         setProjectInfo(data);
+
+        if(!data) {
+            navigate('/workspace');
+            return;
+        }
 
         if (data.modeling.data) {
             setProjectModel(data.modeling.data);
@@ -26,7 +33,7 @@ export default function ProjectWorkspace() {
             let data = projectInfo;
             data.modeling.data = projectModel;
 
-            await callApi(updateProject, [projectInfo._id, data]);
+            await callApi(updateProject, projectInfo._id, data);
         }
     }
 

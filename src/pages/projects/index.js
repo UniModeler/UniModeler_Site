@@ -25,7 +25,7 @@ export default function Projects() {
     }
 
     async function createIt() {
-        let project = await callApi(createProject, [login._id]);
+        let project = await callApi(createProject, login._id);
 
         navigate('/workspace/project/' + project.insertedId);
     }
@@ -79,7 +79,7 @@ function Project({ project, resetProjects }) {
         let data = project;
         data.info.name = name;
 
-        await callApi(updateProject, [project._id, data]);
+        await callApi(updateProject, project._id, data);
         setChangeName(false);
         resetProjects();
     }
@@ -92,7 +92,7 @@ function Project({ project, resetProjects }) {
 
                     <div>
                         <button className='btn-yes' onClick={async () => {
-                            await callApi(deleteProject, [project._id]);
+                            await callApi(deleteProject, project._id);
                             resetProjects();
                             onClose();
                         }}>Sim</button>
@@ -104,12 +104,12 @@ function Project({ project, resetProjects }) {
     }
 
     async function duplicateIt() {
-        await callApi(duplicateProject, [login._id, project.info.name, project.info.cover, project.modeling.data]);
+        await callApi(duplicateProject, login._id, project.info.name, project.info.cover, project.modeling.data);
         resetProjects();
     }
 
     async function updateImage(image) {
-        await callApi(changeProjectImage, [project._id, image]);
+        await callApi(changeProjectImage, project._id, image);
         resetProjects();
     }
 

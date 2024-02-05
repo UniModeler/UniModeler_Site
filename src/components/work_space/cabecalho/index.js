@@ -26,7 +26,7 @@ export default function Cabecalho({ projectInfo }) {
     }, [projectInfo])
 
     useEffect(() => {
-        if(changeName) {
+        if (changeName) {
             document.getElementById('change-name').select();
         }
     }, [changeName])
@@ -35,7 +35,7 @@ export default function Cabecalho({ projectInfo }) {
         let data = projectInfo;
         data.info.name = name;
 
-        await callApi(updateProject, [data._id, data]);
+        await callApi(updateProject, data._id, data);
         setChangeName(false);
     }
 
@@ -49,20 +49,24 @@ export default function Cabecalho({ projectInfo }) {
 
             <div className='project-name'>
                 {
-                    changeName ?
+                    projectInfo && changeName ?
                         <OutsideClickHandler onOutsideClick={() => renameIt()}>
                             <input type="text" value={name}
-                                   id='change-name' 
-                                   onChange={e => setName(e.target.value)}
-                                   onKeyDown={e => { if (e.key === 'Enter') renameIt() }} />
+                                id='change-name'
+                                onChange={e => setName(e.target.value)}
+                                onKeyDown={e => { if (e.key === 'Enter') renameIt() }} />
                         </OutsideClickHandler> :
 
-                        <h2>{name}</h2>
+                        <h2>{projectInfo ? projectInfo.info.name : 'Untitled'}</h2>
                 }
 
-                <button onClick={() => setChangeName(true)}>
-                    <img src="/assets/images/icons/chevron-down.svg" alt="" />
-                </button>
+                {
+                    projectInfo &&
+                    <button onClick={() => setChangeName(true)}>
+                        <img src="/assets/images/icons/chevron-down.svg" alt="" />
+                    </button>
+                }
+
             </div>
 
             <div className="user">

@@ -18,7 +18,7 @@ export default function SignUpPage() {
 
     async function register() {
         if(validParams(name, email, password, company, expertise)) {
-            let r = await callApi(registerAccount, [name, email, password, company, expertise]);
+            let r = await callApi(registerAccount, name, email, password, company, expertise);
 
             set('user-login', r);
     

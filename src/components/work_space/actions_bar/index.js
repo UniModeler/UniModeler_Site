@@ -3,14 +3,15 @@ import './index.scss';
 import { createSharedLink } from '../../../api/services/sharedLinksAPI';
 import toast from 'react-hot-toast';
 import useTranslations from '../../../util/multiLanguage';
-import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import callApi from '../../../api/callAPI';
+import { get } from 'local-storage';
 
-export default function ActionsBar({ jsString }) {
+export default function ActionsBar({ projectInfo, jsString }) {
 
     const [translation, replace] = useTranslations('actionsBar');
-    const [logged, setLogged] = useState(true);
-    const {pathname} = useLocation();
+    const logged = get('user-info');
+    const { pathname } = useLocation();
 
     async function copy(linkInfo) {
         let url = window.location.href;
@@ -19,31 +20,27 @@ export default function ActionsBar({ jsString }) {
 
         await navigator.clipboard.writeText(copyUrl)
 
-        toast.success(translation.shareButton.copyText, {position: 'top-center'});
+        toast.success(translation.shareButton.copyText, { position: 'top-center' });
     }
 
     async function shareLink() {
-        try {
-            let linkInfo = await createSharedLink(jsString);
 
-            toast.success(t =>
-                <div className='cont-button'>
-                    <p>{replace(translation.shareButton.shareText, [linkInfo.remaining])}</p>
+        let linkInfo = await callApi(createSharedLink, projectInfo, jsString)
 
-                    <button onClick={() => {copy(linkInfo); toast.dismiss(t.id);}}>
-                        <img src="/assets/images/icons/copy.svg" alt="" />
-                    </button>
-                </div>, 
-                {
-                    position: 'top-center',
-                    duration: 60000,
-                    className: 'button-share-link'
-                }
-            )
+        toast.success(t =>
+            <div className='cont-button'>
+                <p>{replace(translation.shareButton.shareText, [linkInfo.remaining])}</p>
 
-        } catch (error) {
-            toast.error(error.response.data.erro)
-        }
+                <button onClick={() => { copy(linkInfo); toast.dismiss(t.id); }}>
+                    <img src="/assets/images/icons/copy.svg" alt="" />
+                </button>
+            </div>,
+            {
+                position: 'top-center',
+                duration: 60000,
+                className: 'button-share-link'
+            }
+        )
     }
 
     return (

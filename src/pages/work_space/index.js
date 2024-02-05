@@ -58,7 +58,7 @@ export default function WorkSpace({ projectInfo, model, setModel }) {
 
                 <main>
                     <Cabecalho projectInfo={projectInfo}/>
-                    <ActionsBar jsString={jsString} />
+                    <ActionsBar projectInfo={projectInfo} jsString={jsString} />
 
                     <SideBar jsString={jsString}
                         setJsString={setJsString}
