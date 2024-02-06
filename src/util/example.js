@@ -1,4 +1,4 @@
-const initialString = 
+const exampleModel = 
 `
 let login = {
     '!id': 'abc',
@@ -28,4 +28,4 @@ let enterprise = {
 } 
 `
 
-export default initialString;
+export default exampleModel;

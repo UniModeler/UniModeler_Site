@@ -1,75 +1,66 @@
-import { useEffect, useState } from 'react';
-import Cabecalho from '../../components/work_space/cabecalho';
-import './index.scss';
-import { estruturaObjeto } from '../../api/services/structuresAPI';
-import CollectionsFlow from '../../components/react-flow/collectionsFlow/collectionsFlow';
-import ActionsBar from '../../components/work_space/actions_bar';
-import SideBar from '../../components/work_space/side_bar';
-import { ReactFlowProvider } from 'reactflow';
-import initialString from '../../initialJs';
-import ToasterContainer from '../../components/toast';
+import { useParams } from "react-router-dom";
+import WorkSpace from "./base";
+import { useEffect, useState } from "react";
+import { getProject, updateProject } from "../../api/services/projectsAPI";
+import callApi from "../../api/callAPI";
+import verifyProjectPermission from "../../util/verifyProjectPermission";
+import toast from "react-hot-toast";
+import { estruturaObjeto } from "../../api/services/structuresAPI";
 
-export default function WorkSpace({ projectInfo, model, setModel }) {
+import './index.scss'
 
-    const [jsString, setJsString] = useState();
+export default function ProjectWorkspace() {
+
+    let {id} = useParams();
+
+    const [projectInfo, setProjectInfo] = useState();
+    const [projectModel, setProjectModel] = useState();
     const [structure, setStructure] = useState();
-    const [initialLoad, setInitialLoad] = useState(true);
+
+    const [permission, setPermission] = useState();
 
     async function buscarEstruturaObjeto() {
-        try {
-            setStructure(await estruturaObjeto(jsString));
-        } catch (error) {
-            console.log(error)
+        let struct = await callApi(estruturaObjeto, projectModel);
+        setStructure(struct);
+    }
+
+    async function getIt() {
+        let data = await callApi(getProject, id);
+        let permission = verifyProjectPermission(data);
+
+        if (permission === 'read') {
+            toast(`Your permission in this project is to "read", so you can't change it.`)
+        }
+
+        setProjectInfo(data);
+        setPermission(permission);
+        setProjectModel(data.modeling.data);
+        setStructure(await callApi(estruturaObjeto, data.modeling.data));
+    }
+
+    async function updateIt() {
+        if (projectInfo && permission !== 'read') {
+            let data = projectInfo;
+            data.modeling.data = projectModel;
+
+            await callApi(updateProject, projectInfo._id, data);
         }
     }
 
     useEffect(() => {
-        buscarEstruturaObjeto();
-    }, [])
+        getIt();
+    }, []);
 
     useEffect(() => {
-        async function getModel() {
-            if (model && initialLoad) {
-                setJsString(model);
-                setStructure(await estruturaObjeto(model));
-                setInitialLoad(false);
-            }
-        }
-
-        getModel();
-    }, [model])
-
-    useEffect(() => {
-        if(!initialLoad) {
-            setModel(jsString);
-        }  
-    }, [jsString])
-
-    useEffect(() => {
-        if(!initialLoad && !model)
-            setModel(initialString);
-    }, [initialLoad])
+        updateIt();
+    }, [projectModel])
 
     return (
-        <ReactFlowProvider>
-            <div className="page workspace">
-
-                <ToasterContainer />
-
-                <main>
-                    <Cabecalho projectInfo={projectInfo}/>
-                    <ActionsBar projectInfo={projectInfo} jsString={jsString} />
-
-                    <SideBar jsString={jsString}
-                        setJsString={setJsString}
-                        buscarEstruturaObjeto={buscarEstruturaObjeto}
-                        structure={structure}
-                    />
-
-                </main>
-
-                <CollectionsFlow structure={structure} />
-            </div>
-        </ReactFlowProvider>
+        <WorkSpace projectInfo={projectInfo} 
+                   model={projectModel} 
+                   setModel={setProjectModel} 
+                   structure={structure}
+                   getStructure={buscarEstruturaObjeto}
+                   permission={permission} />
     )
 }

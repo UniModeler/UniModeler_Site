@@ -17,12 +17,15 @@ export default function SignUpPage() {
     const [expertise, setExpertise] = useState('');
 
     async function register() {
-        if(validParams(name, email, password, company, expertise)) {
+
+        if (validParams([name, email, password, company, expertise])) {
             let r = await callApi(registerAccount, name, email, password, company, expertise);
 
-            set('user-login', r);
-    
-            toast.success('Conta criada com sucesso!')
+            if (r) {
+                set('user-login', r);
+
+                toast.success('Conta criada com sucesso!')
+            }
         }
     }
 

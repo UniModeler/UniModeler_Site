@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import './index.scss';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ToasterContainer from '../../components/toast';
 import toast from 'react-hot-toast';
 import { loginAccount } from '../../api/services/accountsAPI';
 
-import {set} from 'local-storage'
+import { set } from 'local-storage'
+import callApi from '../../api/callAPI';
 
 export default function LoginPage() {
 
@@ -13,22 +14,18 @@ export default function LoginPage() {
     const [password, setPassword] = useState('');
 
     async function login() {
-        try {
-            let login = await loginAccount(email, password);
+        let login = await callApi(loginAccount, email, password);
 
+        if (login) {
             set('user-login', login);
-
-            toast.success('Logado!')
-            
-        } catch (error) {
-            console.log(error.response.data.erro);
+            toast.success('Logado!');
         }
     }
 
     return (
         <div className="page login">
 
-            <ToasterContainer props={{position: 'bottom-center'}}/>
+            <ToasterContainer props={{ position: 'bottom-center' }} />
 
             <div>
                 <section className="logo">

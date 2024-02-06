@@ -1,3 +1,4 @@
+import exampleModel from "../../util/example";
 import api from "../apiURL";
 
 export async function getUserProjects(userId) {
@@ -12,10 +13,11 @@ export async function getProject(id) {
     return r.data;
 }
 
-export async function createProject(userId) {
+export async function createProject(userId, name, content) {
     let projectInfo = {
         userId: userId,
-        name: 'Untitled Project'
+        name: name,
+        jsContent: content ? content : exampleModel
     }
 
     let r = await api.post('/projects', projectInfo);

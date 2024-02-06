@@ -1,12 +1,9 @@
-import toast from "react-hot-toast";
-
-export default function validParams(...params) {
-    for (const param of params) {
+export default function validParams(params) {
+    for (let param of params) {
         if(!param) {
-            toast.error("Missing field: " + param);
+            console.log('a');
+            throw new Error("Missing field: " + param);
         }
-
-        return false;
     }
 
     return true;

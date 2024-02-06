@@ -3,7 +3,7 @@ import useTranslations from '../../../../util/multiLanguage';
 
 import './index.scss';
 
-export default function StructureMenu({jsString, setJsString, buscarEstruturaObjeto, closeMenu}) {
+export default function StructureMenu({jsString, setJsString, buscarEstruturaObjeto, closeMenu, changeText}) {
 
     const [translations] = useTranslations('sideBar');
 
@@ -31,7 +31,7 @@ export default function StructureMenu({jsString, setJsString, buscarEstruturaObj
                     defaultLanguage="javascript"
                     value={jsString}
                     onChange={value => setJsString(value)}
-                    options={{minimap: {enabled: false}, quickSuggestions: false}}
+                    options={{minimap: {enabled: false}, quickSuggestions: false, readOnly: !changeText, readOnlyMessage: 'a' }}
             />
         </section>
     )

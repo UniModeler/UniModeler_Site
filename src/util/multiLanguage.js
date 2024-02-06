@@ -44,7 +44,7 @@ const translations = {
         },
         actionsBar: {
             shareButton: {
-                shareText: 'Here is your share link. You can do this %? more times.',
+                shareText: 'Here is your share link.',
                 copyText: 'Copied to clipboard!'
             }
         }
@@ -65,7 +65,7 @@ const translations = {
         },
         actionsBar: {
             shareButton: {
-                shareText: 'Aqui está seu link compartilhável. Você pode fazer isso mais %? vezes.',
+                shareText: 'Aqui está seu link compartilhável.',
                 copyText: 'Copiado!'
             }
         }

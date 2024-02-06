@@ -19,15 +19,15 @@ export default function Projects() {
     const navigate = useNavigate();
 
     async function getProjects() {
-        let data = await getUserProjects(login._id);
-
-        setProjects(data);
+        if (login) {
+            let data = await callApi(getUserProjects, login._id);
+            setProjects(data);
+        }
     }
 
     async function createIt() {
-        let project = await callApi(createProject, login._id);
-
-        navigate('/workspace/project/' + project.insertedId);
+        let project = await callApi(createProject, login._id, 'Untitled Project');
+        navigate('/workspace/project/' + project._id);
     }
 
     useEffect(() => {
@@ -123,12 +123,12 @@ function Project({ project, resetProjects }) {
                         {
                             changeName ?
                                 <OutsideClickHandler onOutsideClick={() => renameIt()}>
-                                    <input id='change-name' type="text" 
-                                            value={name} 
-                                            onChange={e => setName(e.target.value)} 
-                                            onKeyDown={e => { if (e.key === 'Enter') renameIt() }} />
+                                    <input id='change-name' type="text"
+                                        value={name}
+                                        onChange={e => setName(e.target.value)}
+                                        onKeyDown={e => { if (e.key === 'Enter') renameIt() }} />
                                 </OutsideClickHandler> :
-                            <h3>{project.info.name}</h3>
+                                <h3>{project.info.name}</h3>
                         }
 
                         <p>Alterado há 10 horas</p>
@@ -141,22 +141,24 @@ function Project({ project, resetProjects }) {
                 <input type="file" id='image' onChange={e => updateImage(e.target.files[0])} />
 
                 {showMenu &&
-                    <section className="menu">
-                        <div className="group">
-                            <button onClick={toProject}>Ver</button>
-                        </div>
+                    <OutsideClickHandler onOutsideClick={() => setShowMenu(false)}>
+                        <section className="menu">
+                            <div className="group">
+                                <button onClick={toProject}>Ver</button>
+                            </div>
 
-                        <div className="group">
-                            <button onClick={() => setChangeName(true)}>Renomear</button>
-                            <button onClick={duplicateIt}>Duplicar</button>
-                            <button onClick={deleteIt}>Excluir</button>
-                        </div>
+                            <div className="group">
+                                <button onClick={() => setChangeName(true)}>Renomear</button>
+                                <button onClick={duplicateIt}>Duplicar</button>
+                                <button onClick={deleteIt}>Excluir</button>
+                            </div>
 
-                        <div className="group">
-                            <button >Compartilhar</button>
-                            <button onClick={() => document.getElementById('image').click()}>Alterar capa</button>
-                        </div>
-                    </section>
+                            <div className="group">
+                                <button >Compartilhar</button>
+                                <button onClick={() => document.getElementById('image').click()}>Alterar capa</button>
+                            </div>
+                        </section>
+                    </OutsideClickHandler>
                 }
             </button>
         </section>

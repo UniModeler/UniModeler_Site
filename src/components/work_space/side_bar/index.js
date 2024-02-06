@@ -1,13 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Sidebar } from 'react-pro-sidebar';
 import './index.scss';
 import StructureMenu from './structureMenu';
 import ObjectsMenu from './objectsMenu';
-import { useEdges } from 'reactflow';
-import t from '../../../util/multiLanguage';
 import useTranslations from '../../../util/multiLanguage';
 
-export default function SideBar({ jsString, setJsString, buscarEstruturaObjeto, structure }) {
+export default function SideBar({ jsString, setJsString, buscarEstruturaObjeto, structure, permission }) {
 
     const [showBar, setShowBar] = useState(true);
     const [showMenu, setShowMenu] = useState(false);
@@ -57,12 +55,13 @@ export default function SideBar({ jsString, setJsString, buscarEstruturaObjeto, 
                 {menu === 'structure' &&
                     <StructureMenu jsString={jsString}
                                    setJsString={setJsString}
-                                   buscarEstruturaObjeto={buscarEstruturaObjeto} 
-                                   closeMenu={closeMenu}/>
+                                   buscarEstruturaObjeto={buscarEstruturaObjeto}
+                                   changeText={permission !== 'read'}
+                                   closeMenu={closeMenu} />
                 }
 
                 {menu === 'objects' &&
-                    <ObjectsMenu closeMenu={closeMenu} structure={structure}/>
+                    <ObjectsMenu closeMenu={closeMenu} structure={structure} />
                 }
             </Sidebar>
         </section>

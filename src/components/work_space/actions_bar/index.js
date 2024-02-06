@@ -7,16 +7,16 @@ import { useLocation } from 'react-router-dom';
 import callApi from '../../../api/callAPI';
 import { get } from 'local-storage';
 
-export default function ActionsBar({ projectInfo, jsString }) {
+export default function ActionsBar({ projectInfo }) {
 
     const [translation, replace] = useTranslations('actionsBar');
     const logged = get('user-info');
     const { pathname } = useLocation();
 
-    async function copy(linkInfo) {
+    async function copy() {
         let url = window.location.href;
 
-        let copyUrl = url.replace(pathname, '/workspace/shareLink/' + linkInfo.code);
+        let copyUrl = url.replace(pathname, '/workspace/shareLink/' + projectInfo.share.code);
 
         await navigator.clipboard.writeText(copyUrl)
 
@@ -24,14 +24,11 @@ export default function ActionsBar({ projectInfo, jsString }) {
     }
 
     async function shareLink() {
-
-        let linkInfo = await callApi(createSharedLink, projectInfo, jsString)
-
         toast.success(t =>
             <div className='cont-button'>
-                <p>{replace(translation.shareButton.shareText, [linkInfo.remaining])}</p>
+                <p>{translation.shareButton.shareText}</p>
 
-                <button onClick={() => { copy(linkInfo); toast.dismiss(t.id); }}>
+                <button onClick={() => { copy(); toast.dismiss(t.id); }}>
                     <img src="/assets/images/icons/copy.svg" alt="" />
                 </button>
             </div>,

@@ -6,8 +6,9 @@ import { get } from 'local-storage';
 import OutsideClickHandler from 'react-outside-click-handler';
 import callApi from '../../../api/callAPI';
 import { updateProject } from '../../../api/services/projectsAPI';
+import toast from 'react-hot-toast';
 
-export default function Cabecalho({ projectInfo }) {
+export default function Cabecalho({ projectInfo, permission }) {
     const [name, setName] = useState('');
     const [changeName, setChangeName] = useState(false);
     const [logged, setLogged] = useState(false);
@@ -62,7 +63,7 @@ export default function Cabecalho({ projectInfo }) {
 
                 {
                     projectInfo &&
-                    <button onClick={() => setChangeName(true)}>
+                    <button onClick={() => {permission === "owner" ? setChangeName(true) : toast("You don't have permission to change this.")}}>
                         <img src="/assets/images/icons/chevron-down.svg" alt="" />
                     </button>
                 }
