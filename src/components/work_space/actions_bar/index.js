@@ -1,10 +1,8 @@
 import DownloadButton from '../../react-flow/downloadButton';
 import './index.scss';
-import { createSharedLink } from '../../../api/services/sharedLinksAPI';
 import toast from 'react-hot-toast';
 import useTranslations from '../../../util/multiLanguage';
 import { useLocation } from 'react-router-dom';
-import callApi from '../../../api/callAPI';
 import { get } from 'local-storage';
 
 export default function ActionsBar({ projectInfo }) {

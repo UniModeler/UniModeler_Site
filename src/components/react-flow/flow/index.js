@@ -1,24 +1,28 @@
 import { useEffect } from "react";
-import ReactFlow, { Background, useEdgesState, useNodesState } from "reactflow";
+import ReactFlow, { Background, useEdgesState, useNodesState, useUpdateNodeInternals } from "reactflow";
 import 'reactflow/dist/style.css'
-import Collection from "../canvasCollections";
-import { createCollectionNodes, createEdges } from "../../../api/services/structuresAPI";
-import DownloadButton from "../downloadButton";
 
-const nodeTypes = { collection: Collection };
+import Entity from "../nodes/collection";
+import Attribute from "../nodes/attribute";
+
+import { createCollectionNodes, createEdges } from "../../../util/react-flow/workspace-nodes/createNodes";
+
+const nodeTypes = { collection: Entity, attribute: Attribute };
 
 export default function CollectionsFlow({ structure }) {
 
     const [nodes, setNodes, onNodesChange] = useNodesState([]);
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+    const updateNodes = useUpdateNodeInternals();
 
     useEffect(() => {
         if (structure) {
-            let nodes = createCollectionNodes(structure);
-            let edges = createEdges(structure);
+            let n = createCollectionNodes(structure);
+            let e = createEdges(structure);
 
-            setNodes(nodes);
-            setEdges(edges);
+            setNodes(n);
+            setEdges(e);
+            updateNodes();
         }
     }, [structure])
 
@@ -29,12 +33,12 @@ export default function CollectionsFlow({ structure }) {
             nodeTypes={nodeTypes}
             edges={edges}
             onEdgesChange={onEdgesChange}
-            fitView
+            zoomOnDoubleClick={false}
+
             style={{ background: '#333333' }}
         >
 
             <Background variant='dots' gap={12} size={5} color="#2F2A2A" />
-            <DownloadButton />
         </ReactFlow>
     )
 }

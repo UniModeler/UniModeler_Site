@@ -1,7 +1,6 @@
-import { Handle, NodeToolbar, Position, useEdges } from 'reactflow';
-import CollectionField from './collection_field';
+import { NodeToolbar, Position } from 'reactflow';
 import './index.scss';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function Collection({ data }) {
 
@@ -27,14 +26,6 @@ export default function Collection({ data }) {
                     <img src="/assets/images/icons/menu.svg" alt="" />
                 </button>
             </header>
-
-            <Handle type='target' id="right" position={Position.Right} />
-            <Handle type='target' id="left" position={Position.Left} />
-            <Handle type="source" position={Position.Top} />
-
-            <main>
-                <CollectionField atributos={data.attributes} collectionName={data.entity} allShow={allShow} />
-            </main>
         </section>
     )
 }

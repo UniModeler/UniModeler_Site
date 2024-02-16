@@ -8,6 +8,8 @@ import toast from "react-hot-toast";
 import { estruturaObjeto } from "../../api/services/structuresAPI";
 
 import './index.scss'
+import GetStructureContext from "../../util/react-flow/structure/context";
+import { giveNodeInfo } from "../../util/react-flow/workspace-nodes/createNodes";
 
 export default function ProjectWorkspace() {
 
@@ -20,8 +22,8 @@ export default function ProjectWorkspace() {
     const [permission, setPermission] = useState();
 
     async function buscarEstruturaObjeto() {
-        let struct = await callApi(estruturaObjeto, projectModel);
-        setStructure(struct);
+        let struct = await callApi(estruturaObjeto, projectModel);        
+        setStructure(giveNodeInfo(struct));
     }
 
     async function getIt() {
@@ -35,7 +37,9 @@ export default function ProjectWorkspace() {
         setProjectInfo(data);
         setPermission(permission);
         setProjectModel(data.modeling.data);
-        setStructure(await callApi(estruturaObjeto, data.modeling.data));
+        
+        let struct = await callApi(estruturaObjeto, data.modeling.data);
+        setStructure(giveNodeInfo(struct));
     }
 
     async function updateIt() {
@@ -56,11 +60,15 @@ export default function ProjectWorkspace() {
     }, [projectModel])
 
     return (
-        <WorkSpace projectInfo={projectInfo} 
-                   model={projectModel} 
-                   setModel={setProjectModel} 
-                   structure={structure}
-                   getStructure={buscarEstruturaObjeto}
-                   permission={permission} />
+        <GetStructureContext.Provider value={structure}>
+
+                <WorkSpace projectInfo={projectInfo} 
+                        model={projectModel} 
+                        setModel={setProjectModel} 
+                        structure={structure}
+                        getStructure={buscarEstruturaObjeto}
+                        permission={permission} />   
+          
+        </GetStructureContext.Provider>
     )
 }

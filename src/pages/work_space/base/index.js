@@ -1,5 +1,5 @@
 import Cabecalho from '../../../components/work_space/cabecalho';
-import CollectionsFlow from '../../../components/react-flow/collectionsFlow/collectionsFlow';
+import CollectionsFlow from '../../../components/react-flow/flow';
 import ActionsBar from '../../../components/work_space/actions_bar';
 import SideBar from '../../../components/work_space/side_bar';
 import { ReactFlowProvider } from 'reactflow';
@@ -22,7 +22,6 @@ export default function WorkSpace({ projectInfo, model, setModel, structure, get
                         structure={structure}
                         permission={permission}
                     />
-
                 </main>
 
                 <CollectionsFlow structure={structure} />
