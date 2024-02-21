@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './index.scss';
 import { get } from 'local-storage';
 import { useNavigate } from 'react-router-dom';
+import UserMenu from '../user-menu';
 
 export default function Header() {
 
@@ -26,13 +27,7 @@ export default function Header() {
             </div>
 
             {logged &&
-                <div className="user-menu">
-                    <div style={{ background: logged.profileColor }}>
-                        {logged.info.name.charAt(0)}
-                    </div>
-
-                    <img src="/assets/images/icons/chevron-down.svg" alt="" />
-                </div>
+                <UserMenu login={logged}/>
             }
         </header>
     )
