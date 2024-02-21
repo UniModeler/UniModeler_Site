@@ -70,6 +70,10 @@
         h3,
         h4,
         span {
+            max-width: 200px;
+            word-wrap: break-word;
+            line-height: 100%;
+
             font-size: 12px;
             font-weight: 700;
         }
@@ -119,4 +123,8 @@
     >.collection-field {
         padding: 0 !important;
     }
+}
+
+.react-flow__handle {
+    visibility: hidden;
 }

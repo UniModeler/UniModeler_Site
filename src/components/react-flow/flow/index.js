@@ -5,7 +5,9 @@ import 'reactflow/dist/style.css'
 import Entity from "../nodes/collection";
 import Attribute from "../nodes/attribute";
 
-import { createCollectionNodes, createEdges } from "../../../util/react-flow/workspace-nodes/createNodes";
+import { createCollectionNodes } from "../../../util/react-flow/nodes/createNodes";
+import { updateCollectionPosition } from "../../../util/react-flow/nodes/updateNodes";
+import { addEdges } from "../../../util/react-flow/edges/addEdges";
 
 const nodeTypes = { collection: Entity, attribute: Attribute };
 
@@ -15,10 +17,21 @@ export default function CollectionsFlow({ structure }) {
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
     const updateNodes = useUpdateNodeInternals();
 
+    function changeNodesPosition(changes) {
+        for (let change of changes) {
+            if (change.type === 'position' && change.dragging) {
+                let updatedNodes = updateCollectionPosition(change.id, structure, change.position);
+                setNodes(updatedNodes);
+            }
+        }
+
+        onNodesChange(changes);
+    }
+
     useEffect(() => {
         if (structure) {
             let n = createCollectionNodes(structure);
-            let e = createEdges(structure);
+            let e = addEdges(n);
 
             setNodes(n);
             setEdges(e);
@@ -29,11 +42,12 @@ export default function CollectionsFlow({ structure }) {
     return (
         <ReactFlow
             nodes={nodes}
-            onNodesChange={onNodesChange}
+            onNodesChange={changeNodesPosition}
             nodeTypes={nodeTypes}
             edges={edges}
             onEdgesChange={onEdgesChange}
             zoomOnDoubleClick={false}
+            connectionMode="loose"
 
             style={{ background: '#333333' }}
         >

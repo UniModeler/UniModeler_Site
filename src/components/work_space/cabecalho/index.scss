@@ -89,38 +89,5 @@
         > .btn-login:hover {
             scale: 1.05;
         }
-
-        .user-menu {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            height: 30px;
-
-            background-color: #424242;
-            padding: 4px;
-            border-radius: 10000px;
-
-            > div {
-                width: 25px;
-                height: 25px;
-                margin-right: 5px;
-                border-radius: 10000px;
-
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                text-align: center;
-
-                font-size: 14px;
-                font-weight: 500;
-                text-transform: uppercase;
-            }
-
-            img {
-                width: 11px;
-                height: 11px;
-                margin-right: 5px;
-            }
-        }
     }
 }

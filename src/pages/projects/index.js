@@ -4,16 +4,21 @@ import Header from '../../components/account/header';
 import './index.scss';
 import { get } from 'local-storage';
 import { changeProjectImage, createProject, deleteProject, duplicateProject, getProjectImage, getUserProjects, updateProject } from '../../api/services/projectsAPI';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import callApi from '../../api/callAPI';
 
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import OutsideClickHandler from 'react-outside-click-handler';
+import { useQuery } from '../../util/urlQuery';
 
 export default function Projects() {
 
+    const location = useLocation();
+    const query = useQuery();
+
     const [projects, setProjects] = useState([]);
+    const [section, setSection] = useState('myProjects');
     let login = get('user-login');
 
     const navigate = useNavigate();
@@ -31,18 +36,35 @@ export default function Projects() {
     }
 
     useEffect(() => {
+        let section = query.get("section");
+
+        if(section) {
+            setSection(section);
+        }
+
         getProjects();
-    }, [])
+    }, [location.key])
 
     return (
         <div className="page projects">
             <Header />
 
             <main>
-                <div>
-                    <h2>Meus Projetos</h2>
-                    <button onClick={createIt}><h3>+</h3></button>
+                <div className="sections">
+                    <div className={section !== 'myProjects' ? 'disabled' : ''}
+                         onClick={() => setSection('myProjects')}
+                    >
+                        <h2>Meus Projetos</h2>
+                        <button onClick={() => {if(section === 'myProjects') createIt()}}><h3>+</h3></button>
+                    </div>
+
+                    <div className={section !== 'sharedWithMe' ? 'disabled' : ''}
+                         onClick={() => setSection('sharedWithMe')}
+                    >
+                        <h2>Compartilhados Comigo</h2>
+                    </div>
                 </div>
+
 
                 <section className="container-projects">
                     {projects.map(p =>

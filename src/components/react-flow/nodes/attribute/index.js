@@ -3,9 +3,11 @@ import CollectionIcon from "../attribute_icon";
 import { typeFormat } from "../../../../util/typeFormat";
 
 import './index.scss';
-import { toogleShowInsideAttribute } from "../../../../util/react-flow/workspace-nodes/updateNodes";
+import { toogleShowInsideAttribute } from "../../../../util/react-flow/nodes/updateNodes";
 import GetStructureContext from "../../../../util/react-flow/structure/context";
-import { useReactFlow, useUpdateNodeInternals } from "reactflow";
+import { Handle, Position, useReactFlow, useUpdateNodeInternals } from "reactflow";
+import { updateEdges } from "../../../../util/react-flow/edges/addEdges";
+import NodeHandle from "../../handle";
 
 export default function Attribute({ data }) {
 
@@ -15,7 +17,9 @@ export default function Attribute({ data }) {
     const [height, setHeight] = useState(0);
 
     const structure = useContext(GetStructureContext);
-    const updateNodes = useReactFlow().setNodes;
+    const setNodes = useReactFlow().setNodes;
+    const setEdges = useReactFlow().setEdges;
+
     const resetInternal = useUpdateNodeInternals();
 
     function handleShowInfo() {
@@ -33,13 +37,17 @@ export default function Attribute({ data }) {
 
     useEffect(() => {
         let newNodes = toogleShowInsideAttribute(structure, data, showInfo, height);
-        updateNodes(newNodes);
+
+        setNodes(newNodes);
+
         resetInternal(data.nodeInfo.id);
     }, [height]);
 
     return (
         <div className="collection-field" ref={heightRef}>
 
+            <NodeHandle attributes={[data]}/>
+           
             <div style={{ paddingLeft: `${11 + 28 * data.nodeInfo.nestLevel}px` }}
                 className={showInfo ? "description" : ''}
             >

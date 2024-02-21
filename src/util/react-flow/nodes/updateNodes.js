@@ -29,3 +29,16 @@ export function toogleShowInsideAttribute(structure, attribute, showInside, newH
         }
     }
 }
+
+export function updateCollectionPosition(idCollection, structure, newPosition) {
+
+    let struct = [...structure];
+
+    for (let entity of struct) {
+
+        if (entity.id === idCollection)
+            entity.position = newPosition;
+    }
+
+    return createCollectionNodes(struct);
+}

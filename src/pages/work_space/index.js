@@ -9,7 +9,7 @@ import { estruturaObjeto } from "../../api/services/structuresAPI";
 
 import './index.scss'
 import GetStructureContext from "../../util/react-flow/structure/context";
-import { giveNodeInfo } from "../../util/react-flow/workspace-nodes/createNodes";
+import { giveNodeInfo } from "../../util/react-flow/nodes/createNodes";
 
 export default function ProjectWorkspace() {
 

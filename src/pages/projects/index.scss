@@ -14,38 +14,51 @@
         flex-direction: column;
         align-items: flex-start;
 
-        >div {
-
+        >.sections {
             display: flex;
             align-items: center;
+            gap: 35px;
+
             margin-bottom: 24px;
 
-            h2 {
-                font-size: 20px;
-                font-weight: 500;
-                margin-right: 5px;
+            >div {
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+
+                h2 {
+                    font-size: 20px;
+                    font-weight: 500;
+                    margin-right: 5px;
+                }
+
+                button {
+                    h3 {
+                        color: #FFF;
+
+                        font-size: 30px;
+                        font-weight: 700;
+
+                        position: relative;
+                        top: -2px;
+
+                        transition: 0.3s;
+                        cursor: pointer;
+                    }
+
+                    h3:hover {
+                        transform: translateY(-2px);
+                    }
+                }
             }
 
-            button {
-                background: none;
-                border: none;
-                padding: 0;
-
-                h3 {
-                    color: #FFF;
-
-                    font-size: 30px;
-                    font-weight: 700;
-
-                    position: relative;
-                    top: -2px;
-
-                    transition: 0.3s;
-                    cursor: pointer;
+            > .disabled {
+                h2, h3 {
+                    color: #828282;
                 }
 
                 h3:hover {
-                    transform: translateY(-2px);
+                    transform: unset;
                 }
             }
         }
@@ -98,7 +111,9 @@
                         padding: 16px 11px 16px 18px;
 
                         >div {
-                            h3, input {
+
+                            h3,
+                            input {
                                 font-size: 18px;
                                 font-weight: 600;
                                 margin-bottom: 3px;
@@ -111,7 +126,8 @@
                                 color: #FFF;
                             }
 
-                            > div, input {
+                            >div,
+                            input {
                                 width: 100%;
                             }
 
@@ -134,7 +150,7 @@
                     background: none;
                     border: none;
                     cursor: pointer;
-                    
+
                     position: absolute;
                     right: 11px;
                     bottom: 14px;
@@ -165,13 +181,13 @@
                     top: 5px;
                     left: 28px;
 
-                    > .group {
+                    >.group {
                         display: flex;
                         flex-direction: column;
-                        
+
                         background-color: #E7E7E7;
 
-                        > button {
+                        >button {
                             padding: 5px 14px;
                             background-color: transparent;
 
@@ -186,17 +202,17 @@
                             transition: 0.3s;
                         }
 
-                        > button:hover {
+                        >button:hover {
                             background-color: rgba(40, 40, 40, 0.1);
                         }
                     }
                 }
             }
 
-            >.project > div:hover {
+            >.project>div:hover {
                 transform: scale(1.015);
 
-                ~ button {
+                ~button {
                     transform: translate(2px, 2px);
                 }
             }
@@ -215,30 +231,30 @@
     color: #FFF;
     box-shadow: 0 0 25px 10px rgba(35, 35, 35, 0.25);
 
-    > p {
+    >p {
         font-size: 14px;
         font-weight: 600;
     }
 
-    > div {
+    >div {
         display: flex;
         flex-direction: row;
         gap: 5px;
         align-self: flex-end;
 
-        > button {
+        >button {
             border: 1px solid #404040;
             color: #FFF;
 
             padding: 4px 8px;
             cursor: pointer;
         }
-        
-        > .btn-yes {
+
+        >.btn-yes {
             background-color: rgba(0, 184, 168, 0.25);
         }
 
-        > .btn-no {
+        >.btn-no {
             background-color: rgba(184, 37, 0, 0.25);
         }
     }

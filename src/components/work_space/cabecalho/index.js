@@ -7,6 +7,7 @@ import OutsideClickHandler from 'react-outside-click-handler';
 import callApi from '../../../api/callAPI';
 import { updateProject } from '../../../api/services/projectsAPI';
 import toast from 'react-hot-toast';
+import UserMenu from '../../account/user-menu';
 
 export default function Cabecalho({ projectInfo, permission }) {
     const [name, setName] = useState('');
@@ -74,13 +75,7 @@ export default function Cabecalho({ projectInfo, permission }) {
                 {!logged ?
                     <button className="btn-login" onClick={() => navigate('/login')}>Login</button> :
 
-                    <div className="user-menu">
-                        <div style={{ background: logged.profileColor }}>
-                            {logged.info.name.charAt(0)}
-                        </div>
-
-                        <img src="/assets/images/icons/chevron-down.svg" alt="" />
-                    </div>
+                    <UserMenu login={logged}/>    
                 }
             </div>
         </header>
