@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './index.scss';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import ToasterContainer from '../../components/toast';
 import toast from 'react-hot-toast';
 import { loginAccount } from '../../api/services/accountsAPI';
@@ -12,6 +12,8 @@ export default function LoginPage() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const navigate = useNavigate();
 
     async function login() {
         let login = await callApi(loginAccount, email, password);
@@ -29,7 +31,7 @@ export default function LoginPage() {
 
             <div>
                 <section className="logo">
-                    <img src="/assets/images/logo.svg" alt="" />
+                    <img src="/assets/images/logo.svg" alt="" onClick={() => navigate('/')}/>
                 </section>
 
                 <section className="inputs">

@@ -5,10 +5,10 @@ export function addEdges(nodes) {
     let edges = [];
 
     for (let node of nodes) {
-        let color = randomColor({ luminosity: 'bright' });
+        let color = randomColor({ luminosity: 'light' });
 
         if (node.type === 'attribute' && node.data.key === 'foreign key') {
-            let edge = newEdge(edges.length, node.id, node.data.references, color);
+            let edge = newEdge(edges.length, node.data.references, node.id, color);
             edges.push(edge);
 
         } else if (node.keysInside) {

@@ -3,7 +3,7 @@ import Footer from '../../components/account/footer';
 import Header from '../../components/account/header';
 import './index.scss';
 import { get } from 'local-storage';
-import { changeProjectImage, createProject, deleteProject, duplicateProject, getProjectImage, getUserProjects, updateProject } from '../../api/services/projectsAPI';
+import { changeProjectImage, createProject, deleteProject, duplicateProject, getCollaborationProjects, getProjectImage, getUserProjects, updateProject } from '../../api/services/projectsAPI';
 import { useLocation, useNavigate } from 'react-router-dom';
 import callApi from '../../api/callAPI';
 
@@ -16,17 +16,25 @@ export default function Projects() {
 
     const location = useLocation();
     const query = useQuery();
+    let querySection = query.get("section")
 
+    const [loadingProjects, setLoadingProjects] = useState(true);
     const [projects, setProjects] = useState([]);
-    const [section, setSection] = useState('myProjects');
+    const [section, setSection] = useState(querySection ? querySection : 'myProjects');
     let login = get('user-login');
 
     const navigate = useNavigate();
 
     async function getProjects() {
-        if (login) {
+        if (section === 'myProjects') {
             let data = await callApi(getUserProjects, login._id);
             setProjects(data);
+            setLoadingProjects(false);
+        }
+        else if (section === 'sharedWithMe') {
+            let data = await callApi(getCollaborationProjects, login._id);
+            setProjects(data);
+            setLoadingProjects(false);
         }
     }
 
@@ -36,14 +44,17 @@ export default function Projects() {
     }
 
     useEffect(() => {
-        let section = query.get("section");
+        if (querySection)  
+            setSection(querySection);
+        
+        setLoadingProjects(true);
 
-        if(section) {
-            setSection(section);
-        }
-
-        getProjects();
     }, [location.key])
+
+    useEffect(() => {
+        if (login)
+            getProjects();
+    }, [section])
 
     return (
         <div className="page projects">
@@ -52,25 +63,28 @@ export default function Projects() {
             <main>
                 <div className="sections">
                     <div className={section !== 'myProjects' ? 'disabled' : ''}
-                         onClick={() => setSection('myProjects')}
+                        onClick={() => {setSection('myProjects'); setLoadingProjects(true)}}
                     >
                         <h2>Meus Projetos</h2>
-                        <button onClick={() => {if(section === 'myProjects') createIt()}}><h3>+</h3></button>
+                        <button onClick={() => { if (section === 'myProjects') createIt() }}><h3>+</h3></button>
                     </div>
 
                     <div className={section !== 'sharedWithMe' ? 'disabled' : ''}
-                         onClick={() => setSection('sharedWithMe')}
+                        onClick={() => {setSection('sharedWithMe'); setLoadingProjects(true)}}
                     >
                         <h2>Compartilhados Comigo</h2>
                     </div>
                 </div>
 
+                {projects.length > 0 ?
+                    <section className="container-projects">
+                        {projects.map(p => <Project project={p} resetProjects={getProjects} />)}
+                    </section>
+                    
+                    :
 
-                <section className="container-projects">
-                    {projects.map(p =>
-                        <Project project={p} resetProjects={getProjects} />
-                    )}
-                </section>
+                    !loadingProjects && <NoProjects section={section} createProject={createIt}/>
+                }
             </main>
 
             <Footer />
@@ -186,4 +200,25 @@ function Project({ project, resetProjects }) {
         </section>
 
     )
+}
+
+function NoProjects({ section, createProject }) {
+    if (section === 'myProjects') {
+        return (
+            <div className="noProjects">
+                <img src="/assets/images/space-mailbox.png" alt="" />
+                <p>Parece que você ainda não tem projetos.</p> 
+                <p>Comece a Modelar agora mesmo!</p>
+                <button onClick={createProject}>Novo Projeto</button>
+            </div>
+        )
+    }
+    else if (section === 'sharedWithMe') {
+        return (
+            <div className="noProjects">
+                <img src="/assets/images/space-mailbox.png" alt="" />
+                <p>Parece que ninguém compartilhou nada com você ainda.</p>
+            </div>
+        )
+    }
 }

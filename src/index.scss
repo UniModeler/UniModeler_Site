@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Kufam:ital,wght@0,400..900;1,400..900&display=swap');
+
 @font-face {
   font-family: "Merge One";
   src: url("../public/assets/fonts/MergeOne-Regular.ttf") format('truetype');
@@ -20,4 +22,9 @@ button {
   background: none;
   border: none;
   padding: 0;
+}
+
+.react-confirm-alert-overlay {
+  background-color: rgba(40, 40, 40, 0.8) !important;
+  backdrop-filter: blur(5px);
 }

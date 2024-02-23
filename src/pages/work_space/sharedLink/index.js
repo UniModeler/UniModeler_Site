@@ -1,35 +1,60 @@
-import { useNavigate, useParams } from "react-router-dom";
-import { getSharedLink } from "../../../api/services/sharedLinksAPI";
-import { useEffect } from "react";
-import toast from "react-hot-toast";
+import { useParams } from "react-router-dom";
+import WorkSpace from "../base";
+import { useEffect, useState } from "react";
+import { updateProject } from "../../../api/services/projectsAPI";
 import callApi from "../../../api/callAPI";
-import { createProject } from "../../../api/services/projectsAPI";
+import toast from "react-hot-toast";
+import { estruturaObjeto } from "../../../api/services/structuresAPI";
+
+import GetStructureContext from "../../../util/react-flow/structure/context";
+import { giveNodeInfo } from "../../../util/react-flow/nodes/createNodes";
 import { get } from "local-storage";
+import { getSharedLink } from "../../../api/services/sharedLinksAPI";
 
-export default function SharedLink() {
+export default function SharedLinkWorkspace() {
 
-    let { code } = useParams();
-    const navigate = useNavigate();
+    let {code} = useParams();
+    const [projectInfo, setProjectInfo] = useState();
+    const [projectModel, setProjectModel] = useState();
+    const [structure, setStructure] = useState();
+    const [permission, setPermission] = useState();
 
-    async function buscarSharedLink() {
-        if (code) {
-            let linkData = await callApi(getSharedLink, code);
-            let userInfo = get('user-login');
-            let newProject = await callApi(createProject, userInfo?._id, linkData.info.name + ' Copy', linkData.modeling.data);
+    async function buscarEstruturaObjeto() {
+        let struct = await callApi(estruturaObjeto, projectModel);        
+        setStructure(giveNodeInfo(struct));
+    }
 
-            navigate('/workspace/project/' + newProject._id);
+    async function getIt() {
+        let userId = get('user-login')?._id;
+        let data = await callApi(getSharedLink, code, userId);
+        let permission = data.permission;
 
-            setTimeout(() =>
-                toast("You are editing a copy of this project. Any changes here won't affect the original one."),
-                2000)
+        if (permission === 'read') {
+            toast(`This link is read-only, so you cannot make any change.`, {duration: 8000})
         }
+
+        setProjectInfo(data);
+        setPermission(permission);
+        setProjectModel(data.modeling.data);
+        
+        let struct = await callApi(estruturaObjeto, data.modeling.data);
+        setStructure(giveNodeInfo(struct));
     }
 
     useEffect(() => {
-        buscarSharedLink();
+        getIt();
     }, []);
 
     return (
-        <></>
+        <GetStructureContext.Provider value={structure}>
+
+                <WorkSpace projectInfo={projectInfo} 
+                        model={projectModel} 
+                        setModel={setProjectModel} 
+                        structure={structure}
+                        getStructure={buscarEstruturaObjeto}
+                        permission={permission} />   
+          
+        </GetStructureContext.Provider>
     )
 }

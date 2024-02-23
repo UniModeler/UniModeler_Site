@@ -5,6 +5,8 @@ import SideBar from '../../../components/work_space/side_bar';
 import { ReactFlowProvider } from 'reactflow';
 import ToasterContainer from '../../../components/toast';
 
+import './index.scss';
+
 export default function WorkSpace({ projectInfo, model, setModel, structure, getStructure, permission }) {
     return (
         <ReactFlowProvider>
@@ -14,7 +16,7 @@ export default function WorkSpace({ projectInfo, model, setModel, structure, get
 
                 <main>
                     <Cabecalho projectInfo={projectInfo} permission={permission}/>
-                    <ActionsBar projectInfo={projectInfo} />
+                    <ActionsBar projectInfo={projectInfo} projectModel={model} permission={permission}/>
 
                     <SideBar jsString={model}
                         setJsString={setModel}

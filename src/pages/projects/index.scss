@@ -6,6 +6,8 @@
         flex-grow: 1;
         align-self: center;
 
+        position: relative;
+
         width: 100%;
         max-width: 1720px;
         padding: 34px 20px;
@@ -217,6 +219,55 @@
                 }
             }
         }
+
+        > .noProjects {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            position: absolute;
+            top: 50%;
+            bottom: 50%;
+            right: 50%;
+            left: 50%;
+
+            > img {
+                max-width: 350px;
+                max-height: 350px;
+            }
+
+            > p {
+                width: 100vw;
+                text-align: center;
+
+                font-size: 18px;
+                font-weight: 500;
+                color: #CACACA;
+
+                max-width: 350px;
+            }
+
+            > button {
+                text-wrap: nowrap;
+                margin-top: 34px;
+                font-size: 16px;
+                font-weight: 500;
+
+                color: #FFF;
+                background-color: #B89B19;
+                
+                padding: 11px 17px;
+                border-radius: 5px;
+
+                transition: 0.2s;
+                cursor: pointer;
+            }
+
+            > button:hover {
+                transform: scale(1.01);
+            }
+        }
     }
 }
 
@@ -258,8 +309,4 @@
             background-color: rgba(184, 37, 0, 0.25);
         }
     }
-}
-
-.react-confirm-alert-overlay {
-    background-color: rgba(40, 40, 40, 0.8) !important;
 }

@@ -13,7 +13,7 @@ export default function UserMenu({ login }) {
     }
 
     return (
-        <>
+        <div style={{position: 'relative'}}>
             <div className="user-menu" onClick={() => setOpened(!opened)}>
                 <div style={{ background: login.profileColor }}>
                     {login.info.name.charAt(0)}
@@ -41,6 +41,6 @@ export default function UserMenu({ login }) {
                     </nav>
                 </div>
             }
-        </>
+        </div>
     )
 }

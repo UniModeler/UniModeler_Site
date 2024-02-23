@@ -2,13 +2,19 @@ import exampleModel from "../../util/example";
 import api from "../apiURL";
 
 export async function getUserProjects(userId) {
-    let r = await api.get(`/projects?userId=${userId}`)
+    let r = await api.get(`/projects/user/${userId}`)
 
     return r.data;
 }
 
-export async function getProject(id) {
-    let r = await api.get('/projects/' + id);
+export async function getCollaborationProjects(userId) {
+    let r = await api.get(`/projects/collaboration/${userId}`);
+
+    return r.data;
+}
+
+export async function getProject(id, userId) {
+    let r = await api.get(`/projects/${id}?userId=${userId}`);
 
     return r.data;
 }
