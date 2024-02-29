@@ -1,26 +1,24 @@
 import { useParams } from "react-router-dom";
 import WorkSpace from "../base";
 import { useEffect, useState } from "react";
-import { updateProject } from "../../../api/services/projectsAPI";
 import callApi from "../../../api/callAPI";
 import toast from "react-hot-toast";
 import { estruturaObjeto } from "../../../api/services/structuresAPI";
 
-import GetStructureContext from "../../../util/react-flow/structure/context";
 import { giveNodeInfo } from "../../../util/react-flow/nodes/createNodes";
 import { get } from "local-storage";
 import { getSharedLink } from "../../../api/services/shareProjectAPI";
 
 export default function SharedLinkWorkspace() {
 
-    let {code} = useParams();
+    let { code } = useParams();
     const [projectInfo, setProjectInfo] = useState();
     const [projectModel, setProjectModel] = useState();
     const [structure, setStructure] = useState();
     const [permission, setPermission] = useState();
 
     async function buscarEstruturaObjeto() {
-        let struct = await callApi(estruturaObjeto, projectModel);        
+        let struct = await callApi(estruturaObjeto, projectModel);
         setStructure(giveNodeInfo(struct));
     }
 
@@ -30,13 +28,13 @@ export default function SharedLinkWorkspace() {
         let permission = data.permission;
 
         if (permission === 'read') {
-            toast(`This link is read-only, so you cannot make any change.`, {duration: 8000})
+            toast(`This link is read-only, so you cannot make any change.`, { duration: 8000 })
         }
 
         setProjectInfo(data);
         setPermission(permission);
         setProjectModel(data.modeling.data);
-        
+
         let struct = await callApi(estruturaObjeto, data.modeling.data);
         setStructure(giveNodeInfo(struct));
     }
@@ -46,15 +44,12 @@ export default function SharedLinkWorkspace() {
     }, []);
 
     return (
-        <GetStructureContext.Provider value={structure}>
-
-                <WorkSpace projectInfo={projectInfo} 
-                        model={projectModel} 
-                        setModel={setProjectModel} 
-                        structure={structure}
-                        getStructure={buscarEstruturaObjeto}
-                        permission={permission} />   
-          
-        </GetStructureContext.Provider>
+        <WorkSpace projectInfo={projectInfo}
+            model={projectModel}
+            setModel={setProjectModel}
+            structure={structure}
+            setStructure={setStructure}
+            buscarEstruturaObjeto={buscarEstruturaObjeto}
+            permission={permission} />
     )
 }

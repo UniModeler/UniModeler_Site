@@ -9,7 +9,7 @@ export function createCollectionNodes(structure) {
             position: entity.position,
             type: 'collection',
             data: entity,
-            width: 1,
+            width: 400,
             style: { width: '100%', maxWidth: 400 },
             height: 200
         });
@@ -43,7 +43,7 @@ function createAttributesNodes(attributes, collectionName, positionObject) {
             position: { x: 0, y: positionObject.y },
             parentNode: `collection_${collectionName}`,
             height: attribute.nodeInfo.height,
-            width: 1,
+            width: 400,
             style: { width: '100%', maxWidth: 400 },
             draggable: false,
             keysInside: keysInside

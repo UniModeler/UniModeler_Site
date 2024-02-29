@@ -4,9 +4,8 @@ import { typeFormat } from "../../../../util/typeFormat";
 
 import './index.scss';
 import { toogleShowInsideAttribute } from "../../../../util/react-flow/nodes/updateNodes";
-import GetStructureContext from "../../../../util/react-flow/structure/context";
-import { Handle, Position, useReactFlow, useUpdateNodeInternals } from "reactflow";
-import { updateEdges } from "../../../../util/react-flow/edges/addEdges";
+import StructureContext from "../../../../util/react-flow/structure/context";
+import { useReactFlow, useUpdateNodeInternals } from "reactflow";
 import NodeHandle from "../../handle";
 
 export default function Attribute({ data }) {
@@ -16,9 +15,8 @@ export default function Attribute({ data }) {
     const [showInfo, setShowInfo] = useState(false);
     const [height, setHeight] = useState(0);
 
-    const structure = useContext(GetStructureContext);
+    const {structure} = useContext(StructureContext);
     const setNodes = useReactFlow().setNodes;
-    const setEdges = useReactFlow().setEdges;
 
     const resetInternal = useUpdateNodeInternals();
 
@@ -28,7 +26,7 @@ export default function Attribute({ data }) {
     }
 
     useEffect(() => {
-        setShowInfo(data.allShow);
+        setShowInfo(data.nodeInfo.showAll);
     }, [data]);
 
     useEffect(() => {
@@ -37,7 +35,6 @@ export default function Attribute({ data }) {
 
     useEffect(() => {
         let newNodes = toogleShowInsideAttribute(structure, data, showInfo, height);
-
         setNodes(newNodes);
 
         resetInternal(data.nodeInfo.id);

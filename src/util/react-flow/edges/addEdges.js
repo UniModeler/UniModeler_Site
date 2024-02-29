@@ -1,25 +1,34 @@
 import randomColor from "randomcolor";
 import { MarkerType } from "reactflow";
 
+const colors = [randomColor({ luminosity: 'light' })];
+let index = 0;
+
 export function addEdges(nodes) {
     let edges = [];
+    index = 0;
+
+    console.log(colors);
 
     for (let node of nodes) {
-        let color = randomColor({ luminosity: 'light' });
+        let color = colors[index];
 
         if (node.type === 'attribute' && node.data.key === 'foreign key') {
             let edge = newEdge(edges.length, node.data.references, node.id, color);
             edges.push(edge);
 
+            index++;
+
         } else if (node.keysInside) {
-            addEdgesKeysInside(edges, node.keysInside, color, node.id);
+            addEdgesKeysInside(edges, node.keysInside, node.id, color);
+            index++;
         }
     }
 
     return edges;
 }
 
-function addEdgesKeysInside(edges, keysInside, color, fatherId) {
+function addEdgesKeysInside(edges, keysInside, fatherId, color) {
     for (let key of keysInside) {
         if(key.type === 'foreign key') {
             edges.push(newEdge(edges.length, key.references, key.key, color));
@@ -29,6 +38,10 @@ function addEdgesKeysInside(edges, keysInside, color, fatherId) {
 }
 
 function newEdge(counter, sourceId, target, color) {
+
+    let newColor = randomColor({ luminosity: 'light' });
+    colors.push(newColor);
+
     return {
         id: counter,
         source: `pk_${sourceId}`,

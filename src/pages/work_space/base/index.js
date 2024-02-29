@@ -6,28 +6,31 @@ import { ReactFlowProvider } from 'reactflow';
 import ToasterContainer from '../../../components/toast';
 
 import './index.scss';
+import StructureContext from '../../../util/react-flow/structure/context';
 
-export default function WorkSpace({ projectInfo, model, setModel, structure, getStructure, permission }) {
+export default function WorkSpace({ projectInfo, model, setModel, structure, setStructure, buscarEstruturaObjeto, permission }) {
     return (
         <ReactFlowProvider>
-            <div className="page workspace">
+            <StructureContext.Provider value={{structure: structure, setStructure: setStructure}}>
+                <div className="page workspace">
 
-                <ToasterContainer />
+                    <ToasterContainer />
 
-                <main>
-                    <Cabecalho projectInfo={projectInfo} permission={permission}/>
-                    <ActionsBar projectInfo={projectInfo} projectModel={model} permission={permission}/>
+                    <main>
+                        <Cabecalho projectInfo={projectInfo} permission={permission} />
+                        <ActionsBar projectInfo={projectInfo} projectModel={model} permission={permission} />
 
-                    <SideBar jsString={model}
-                        setJsString={setModel}
-                        buscarEstruturaObjeto={getStructure}
-                        structure={structure}
-                        permission={permission}
-                    />
-                </main>
+                        <SideBar jsString={model}
+                            setJsString={setModel}
+                            buscarEstruturaObjeto={buscarEstruturaObjeto}
+                            structure={structure}
+                            permission={permission}
+                        />
+                    </main>
 
-                <CollectionsFlow structure={structure} />
-            </div>
+                    <CollectionsFlow structure={structure} />
+                </div>
+            </StructureContext.Provider>
         </ReactFlowProvider>
     )
 }

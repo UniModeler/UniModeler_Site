@@ -1,5 +1,5 @@
 import { createContext } from "react";
 
-const GetStructureContext = createContext(null);
+const StructureContext = createContext(null);
 
-export default GetStructureContext;
+export default StructureContext;
