@@ -6,6 +6,9 @@ export default async function callApi(callback, ...params) {
 
         return r;
     } catch (error) {
-        toast.error(error.response.data.erro);
+        if(error.response)
+            toast.error(error.response.data.erro);
+        else
+            toast.error(error.message); 
     }
 }

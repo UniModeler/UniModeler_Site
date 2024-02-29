@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import WorkSpace from "../base";
 import { useEffect, useState } from "react";
 import { getProject, updateProject } from "../../../api/services/projectsAPI";
@@ -11,6 +11,8 @@ import { giveNodeInfo } from "../../../util/react-flow/nodes/createNodes";
 import { get } from "local-storage";
 
 export default function ProjectWorkspace() {
+
+    const navigate = useNavigate();
 
     let {id} = useParams();
     const [projectInfo, setProjectInfo] = useState();
@@ -27,8 +29,12 @@ export default function ProjectWorkspace() {
     async function getIt() {
         let userId = get('user-login')?._id;
         let data = await callApi(getProject, id, userId);
-        let permission = data.permission;
+        let permission = data?.permission;
 
+        if (!permission) {
+            navigate(-1);
+        }
+        
         if (permission === 'read') {
             toast(`Your permission in this project is to "read", so you can't change it.`)
         }

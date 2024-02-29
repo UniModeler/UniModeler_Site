@@ -20,3 +20,15 @@ export async function loginAccount(email, password) {
 
     return r.data;
 }
+
+export async function getUserByEmail(email) {
+    let r = await api.get('/accounts/email?address=' + email);
+    
+    return r.data;
+}
+
+export async function getUserById(id) {
+    let r = await api.get('/accounts/' + id);
+
+    return r.data;
+}

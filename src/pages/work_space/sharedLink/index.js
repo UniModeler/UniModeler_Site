@@ -9,7 +9,7 @@ import { estruturaObjeto } from "../../../api/services/structuresAPI";
 import GetStructureContext from "../../../util/react-flow/structure/context";
 import { giveNodeInfo } from "../../../util/react-flow/nodes/createNodes";
 import { get } from "local-storage";
-import { getSharedLink } from "../../../api/services/sharedLinksAPI";
+import { getSharedLink } from "../../../api/services/shareProjectAPI";
 
 export default function SharedLinkWorkspace() {
 
