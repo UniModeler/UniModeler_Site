@@ -9,15 +9,15 @@ export default function CollectionInfo({ infoCollection }) {
 
     let id = `collection_${infoCollection.entity}`;
     let nodes = getNodes();
-    let thisCollection = useMemo(() => {
-        return nodes.filter(entity => entity.id === id)[0]
+    let thisCollectionAndChildren = useMemo(() => {
+        return nodes.filter(node => node.id === id || node.parentNode === id)
     }, []);
 
     useEffect(() => {
         if (!showInCanvas) {
-            setNodes(nodes.filter(entity => entity.id !== id));
+            setNodes(nodes.filter(node => node.id !== id && node.parentNode != id));
         } else {
-            nodes.push(thisCollection);
+            nodes.push(...thisCollectionAndChildren);
             setNodes(nodes);
         }
     }, [showInCanvas])

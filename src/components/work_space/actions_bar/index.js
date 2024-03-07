@@ -1,13 +1,11 @@
 import DownloadButton from '../../react-flow/downloadButton';
 import './index.scss';
 import toast from 'react-hot-toast';
-import useTranslations from '../../../util/multiLanguage';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { get } from 'local-storage';
 import { confirmAlert } from 'react-confirm-alert';
 import callApi from '../../../api/callAPI';
-import { createProject, getProject, updateProject } from '../../../api/services/projectsAPI';
-import { changeLinkPermission } from '../../../api/services/shareProjectAPI';
+import { createProject, updateProject } from '../../../api/services/projectsAPI';
 import { useEffect, useState } from 'react';
 import SharePopup from './sharePopup';
 
@@ -23,7 +21,7 @@ export default function ActionsBar({ projectInfo, projectModel, permission }) {
             setInfo(projectInfo);
     }, [projectInfo])
 
-    function shareLink() {
+    function share() {
         confirmAlert({
             customUI: () => <SharePopup projectInfo={info} setInfo={setInfo} pathname={pathname} permission={permission} />
         })
@@ -66,7 +64,7 @@ export default function ActionsBar({ projectInfo, projectModel, permission }) {
                     <img src="/assets/images/icons/exportPage.svg" alt="" />
                 </DownloadButton>
 
-                <button onClick={shareLink}>
+                <button onClick={share}>
                     <img src="/assets/images/icons/share.svg" alt="" />
                 </button>
             </div>

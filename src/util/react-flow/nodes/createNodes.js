@@ -31,8 +31,8 @@ function createAttributesNodes(attributes, collectionName, positionObject) {
     for (let attribute of attributes) {
 
         let keysInside;
-        if(attribute.attributes)
-            keysInside = findKeys(attribute.attributes, collectionName);
+        if (attribute.attributes)
+            keysInside = findKeys(attribute.attributes);
 
         let primaryKey = attribute.key === 'primary key';
 
@@ -59,18 +59,26 @@ function createAttributesNodes(attributes, collectionName, positionObject) {
     return nodes;
 }
 
-function findKeys(attributes, collectionName) {
+function findKeys(attributes, parentAtributtes) {
     let keys = [];
 
+    if(!parentAtributtes)
+        parentAtributtes = [];
+
     for (let attribute of attributes) {
-        if (attribute.key === 'primary key')
-            keys.push({key: `pk_${collectionName}`, type: 'primary key'});
-        
-        if(attribute.key === 'foreign key') 
-            keys.push({key: attribute.nodeInfo.id, type: 'foreign key', references: attribute.references});
-         
-        else if (attribute.attributes) 
-            keys.push(...findKeys(attribute.attributes, collectionName));
+        if (attribute.key === 'foreign key') {
+            keys.push({
+                id: attribute.nodeInfo.id,
+                type: 'foreign key',
+                references: attribute.references,
+                parentAtributtes: parentAtributtes
+            });
+        }
+
+        else if (attribute.attributes) {
+            parentAtributtes.push(attribute.nodeInfo.id);
+            keys.push(...findKeys(attribute.attributes, parentAtributtes));
+        }
     }
 
     return keys;
@@ -88,7 +96,6 @@ export function giveNodeInfo(structure) {
         exploreAttributes(entity);
     }
 
-    console.log(nodeStructure);
     return nodeStructure;
 
     function exploreAttributes(entity, nestLevel) {

@@ -8,8 +8,6 @@ export function addEdges(nodes) {
     let edges = [];
     index = 0;
 
-    console.log(colors);
-
     for (let node of nodes) {
         let color = colors[index];
 
@@ -19,22 +17,30 @@ export function addEdges(nodes) {
 
             index++;
 
-        } else if (node.keysInside) {
+        } else if (node.keysInside && node.data.nodeInfo.nestLevel === 0) {
             addEdgesKeysInside(edges, node.keysInside, node.id, color);
             index++;
         }
     }
+
+    console.log(nodes);
+    console.log(edges);
 
     return edges;
 }
 
 function addEdgesKeysInside(edges, keysInside, fatherId, color) {
     for (let key of keysInside) {
-        if(key.type === 'foreign key') {
-            edges.push(newEdge(edges.length, key.references, key.key, color));
-            edges.push(newEdge(edges.length, key.references, fatherId, color));
-        }
+        edges.push(newEdge(edges.length, key.references, key.id, color));
+        edges.push(newEdge(edges.length, key.references, fatherId, color));
+
+        addParentAtributtesEdges(edges, key, color);
     }
+}
+
+function addParentAtributtesEdges(edges, key, color) {
+    for (let parentAtributteId of key.parentAtributtes)
+        edges.push(newEdge(edges.length, key.references, parentAtributteId, color));
 }
 
 function newEdge(counter, sourceId, target, color) {

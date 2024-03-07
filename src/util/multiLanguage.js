@@ -21,8 +21,7 @@ function replace(translation, replacements) {
     let t = translation;
 
     for(let r of replacements) {
-        console.log(r);
-        t = t.replace('%\?', r)
+        t = t.replace('%?', r)  
     }
 
     return t;

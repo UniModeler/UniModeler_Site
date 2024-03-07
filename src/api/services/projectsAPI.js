@@ -59,8 +59,7 @@ export async function deleteProject(id) {
 export async function changeProjectImage(id, image) {
     const formData = new FormData();
     formData.append('cover-image', image);
-    console.log('a');
-
+    
     let r = await api.put(`/projects/${id}/cover`, formData, {
         headers: {
             "Content-Type": "multipart/form-data"

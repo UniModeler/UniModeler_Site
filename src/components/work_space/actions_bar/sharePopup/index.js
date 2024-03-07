@@ -6,10 +6,14 @@ import { addCollaborator, changeCollaboratorPermission, changeLinkPermission } f
 import { getProject } from "../../../../api/services/projectsAPI";
 import { getUserByEmail, getUserById } from "../../../../api/services/accountsAPI";
 
+import PerfectScrollbar from 'react-perfect-scrollbar'
+import 'react-perfect-scrollbar/dist/css/styles.css';
+
+import './index.scss';
+
 export default function SharePopup({ projectInfo, setInfo, pathname, permission }) {
 
     const changingPermission = permission === 'owner';
-    console.log(projectInfo);
 
     const [translation, replace] = useTranslations('actionsBar');
     const [linkPermission, setLinkPermission] = useState(projectInfo.share.link.permission);
@@ -82,13 +86,15 @@ export default function SharePopup({ projectInfo, setInfo, pathname, permission 
             }
 
             <h3>Colaboradores</h3>
-            <section className='collaborators'>
-                {collaborators.map(collaborator => <Collaborator id={collaborator.userId}
-                                                                 projectInfo={projectInfo}
-                                                                 collaborators={collaborators}
-                                                                 updateInfo={updateInfo}
-                                                                 changingPermission={changingPermission} />)}
-            </section>
+            <PerfectScrollbar style={{maxHeight: '138px', marginBottom: '70px'}}>
+                <section className='collaborators'>
+                    {collaborators.map(collaborator => <Collaborator id={collaborator.userId}
+                                                                    projectInfo={projectInfo}
+                                                                    collaborators={collaborators}
+                                                                    updateInfo={updateInfo}
+                                                                    changingPermission={changingPermission} />)}
+                </section>
+            </PerfectScrollbar>
 
             <h3>Link Público</h3>
             <div className='link'>
