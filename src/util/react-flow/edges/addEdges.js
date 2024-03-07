@@ -23,9 +23,6 @@ export function addEdges(nodes) {
         }
     }
 
-    console.log(nodes);
-    console.log(edges);
-
     return edges;
 }
 
