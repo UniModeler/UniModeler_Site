@@ -7,11 +7,30 @@ import ToasterContainer from '../../../components/toast';
 
 import './index.scss';
 import StructureContext from '../../../util/react-flow/structure/context';
+import callApi from '../../../api/callAPI';
+import { estruturaObjeto } from '../../../api/services/structuresAPI';
+import { useEffect, useState } from 'react';
+import { giveNodeInfo } from '../../../util/react-flow/nodes/createNodes';
 
-export default function WorkSpace({ projectInfo, model, setModel, structure, setStructure, buscarEstruturaObjeto, permission }) {
+export default function WorkSpace({ projectInfo, model, setModel, permission, initialLoad, setInitialLoad }) {
+
+    const [structure, setStructure] = useState();
+
+    async function buscarEstruturaObjeto() {
+        let struct = await callApi(estruturaObjeto, model);
+        setStructure(giveNodeInfo(struct));
+    }
+
+    useEffect(() => {
+        if (initialLoad) {
+            buscarEstruturaObjeto();
+            setInitialLoad(false);
+        }
+    }, [model])
+
     return (
         <ReactFlowProvider>
-            <StructureContext.Provider value={{structure: structure, setStructure: setStructure}}>
+            <StructureContext.Provider value={{ structure: structure, setStructure: setStructure }}>
                 <div className="page workspace">
 
                     <ToasterContainer />

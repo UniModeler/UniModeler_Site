@@ -9,7 +9,7 @@ import callApi from '../../api/callAPI';
 
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { useQuery } from '../../util/urlQuery';
-import Project from './projectCard';
+import ProjectCard from './projectCard';
 import ToasterContainer from '../../components/toast';
 
 export default function Projects() {
@@ -80,7 +80,7 @@ export default function Projects() {
 
                 {projects.length > 0 ?
                     <section className="container-projects">
-                        {projects.map(p => <Project project={p} resetProjects={getProjects} />)}
+                        {projects.map(p => <ProjectCard project={p} resetProjects={getProjects} />)}
                     </section>
 
                     :

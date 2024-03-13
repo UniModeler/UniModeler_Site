@@ -3,9 +3,6 @@ import WorkSpace from "../base";
 import { useEffect, useState } from "react";
 import callApi from "../../../api/callAPI";
 import toast from "react-hot-toast";
-import { estruturaObjeto } from "../../../api/services/structuresAPI";
-
-import { giveNodeInfo } from "../../../util/react-flow/nodes/createNodes";
 import { get } from "local-storage";
 import { getSharedLink } from "../../../api/services/shareProjectAPI";
 
@@ -14,15 +11,13 @@ export default function SharedLinkWorkspace() {
     let { code } = useParams();
     const [projectInfo, setProjectInfo] = useState();
     const [projectModel, setProjectModel] = useState();
-    const [structure, setStructure] = useState();
     const [permission, setPermission] = useState();
 
-    async function buscarEstruturaObjeto() {
-        let struct = await callApi(estruturaObjeto, projectModel);
-        setStructure(giveNodeInfo(struct));
-    }
+    const [initialLoad, setInitialLoad] = useState(true);
 
     async function getIt() {
+        setInitialLoad(true);
+
         let userId = get('user-login')?.user.id;
         let data = await callApi(getSharedLink, code, userId);
         let permission = data.permission;
@@ -34,9 +29,6 @@ export default function SharedLinkWorkspace() {
         setProjectInfo(data);
         setPermission(permission);
         setProjectModel(data.modeling.data);
-
-        let struct = await callApi(estruturaObjeto, data.modeling.data);
-        setStructure(giveNodeInfo(struct));
     }
 
     useEffect(() => {
@@ -47,9 +39,10 @@ export default function SharedLinkWorkspace() {
         <WorkSpace projectInfo={projectInfo}
             model={projectModel}
             setModel={setProjectModel}
-            structure={structure}
-            setStructure={setStructure}
-            buscarEstruturaObjeto={buscarEstruturaObjeto}
-            permission={permission} />
+            permission={permission}
+
+            initialLoad={initialLoad}
+            setInitialLoad={setInitialLoad}
+        />
     )
 }
