@@ -2,11 +2,11 @@ import { get } from "local-storage";
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import callApi from "../../api/callAPI";
-import { changeProjectImage, deleteProject, duplicateProject, getProjectImage, updateProject } from "../../api/services/projectsAPI";
+import { changeProjectImage, deleteProject, duplicateProject, getProjectImage, renameProject } from "../../api/services/projectsAPI";
 import { confirmAlert } from "react-confirm-alert";
 import OutsideClickHandler from "react-outside-click-handler";
 import toast from "react-hot-toast";
-import SharePopup from "../../components/work_space/actions_bar/sharePopup";
+import SharePopup from "../../components/sharePopup";
 
 export default function Project({ project, resetProjects }) {
 
@@ -39,10 +39,12 @@ export default function Project({ project, resetProjects }) {
             setShowMenuTop(true);
     }, [])
 
-    let login = get('user-login');
+    useEffect(() => {
+        setProjectInfo(project);
+    }, [project])
 
     function toProject() {
-        navigate('/workspace/project/' + project._id)
+        navigate('/workspace/project/' + project.id)
     }
 
     async function renameIt() {
@@ -51,10 +53,7 @@ export default function Project({ project, resetProjects }) {
             return;
         }
 
-        let data = project;
-        data.info.name = name;
-
-        await callApi(updateProject, project._id, data);
+        await callApi(renameProject, project.id, name);
         setChangeName(false);
         resetProjects();
     }
@@ -72,7 +71,7 @@ export default function Project({ project, resetProjects }) {
 
                     <div>
                         <button className='btn-yes' onClick={async () => {
-                            await callApi(deleteProject, project._id);
+                            await callApi(deleteProject, project.id);
                             resetProjects();
                             onClose();
                         }}>Sim</button>
@@ -84,7 +83,7 @@ export default function Project({ project, resetProjects }) {
     }
 
     async function duplicateIt() {
-        await callApi(duplicateProject, login._id, project.info.name, project.info.cover, project.modeling.data);
+        await callApi(duplicateProject, project.id);
         resetProjects();
     }
 
@@ -94,7 +93,7 @@ export default function Project({ project, resetProjects }) {
             return;
         }
 
-        await callApi(changeProjectImage, project._id, image);
+        await callApi(changeProjectImage, project.id, image);
         resetProjects();
     }
 

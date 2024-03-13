@@ -5,17 +5,18 @@ import { useEffect, useState } from 'react';
 import { get } from 'local-storage';
 import OutsideClickHandler from 'react-outside-click-handler';
 import callApi from '../../../api/callAPI';
-import { updateProject } from '../../../api/services/projectsAPI';
+import { renameProject } from '../../../api/services/projectsAPI';
 import toast from 'react-hot-toast';
 import UserMenu from '../../account/user-menu';
 
 export default function Cabecalho({ projectInfo, permission }) {
+
     const [name, setName] = useState('');
     const [changeName, setChangeName] = useState(false);
     const [logged, setLogged] = useState(false);
 
     useEffect(() => {
-        let login = get('user-login');
+        let login = get('user-login').user;
 
         if (login) {
             setLogged(login);
@@ -34,10 +35,7 @@ export default function Cabecalho({ projectInfo, permission }) {
     }, [changeName])
 
     async function renameIt() {
-        let data = projectInfo;
-        data.info.name = name;
-
-        await callApi(updateProject, data._id, data);
+        await callApi(renameProject, projectInfo.id, name);
         setChangeName(false);
     }
 
@@ -59,7 +57,7 @@ export default function Cabecalho({ projectInfo, permission }) {
                                 onKeyDown={e => { if (e.key === 'Enter') renameIt() }} />
                         </OutsideClickHandler> :
 
-                        <h2>{projectInfo ? projectInfo.info.name : 'Untitled'}</h2>
+                        <h2>{name ? name : 'Untitled'}</h2>
                 }
 
                 {

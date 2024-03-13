@@ -10,7 +10,7 @@ export default function Header() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        let login = get('user-login');
+        let login = get('user-login')?.user;
 
         if (!login) {
             navigate('/login');

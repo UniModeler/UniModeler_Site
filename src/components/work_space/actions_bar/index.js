@@ -7,12 +7,12 @@ import { confirmAlert } from 'react-confirm-alert';
 import callApi from '../../../api/callAPI';
 import { createProject, updateProject } from '../../../api/services/projectsAPI';
 import { useEffect, useState } from 'react';
-import SharePopup from './sharePopup';
+import SharePopup from '../../sharePopup';
 
 export default function ActionsBar({ projectInfo, projectModel, permission }) {
 
     const [info, setInfo] = useState(projectInfo);
-    const logged = get('user-login');
+    const logged = get('user-login').user;
     const { pathname } = useLocation();
     const navigate = useNavigate();
 
@@ -29,18 +29,15 @@ export default function ActionsBar({ projectInfo, projectModel, permission }) {
 
     async function saveProject() {
         if (projectInfo && permission !== 'read') {
-            let data = projectInfo;
-            data.modeling.data = projectModel;
-
-            await callApi(updateProject, projectInfo._id, data);
+            await callApi(updateProject, projectInfo.id, projectModel);
 
             toast.success('Salvo!', { position: 'top-center' });
         }
     }
 
     async function newProject() {
-        let project = await callApi(createProject, logged._id, 'Untitled Project');
-        navigate('/workspace/project/' + project._id);
+        let project = await callApi(createProject, logged.id, 'Untitled Project');
+        navigate('/workspace/project/' + project.id);
     }
 
     return (

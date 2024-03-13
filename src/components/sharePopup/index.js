@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import useTranslations from "../../../../util/multiLanguage";
+import useTranslations from "../../util/multiLanguage";
 import toast from "react-hot-toast";
-import callApi from "../../../../api/callAPI";
-import { addCollaborator, changeCollaboratorPermission, changeLinkPermission } from "../../../../api/services/shareProjectAPI";
-import { getProject } from "../../../../api/services/projectsAPI";
-import { getUserByEmail, getUserById } from "../../../../api/services/accountsAPI";
+import callApi from "../../api/callAPI";
+import { addCollaborator, changeCollaboratorPermission, changeLinkPermission } from "../../api/services/shareProjectAPI";
+import { getProject } from "../../api/services/projectsAPI";
+import { getUserByEmail, getUserById } from "../../api/services/accountsAPI";
 
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import 'react-perfect-scrollbar/dist/css/styles.css';
@@ -12,6 +12,8 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 import './index.scss';
 
 export default function SharePopup({ projectInfo, setInfo, pathname, permission }) {
+
+    console.log(projectInfo);
 
     const changingPermission = permission === 'owner';
 
@@ -37,7 +39,7 @@ export default function SharePopup({ projectInfo, setInfo, pathname, permission 
                 throw new Error('Erro ao alterar a permissão.')
             }
 
-            changeLinkPermission(projectInfo._id, newPermission);
+            changeLinkPermission(projectInfo.id, newPermission);
             setLinkPermission(newPermission);
         })
 
@@ -54,7 +56,7 @@ export default function SharePopup({ projectInfo, setInfo, pathname, permission 
             if (!user)
                 throw new Error('Não existe um usuário com o email informado.')
 
-            await addCollaborator(projectInfo._id, user._id);
+            await addCollaborator(projectInfo.id, user.id);
 
             toast.success('Compartilhado!')
         });
@@ -63,7 +65,7 @@ export default function SharePopup({ projectInfo, setInfo, pathname, permission 
     }
 
     async function updateInfo() {
-        let newInfo = await callApi(getProject, projectInfo._id, projectInfo.userId);
+        let newInfo = await callApi(getProject, projectInfo.id, projectInfo.userId);
         setInfo(newInfo);
         setCollaborators(newInfo.share.collaborators);
         setLinkPermission(newInfo.share.link.permission);
@@ -98,9 +100,13 @@ export default function SharePopup({ projectInfo, setInfo, pathname, permission 
 
             <h3>Link Público</h3>
             <div className='link'>
-                <span onClick={copyLink}>
-                    <img src="/assets/images/icons/copy.svg" alt="" />
-                </span>
+                <button disabled={!projectInfo.share.link.code} onClick={copyLink}>
+                    {projectInfo.share.link.code ?
+                        <img src="/assets/images/icons/copy.svg" alt="" />
+                        :
+                        <img src="/assets/images/icons/link.svg" alt="" />                        
+                    }                    
+                </button>
 
                 <div>
                     <h4>Qualquer pessoa com o link</h4>
@@ -138,7 +144,7 @@ function Collaborator({ id, projectInfo, collaborators, updateInfo, changingPerm
             if ((newPermission !== 'read' && newPermission !== 'edit') || !changingPermission)
                 throw new Error('Erro ao atualizar permissão')
 
-            await changeCollaboratorPermission(projectInfo._id, id, newPermission);
+            await changeCollaboratorPermission(projectInfo.id, id, newPermission);
             updateInfo();
         })
     }

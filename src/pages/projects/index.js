@@ -21,26 +21,26 @@ export default function Projects() {
     const [loadingProjects, setLoadingProjects] = useState(true);
     const [projects, setProjects] = useState([]);
     const [section, setSection] = useState(querySection ? querySection : 'myProjects');
-    let login = get('user-login');
+    let login = get('user-login')?.user;
 
     const navigate = useNavigate();
 
     async function getProjects() {
         if (section === 'myProjects') {
-            let data = await callApi(getUserProjects, login._id);
+            let data = await callApi(getUserProjects, login.id);
             setProjects(data);
             setLoadingProjects(false);
         }
         else if (section === 'sharedWithMe') {
-            let data = await callApi(getCollaborationProjects, login._id);
+            let data = await callApi(getCollaborationProjects, login.id);
             setProjects(data);
             setLoadingProjects(false);
         }
     }
 
     async function createIt() {
-        let project = await callApi(createProject, login._id, 'Untitled Project');
-        navigate('/workspace/project/' + project._id);
+        let project = await callApi(createProject, 'Untitled Project');
+        navigate('/workspace/project/' + project.id);
     }
 
     useEffect(() => {

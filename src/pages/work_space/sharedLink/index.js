@@ -23,7 +23,7 @@ export default function SharedLinkWorkspace() {
     }
 
     async function getIt() {
-        let userId = get('user-login')?._id;
+        let userId = get('user-login')?.user.id;
         let data = await callApi(getSharedLink, code, userId);
         let permission = data.permission;
 
