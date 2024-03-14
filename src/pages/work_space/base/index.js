@@ -12,21 +12,40 @@ import { estruturaObjeto } from '../../../api/services/structuresAPI';
 import { useEffect, useState } from 'react';
 import { giveNodeInfo } from '../../../util/react-flow/nodes/createNodes';
 
+import { useBeforeUnload, useBlocker } from 'react-router-dom';
+import UnsavedAlert from '../../../components/work_space/unsavedAlert';
+
 export default function WorkSpace({ projectInfo, model, setModel, permission, initialLoad, setInitialLoad }) {
 
     const [structure, setStructure] = useState();
+    const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
 
     async function buscarEstruturaObjeto() {
         let struct = await callApi(estruturaObjeto, model);
-        setStructure(giveNodeInfo(struct));
+
+        if (struct)
+            setStructure(giveNodeInfo(struct));
     }
 
     useEffect(() => {
         if (initialLoad) {
             buscarEstruturaObjeto();
             setInitialLoad(false);
+        } else {
+            setHasUnsavedChanges(true);
         }
     }, [model])
+
+    const handleUnsavedEvent = event => {
+        if (!hasUnsavedChanges) return;
+
+        event.preventDefault();
+        event.returnValue = '';
+        return '';
+    }
+
+    useBeforeUnload(handleUnsavedEvent, { capture: true });
+    const blocker = useBlocker(hasUnsavedChanges);
 
     return (
         <ReactFlowProvider>
@@ -37,7 +56,7 @@ export default function WorkSpace({ projectInfo, model, setModel, permission, in
 
                     <main>
                         <Cabecalho projectInfo={projectInfo} permission={permission} />
-                        <ActionsBar projectInfo={projectInfo} projectModel={model} permission={permission} />
+                        <ActionsBar projectInfo={projectInfo} projectModel={model} permission={permission} setHasUnsavedChanges={setHasUnsavedChanges} />
 
                         <SideBar jsString={model}
                             setJsString={setModel}
@@ -47,6 +66,10 @@ export default function WorkSpace({ projectInfo, model, setModel, permission, in
                         />
                     </main>
 
+
+                    {blocker.state === "blocked" &&
+                        <UnsavedAlert blocker={blocker} />
+                    }
                     <CollectionsFlow structure={structure} />
                 </div>
             </StructureContext.Provider>

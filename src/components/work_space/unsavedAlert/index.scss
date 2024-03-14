@@ -1,0 +1,43 @@
+.unsaved-alert {
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid rgb(50, 50, 50);
+    background-color: rgb(29, 29, 29);
+    color: #fff;
+    border-radius: 5px;
+
+    h2 {
+        font-size: 20px;
+        margin-bottom: 16px;
+    }
+
+    p {
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 20px;
+    }
+
+    .buttons {
+        display: flex;
+        align-self: flex-end;
+        gap: 10px;
+
+        button {
+            background-color: #b89b19;
+            color: #fff;
+            border-radius: 3px;
+            padding: 8px 12px;
+
+            font-size: 12px;
+            font-weight: 600;
+        }
+    }
+}
+
+.react-confirm-alert-overlay.unsaved-alert-overlay {
+    backdrop-filter: none;
+    background-color: rgba(0, 0, 0, 0.3);
+}

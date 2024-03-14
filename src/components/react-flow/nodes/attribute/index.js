@@ -20,11 +20,6 @@ export default function Attribute({ data }) {
 
     const resetInternal = useUpdateNodeInternals();
 
-    function handleShowInfo() {
-        let show = !showInfo;
-        setShowInfo(show);
-    }
-
     useEffect(() => {
         setShowInfo(data.nodeInfo.showAll);
     }, [data]);
@@ -43,7 +38,7 @@ export default function Attribute({ data }) {
     return (
         <div className="collection-field" ref={heightRef}>
 
-            <NodeHandle attributes={[data]}/>
+            <NodeHandle attribute={data} opened={showInfo}/>
            
             <div style={{ paddingLeft: `${11 + 28 * data.nodeInfo.nestLevel}px` }}
                 className={showInfo ? "description" : ''}
@@ -73,7 +68,7 @@ export default function Attribute({ data }) {
                 <div className="type">
                     <h4>{typeFormat(data.type)}</h4>
 
-                    <button onClick={handleShowInfo}>
+                    <button onClick={() => setShowInfo(!showInfo)}>
                         <img src={showInfo ?
                             '/assets/images/icons/arrow-down.svg' :
                             '/assets/images/icons/arrow-right.svg'
