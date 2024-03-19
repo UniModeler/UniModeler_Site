@@ -10,43 +10,43 @@ import callApi from '../../api/callAPI';
 
 export default function LoginPage() {
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    async function login() {
-        let login = await callApi(loginAccount, email, password);
+  async function login() {
+    let login = await callApi(loginAccount, email, password);
 
-        if (login) {
-            set('user-login', login);
-            toast.success('Logado!');
-        }
+    if (login) {
+      set('user-login', login);
+      toast.success('Logado!');
     }
+  }
 
-    return (
-        <div className="page login">
+  return (
+    <div className="page login">
 
-            <ToasterContainer props={{ position: 'bottom-center' }} />
+      <ToasterContainer props={{ position: 'bottom-center' }} />
+
+      <div>
+        <section className="logo">
+          <img src="/assets/images/logo.svg" alt="" onClick={() => navigate('/')}/>
+        </section>
+
+        <section className="inputs">
+          <div>
+            <input type="email" placeholder='E-mail' value={email} onChange={e => setEmail(e.target.value)} />
+            <input type="password" placeholder='Senha' value={password} onChange={e => setPassword(e.target.value)} />
+            <button onClick={login}>Entrar</button>
 
             <div>
-                <section className="logo">
-                    <img src="/assets/images/logo.svg" alt="" onClick={() => navigate('/')}/>
-                </section>
-
-                <section className="inputs">
-                    <div>
-                        <input type="email" placeholder='E-mail' value={email} onChange={e => setEmail(e.target.value)} />
-                        <input type="password" placeholder='Senha' value={password} onChange={e => setPassword(e.target.value)} />
-                        <button onClick={login}>Entrar</button>
-
-                        <div>
-                            <Link to={'/cadastro'}>Criar conta</Link>
-                            <Link>Esqueci a senha</Link>
-                        </div>
-                    </div>
-                </section>
+              <Link to={'/cadastro'}>Criar conta</Link>
+              <Link>Esqueci a senha</Link>
             </div>
-        </div>
-    )
+          </div>
+        </section>
+      </div>
+    </div>
+  )
 }

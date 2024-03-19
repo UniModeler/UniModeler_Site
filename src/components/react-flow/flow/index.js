@@ -13,46 +13,46 @@ const nodeTypes = { collection: Entity, attribute: Attribute };
 
 export default function CollectionsFlow({ structure }) {
 
-    const [nodes, setNodes, onNodesChange] = useNodesState([]);
-    const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-    const updateNodes = useUpdateNodeInternals();
+  const [nodes, setNodes, onNodesChange] = useNodesState([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const updateNodes = useUpdateNodeInternals();
 
-    function changeNodesPosition(changes) {
-        for (let change of changes) {
-            if (change.type === 'position' && change.dragging) {
-                let updatedNodes = updateCollectionPosition(change.id, structure, change.position);
-                setNodes(updatedNodes);
-            }
-        }
-
-        onNodesChange(changes);
+  function changeNodesPosition(changes) {
+    for (let change of changes) {
+      if (change.type === 'position' && change.dragging) {
+        let updatedNodes = updateCollectionPosition(change.id, structure, change.position);
+        setNodes(updatedNodes);
+      }
     }
 
-    useEffect(() => {
-        if (structure) {
-            let n = createCollectionNodes(structure);
-            let e = addEdges(n);
+    onNodesChange(changes);
+  }
 
-            setNodes(n);
-            setEdges(e);
-            updateNodes();
-        }
-    }, [structure])
+  useEffect(() => {
+    if (structure) {
+      let n = createCollectionNodes(structure);
+      let e = addEdges(n);
 
-    return (
-        <ReactFlow
-            nodes={nodes}
-            onNodesChange={changeNodesPosition}
-            nodeTypes={nodeTypes}
-            edges={edges}
-            onEdgesChange={onEdgesChange}
-            zoomOnDoubleClick={false}
-            connectionMode="loose"
+      setNodes(n);
+      setEdges(e);
+      updateNodes();
+    }
+  }, [structure])
 
-            style={{ background: '#333333' }}
-        >
+  return (
+    <ReactFlow
+      nodes={nodes}
+      onNodesChange={changeNodesPosition}
+      nodeTypes={nodeTypes}
+      edges={edges}
+      onEdgesChange={onEdgesChange}
+      zoomOnDoubleClick={false}
+      connectionMode="loose"
 
-            <Background variant='dots' gap={12} size={5} color="#2F2A2A" />
-        </ReactFlow>
-    )
+      style={{ background: '#333333' }}
+    >
+
+      <Background variant='dots' gap={12} size={5} color="#2F2A2A" />
+    </ReactFlow>
+  )
 }

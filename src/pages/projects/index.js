@@ -14,103 +14,103 @@ import ToasterContainer from '../../components/toast';
 
 export default function Projects() {
 
-    const location = useLocation();
-    const query = useQuery();
-    let querySection = query.get("section")
+  const location = useLocation();
+  const query = useQuery();
+  let querySection = query.get("section")
 
-    const [loadingProjects, setLoadingProjects] = useState(true);
-    const [projects, setProjects] = useState([]);
-    const [section, setSection] = useState(querySection ? querySection : 'myProjects');
-    let login = get('user-login')?.user;
+  const [loadingProjects, setLoadingProjects] = useState(true);
+  const [projects, setProjects] = useState([]);
+  const [section, setSection] = useState(querySection ? querySection : 'myProjects');
+  let login = get('user-login')?.user;
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    async function getProjects() {
-        if (section === 'myProjects') {
-            let data = await callApi(getUserProjects, login.id);
-            setProjects(data);
-            setLoadingProjects(false);
-        }
-        else if (section === 'sharedWithMe') {
-            let data = await callApi(getCollaborationProjects, login.id);
-            setProjects(data);
-            setLoadingProjects(false);
-        }
+  async function getProjects() {
+    if (section === 'myProjects') {
+      let data = await callApi(getUserProjects, login.id);
+      setProjects(data);
+      setLoadingProjects(false);
     }
-
-    async function createIt() {
-        let project = await callApi(createProject, 'Untitled Project');
-        navigate('/workspace/project/' + project.id);
+    else if (section === 'sharedWithMe') {
+      let data = await callApi(getCollaborationProjects, login.id);
+      setProjects(data);
+      setLoadingProjects(false);
     }
+  }
 
-    useEffect(() => {
-        if (querySection)
-            setSection(querySection);
+  async function createIt() {
+    let project = await callApi(createProject, 'Untitled Project');
+    navigate('/workspace/project/' + project.id);
+  }
 
-        setLoadingProjects(true);
+  useEffect(() => {
+    if (querySection)
+      setSection(querySection);
 
-    }, [location.key])
+    setLoadingProjects(true);
 
-    useEffect(() => {
-        if (login)
-            getProjects();
-    }, [section, location.key])
+  }, [location.key])
 
-    return (
-        <div className="page projects">
-            <Header />
+  useEffect(() => {
+    if (login)
+      getProjects();
+  }, [section, location.key])
 
-            <ToasterContainer />
+  return (
+    <div className="page projects">
+      <Header />
 
-            <main>
-                <div className="sections">
-                    <div className={section !== 'myProjects' ? 'disabled' : ''}
-                        onClick={() => { setSection('myProjects'); setLoadingProjects(true) }}
-                    >
-                        <h2>Meus Projetos</h2>
-                        <button onClick={() => { if (section === 'myProjects') createIt() }}><h3>+</h3></button>
-                    </div>
+      <ToasterContainer />
 
-                    <div className={section !== 'sharedWithMe' ? 'disabled' : ''}
-                        onClick={() => { setSection('sharedWithMe'); setLoadingProjects(true) }}
-                    >
-                        <h2>Compartilhados Comigo</h2>
-                    </div>
-                </div>
+      <main>
+        <div className="sections">
+          <div className={section !== 'myProjects' ? 'disabled' : ''}
+            onClick={() => { setSection('myProjects'); setLoadingProjects(true) }}
+          >
+            <h2>Meus Projetos</h2>
+            <button onClick={() => { if (section === 'myProjects') createIt() }}><h3>+</h3></button>
+          </div>
 
-                {projects.length > 0 ?
-                    <section className="container-projects">
-                        {projects.map(p => <ProjectCard project={p} resetProjects={getProjects} />)}
-                    </section>
-
-                    :
-
-                    !loadingProjects && <NoProjects section={section} createProject={createIt} />
-                }
-            </main>
-
-            <Footer />
+          <div className={section !== 'sharedWithMe' ? 'disabled' : ''}
+            onClick={() => { setSection('sharedWithMe'); setLoadingProjects(true) }}
+          >
+            <h2>Compartilhados Comigo</h2>
+          </div>
         </div>
-    )
+
+        {projects.length > 0 ?
+          <section className="container-projects">
+            {projects.map(p => <ProjectCard project={p} resetProjects={getProjects} />)}
+          </section>
+
+          :
+
+          !loadingProjects && <NoProjects section={section} createProject={createIt} />
+        }
+      </main>
+
+      <Footer />
+    </div>
+  )
 }
 
 function NoProjects({ section, createProject }) {
-    if (section === 'myProjects') {
-        return (
-            <div className="noProjects">
-                <img src="/assets/images/space-mailbox.png" alt="" />
-                <p>Parece que você ainda não tem projetos.</p>
-                <p>Comece a Modelar agora mesmo!</p>
-                <button onClick={createProject}>Novo Projeto</button>
-            </div>
-        )
-    }
-    else if (section === 'sharedWithMe') {
-        return (
-            <div className="noProjects">
-                <img src="/assets/images/space-mailbox.png" alt="" />
-                <p>Parece que ninguém compartilhou nada com você ainda.</p>
-            </div>
-        )
-    }
+  if (section === 'myProjects') {
+    return (
+      <div className="noProjects">
+        <img src="/assets/images/space-mailbox.png" alt="" />
+        <p>Parece que você ainda não tem projetos.</p>
+        <p>Comece a Modelar agora mesmo!</p>
+        <button onClick={createProject}>Novo Projeto</button>
+      </div>
+    )
+  }
+  else if (section === 'sharedWithMe') {
+    return (
+      <div className="noProjects">
+        <img src="/assets/images/space-mailbox.png" alt="" />
+        <p>Parece que ninguém compartilhou nada com você ainda.</p>
+      </div>
+    )
+  }
 }

@@ -9,68 +9,68 @@ import DeleteAlert from "./deleteAlert";
 
 export default function ProjectMenu({ menuButtonRef, project, permission, resetProjects, setShowMenu, setChangeName, share  }) {
 
-    const [showMenuLeft, setShowMenuLeft] = useState(false);
-    const [showMenuTop, setShowMenuTop] = useState(false);
-    
-    const navigate = useNavigate();
-    const toProject = () => navigate('/workspace/project/' + project.id);
+  const [showMenuLeft, setShowMenuLeft] = useState(false);
+  const [showMenuTop, setShowMenuTop] = useState(false);
+  
+  const navigate = useNavigate();
+  const toProject = () => navigate('/workspace/project/' + project.id);
 
-    useEffect(() => {
-        let buttonMeasures = menuButtonRef.current.getBoundingClientRect();
+  useEffect(() => {
+    let buttonMeasures = menuButtonRef.current.getBoundingClientRect();
 
-        if (buttonMeasures.x + 178 >= window.innerWidth)
-            setShowMenuLeft(true);
+    if (buttonMeasures.x + 178 >= window.innerWidth)
+      setShowMenuLeft(true);
 
-        if (buttonMeasures.y + 194 >= window.innerHeight)
-            setShowMenuTop(true);
-    }, [menuButtonRef])
+    if (buttonMeasures.y + 194 >= window.innerHeight)
+      setShowMenuTop(true);
+  }, [menuButtonRef])
 
-    function deleteIt() {
-        if (permission !== 'owner') {
-            toast("You don't have permission to do that.");
-            return;
-        }
-
-        confirmAlert({
-            customUI: ({ onClose }) =>  <DeleteAlert project={project} resetProjects={resetProjects} onClose={onClose}/>
-        })
+  function deleteIt() {
+    if (permission !== 'owner') {
+      toast("You don't have permission to do that.");
+      return;
     }
 
-    async function duplicateIt() {
-        await callApi(duplicateProject, project.id);
-        resetProjects();
-    }
+    confirmAlert({
+      customUI: ({ onClose }) =>  <DeleteAlert project={project} resetProjects={resetProjects} onClose={onClose}/>
+    })
+  }
 
-    return (
-        <OutsideClickHandler onOutsideClick={() => { setShowMenu(false) }}>
-            <section className="menu"
-                style={{
-                    right: showMenuLeft && '100%',
-                    left: showMenuLeft && 'unset',
-                    bottom: showMenuTop && '100%',
-                    top: showMenuTop && 'unset'
-                }}
-            >
-                <div className="group">
-                    <button onClick={toProject}>Ver</button>
-                </div>
+  async function duplicateIt() {
+    await callApi(duplicateProject, project.id);
+    resetProjects();
+  }
 
-                <div className="group">
-                    <button onClick={() => {
-                        if (permission !== 'owner')
-                            toast("You don't have permission to do that.");
-                        else setChangeName(true)
-                    }}>Renomear</button>
+  return (
+    <OutsideClickHandler onOutsideClick={() => { setShowMenu(false) }}>
+      <section className="menu"
+        style={{
+          right: showMenuLeft && '100%',
+          left: showMenuLeft && 'unset',
+          bottom: showMenuTop && '100%',
+          top: showMenuTop && 'unset'
+        }}
+      >
+        <div className="group">
+          <button onClick={toProject}>Ver</button>
+        </div>
 
-                    <button onClick={duplicateIt}>Duplicar</button>
-                    <button onClick={deleteIt}>Excluir</button>
-                </div>
+        <div className="group">
+          <button onClick={() => {
+            if (permission !== 'owner')
+              toast("You don't have permission to do that.");
+            else setChangeName(true)
+          }}>Renomear</button>
 
-                <div className="group">
-                    <button onClick={share}>Compartilhar</button>
-                    <button onClick={() => document.getElementById('image').click()}>Alterar capa</button>
-                </div>
-            </section>
-        </OutsideClickHandler>
-    )
+          <button onClick={duplicateIt}>Duplicar</button>
+          <button onClick={deleteIt}>Excluir</button>
+        </div>
+
+        <div className="group">
+          <button onClick={share}>Compartilhar</button>
+          <button onClick={() => document.getElementById('image').click()}>Alterar capa</button>
+        </div>
+      </section>
+    </OutsideClickHandler>
+  )
 }

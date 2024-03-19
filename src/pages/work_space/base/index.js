@@ -17,62 +17,62 @@ import UnsavedAlert from '../../../components/work_space/unsavedAlert';
 
 export default function WorkSpace({ projectInfo, model, setModel, permission, initialLoad, setInitialLoad }) {
 
-    const [structure, setStructure] = useState();
-    const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+  const [structure, setStructure] = useState();
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
 
-    async function buscarEstruturaObjeto() {
-        let struct = await callApi(estruturaObjeto, model);
+  async function buscarEstruturaObjeto() {
+    let struct = await callApi(estruturaObjeto, model);
 
-        if (struct)
-            setStructure(giveNodeInfo(struct));
+    if (struct)
+      setStructure(giveNodeInfo(struct));
+  }
+
+  useEffect(() => {
+    if (initialLoad) {
+      buscarEstruturaObjeto();
+      setInitialLoad(false);
+    } else {
+      setHasUnsavedChanges(true);
     }
+  }, [model])
 
-    useEffect(() => {
-        if (initialLoad) {
-            buscarEstruturaObjeto();
-            setInitialLoad(false);
-        } else {
-            setHasUnsavedChanges(true);
-        }
-    }, [model])
+  const handleUnsavedEvent = event => {
+    if (!hasUnsavedChanges) return;
 
-    const handleUnsavedEvent = event => {
-        if (!hasUnsavedChanges) return;
+    event.preventDefault();
+    event.returnValue = '';
+    return '';
+  }
 
-        event.preventDefault();
-        event.returnValue = '';
-        return '';
-    }
+  useBeforeUnload(handleUnsavedEvent, { capture: true });
+  const blocker = useBlocker(hasUnsavedChanges);
 
-    useBeforeUnload(handleUnsavedEvent, { capture: true });
-    const blocker = useBlocker(hasUnsavedChanges);
+  return (
+    <ReactFlowProvider>
+      <StructureContext.Provider value={{ structure: structure, setStructure: setStructure }}>
+        <div className="page workspace">
 
-    return (
-        <ReactFlowProvider>
-            <StructureContext.Provider value={{ structure: structure, setStructure: setStructure }}>
-                <div className="page workspace">
+          <ToasterContainer />
 
-                    <ToasterContainer />
+          <main>
+            <Cabecalho projectInfo={projectInfo} permission={permission} />
+            <ActionsBar projectInfo={projectInfo} projectModel={model} permission={permission} setHasUnsavedChanges={setHasUnsavedChanges} />
 
-                    <main>
-                        <Cabecalho projectInfo={projectInfo} permission={permission} />
-                        <ActionsBar projectInfo={projectInfo} projectModel={model} permission={permission} setHasUnsavedChanges={setHasUnsavedChanges} />
-
-                        <SideBar jsString={model}
-                            setJsString={setModel}
-                            buscarEstruturaObjeto={buscarEstruturaObjeto}
-                            structure={structure}
-                            permission={permission}
-                        />
-                    </main>
+            <SideBar jsString={model}
+              setJsString={setModel}
+              buscarEstruturaObjeto={buscarEstruturaObjeto}
+              structure={structure}
+              permission={permission}
+            />
+          </main>
 
 
-                    {blocker.state === "blocked" &&
-                        <UnsavedAlert blocker={blocker} />
-                    }
-                    <CollectionsFlow structure={structure} />
-                </div>
-            </StructureContext.Provider>
-        </ReactFlowProvider>
-    )
+          {blocker.state === "blocked" &&
+            <UnsavedAlert blocker={blocker} />
+          }
+          <CollectionsFlow structure={structure} />
+        </div>
+      </StructureContext.Provider>
+    </ReactFlowProvider>
+  )
 }

@@ -9,47 +9,47 @@ import { get } from "local-storage";
 
 export default function ProjectWorkspace() {
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    let { id } = useParams();
-    const [projectInfo, setProjectInfo] = useState();
-    const [projectModel, setProjectModel] = useState();
-    const [permission, setPermission] = useState();
+  let { id } = useParams();
+  const [projectInfo, setProjectInfo] = useState();
+  const [projectModel, setProjectModel] = useState();
+  const [permission, setPermission] = useState();
 
-    const [initialLoad, setInitialLoad] = useState(true);
+  const [initialLoad, setInitialLoad] = useState(true);
 
-    async function getIt() {
-        setInitialLoad(true);
-        
-        let userId = get('user-login')?.user.id;
-        let data = await callApi(getProject, id, userId);
-        let permission = data?.permission;
+  async function getIt() {
+    setInitialLoad(true);
+    
+    let userId = get('user-login')?.user.id;
+    let data = await callApi(getProject, id, userId);
+    let permission = data?.permission;
 
-        if (!permission) {
-            navigate(-1);
-        }
-
-        if (permission === 'read') {
-            toast(`Your permission in this project is to "read", so you can't change it.`)
-        }
-
-        setProjectInfo(data);
-        setPermission(permission);
-        setProjectModel(data.modeling.data);
+    if (!permission) {
+      navigate(-1);
     }
 
-    useEffect(() => {
-        getIt();
-    }, []);
+    if (permission === 'read') {
+      toast(`Your permission in this project is to "read", so you can't change it.`)
+    }
 
-    return (
-        <WorkSpace projectInfo={projectInfo}
-            model={projectModel}
-            setModel={setProjectModel}
-            permission={permission}
+    setProjectInfo(data);
+    setPermission(permission);
+    setProjectModel(data.modeling.data);
+  }
 
-            initialLoad={initialLoad}
-            setInitialLoad={setInitialLoad}
-        />
-    )
+  useEffect(() => {
+    getIt();
+  }, []);
+
+  return (
+    <WorkSpace projectInfo={projectInfo}
+      model={projectModel}
+      setModel={setProjectModel}
+      permission={permission}
+
+      initialLoad={initialLoad}
+      setInitialLoad={setInitialLoad}
+    />
+  )
 }

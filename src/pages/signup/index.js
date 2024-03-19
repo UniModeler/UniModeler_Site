@@ -10,46 +10,46 @@ import validParams from '../../util/testParams';
 
 export default function SignUpPage() {
 
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [company, setCompany] = useState('');
-    const [expertise, setExpertise] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [company, setCompany] = useState('');
+  const [expertise, setExpertise] = useState('');
 
-    async function register() {
+  async function register() {
 
-        if (validParams([name, email, password, company, expertise])) {
-            let r = await callApi(registerAccount, name, email, password, company, expertise);
+    if (validParams([name, email, password, company, expertise])) {
+      let r = await callApi(registerAccount, name, email, password, company, expertise);
 
-            if (r) {
-                set('user-login', r);
+      if (r) {
+        set('user-login', r);
 
-                toast.success('Conta criada com sucesso!')
-            }
-        }
+        toast.success('Conta criada com sucesso!')
+      }
     }
+  }
 
-    return (
-        <div className="page sign-up">
+  return (
+    <div className="page sign-up">
 
-            <ToasterContainer props={{ position: 'bottom-center' }} />
+      <ToasterContainer props={{ position: 'bottom-center' }} />
 
-            <div>
-                <img src="/assets/images/logo.svg" alt="" />
+      <div>
+        <img src="/assets/images/logo.svg" alt="" />
 
-                <section className="inputs">
-                    <div>
-                        <input type="text" placeholder='Nome' value={name} onChange={e => setName(e.target.value)} />
-                        <input type="text" placeholder='Empresa' value={company} onChange={e => setCompany(e.target.value)} />
-                        <input type="text" placeholder='Área de atuação' value={expertise} onChange={e => setExpertise(e.target.value)} />
-                        <button onClick={register}>Criar conta</button>
-                    </div>
-                    <div>
-                        <input type="text" placeholder='E-mail' value={email} onChange={e => setEmail(e.target.value)} />
-                        <input type="text" placeholder='Senha' value={password} onChange={e => setPassword(e.target.value)} />
-                    </div>
-                </section>
-            </div>
-        </div>
-    )
+        <section className="inputs">
+          <div>
+            <input type="text" placeholder='Nome' value={name} onChange={e => setName(e.target.value)} />
+            <input type="text" placeholder='Empresa' value={company} onChange={e => setCompany(e.target.value)} />
+            <input type="text" placeholder='Área de atuação' value={expertise} onChange={e => setExpertise(e.target.value)} />
+            <button onClick={register}>Criar conta</button>
+          </div>
+          <div>
+            <input type="text" placeholder='E-mail' value={email} onChange={e => setEmail(e.target.value)} />
+            <input type="text" placeholder='Senha' value={password} onChange={e => setPassword(e.target.value)} />
+          </div>
+        </section>
+      </div>
+    </div>
+  )
 }

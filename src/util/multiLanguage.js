@@ -3,70 +3,70 @@ import { get } from 'local-storage';
 
 export default function useTranslations(component) {
 
-    const [translations] = useState(translate(component));
+  const [translations] = useState(translate(component));
 
-    return [translations, replace];
+  return [translations, replace];
 }
 
 function translate(component) {
-    let language = get('language');
-    
-    if(!language) language = 'pt_br';
+  let language = get('language');
+  
+  if(!language) language = 'pt_br';
 
-    return translations[language][component];
+  return translations[language][component];
 }
 
 function replace(translation, replacements) {
 
-    let t = translation;
+  let t = translation;
 
-    for(let r of replacements) {
-        t = t.replace('%?', r)  
-    }
+  for(let r of replacements) {
+    t = t.replace('%?', r)  
+  }
 
-    return t;
+  return t;
 }
 
 const translations = {
-    en: {
-        sideBar: {
-            menus: {
-                structure: {
-                    title: 'Structure',
-                    button: 'Update'
-                },
-                objects: {
-                    title: 'Objects',
-                    entitiesTitle: 'Entities'
-                }
-            },
+  en: {
+    sideBar: {
+      menus: {
+        structure: {
+          title: 'Structure',
+          button: 'Update'
         },
-        actionsBar: {
-            shareButton: {
-                shareText: 'Here is your share link.',
-                copyText: 'Copied to clipboard!'
-            }
+        objects: {
+          title: 'Objects',
+          entitiesTitle: 'Entities'
         }
+      },
     },
+    actionsBar: {
+      shareButton: {
+        shareText: 'Here is your share link.',
+        copyText: 'Copied to clipboard!'
+      }
+    }
+  },
 
-    pt_br: {
-        sideBar: {
-            menus: {
-                structure: {
-                    title: 'Estrutura',
-                    button: 'Atualizar'
-                },
-                objects: {
-                    title: 'Objetos',
-                    entitiesTitle: 'Entidades'
-                }
-            },
+  pt_br: {
+    sideBar: {
+      menus: {
+        structure: {
+          title: 'Estrutura',
+          button: 'Atualizar'
         },
-        actionsBar: {
-            shareButton: {
-                shareText: 'Aqui está seu link compartilhável.',
-                copyText: 'Copiado!'
-            }
+        objects: {
+          title: 'Objetos',
+          entitiesTitle: 'Entidades'
         }
+      },
     },
+    actionsBar: {
+      shareButton: {
+        shareText: 'Aqui está seu link compartilhável.',
+        copyText: 'Copiado!'
+      }
+    }
+  },
 }

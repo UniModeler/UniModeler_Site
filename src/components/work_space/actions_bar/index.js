@@ -11,62 +11,62 @@ import SharePopup from '../../sharePopup';
 
 export default function ActionsBar({ projectInfo, projectModel, permission, setHasUnsavedChanges }) {
 
-    const [info, setInfo] = useState(projectInfo);
-    const logged = get('user-login').user;
-    const { pathname } = useLocation();
-    const navigate = useNavigate();
+  const [info, setInfo] = useState(projectInfo);
+  const logged = get('user-login').user;
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        if(projectInfo)
-            setInfo(projectInfo);
-    }, [projectInfo])
+  useEffect(() => {
+    if(projectInfo)
+      setInfo(projectInfo);
+  }, [projectInfo])
 
-    function share() {
-        confirmAlert({
-            customUI: () => <SharePopup projectInfo={info} setInfo={setInfo} pathname={pathname} permission={permission} />
-        })
+  function share() {
+    confirmAlert({
+      customUI: () => <SharePopup projectInfo={info} setInfo={setInfo} pathname={pathname} permission={permission} />
+    })
+  }
+
+  async function saveProject() {
+    if (projectInfo && permission !== 'read') {
+      await callApi(updateProject, projectInfo.id, projectModel);
+
+      toast.success('Salvo!', { position: 'top-center' });
+
+      setHasUnsavedChanges(false);
     }
+  }
 
-    async function saveProject() {
-        if (projectInfo && permission !== 'read') {
-            await callApi(updateProject, projectInfo.id, projectModel);
+  async function newProject() {
+    let project = await callApi(createProject, logged.id, 'Untitled Project');
+    navigate('/workspace/project/' + project.id);
+  }
 
-            toast.success('Salvo!', { position: 'top-center' });
+  return (
+    <section className="actions-bar">
+      <div className={logged ? '' : 'not-logged'}>
+        <button onClick={saveProject}>
+          <img src="/assets/images/icons/save.svg" alt="" />
+        </button>
 
-            setHasUnsavedChanges(false);
-        }
-    }
+        <button onClick={() => { navigate('/projects') }}>
+          <img src="/assets/images/icons/file.svg" alt="" />
+        </button>
 
-    async function newProject() {
-        let project = await callApi(createProject, logged.id, 'Untitled Project');
-        navigate('/workspace/project/' + project.id);
-    }
+        <button onClick={() => { newProject() }}>
+          <img src="/assets/images/icons/addPage.svg" alt="" />
+        </button>
+      </div>
 
-    return (
-        <section className="actions-bar">
-            <div className={logged ? '' : 'not-logged'}>
-                <button onClick={saveProject}>
-                    <img src="/assets/images/icons/save.svg" alt="" />
-                </button>
+      <div>
+        <DownloadButton>
+          <img src="/assets/images/icons/exportPage.svg" alt="" />
+        </DownloadButton>
 
-                <button onClick={() => { navigate('/projects') }}>
-                    <img src="/assets/images/icons/file.svg" alt="" />
-                </button>
-
-                <button onClick={() => { newProject() }}>
-                    <img src="/assets/images/icons/addPage.svg" alt="" />
-                </button>
-            </div>
-
-            <div>
-                <DownloadButton>
-                    <img src="/assets/images/icons/exportPage.svg" alt="" />
-                </DownloadButton>
-
-                <button onClick={share}>
-                    <img src="/assets/images/icons/share.svg" alt="" />
-                </button>
-            </div>
-        </section>
-    )
+        <button onClick={share}>
+          <img src="/assets/images/icons/share.svg" alt="" />
+        </button>
+      </div>
+    </section>
+  )
 }
