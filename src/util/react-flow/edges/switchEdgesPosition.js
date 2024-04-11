@@ -28,15 +28,14 @@ export default function switchEdgesPosition(nodes, edges, collectionId) {
       edge[immobileTip] = "left";
       edge[mobileTip] = "left"
     }
-      
-    else if(immobileCollection.position.x < collection.position.x + 400) {
+    else {
       edge[immobileTip] = "right";
       edge[mobileTip] = "right";
     }
 
-    if(collection.position.x + 400 < immobileCollection.position.x)
+    if(collection.position.x + 350 < immobileCollection.position.x)
       edge[mobileTip] = "right";
-    else if(collection.position.x > immobileCollection.position.x + 400) 
+    else if(collection.position.x > immobileCollection.position.x + 350) 
       edge[mobileTip] = "left";
   }
 
