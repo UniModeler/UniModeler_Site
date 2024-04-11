@@ -8,6 +8,7 @@ import Attribute from "../nodes/attribute";
 import { createCollectionNodes } from "../../../util/react-flow/nodes/createNodes";
 import { updateCollectionPosition } from "../../../util/react-flow/nodes/updateNodes";
 import { addEdges } from "../../../util/react-flow/edges/addEdges";
+import switchEdgesPosition from "../../../util/react-flow/edges/switchEdgesPosition";
 
 const nodeTypes = { collection: Entity, attribute: Attribute };
 
@@ -22,6 +23,7 @@ export default function CollectionsFlow({ structure }) {
       if (change.type === 'position' && change.dragging) {
         let updatedNodes = updateCollectionPosition(change.id, structure, change.position);
         setNodes(updatedNodes);
+        setEdges(switchEdgesPosition(nodes, edges, change.id));
       }
     }
 

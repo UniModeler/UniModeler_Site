@@ -12,7 +12,9 @@ export function addEdges(nodes) {
     let color = colors[index];
 
     if (node.type === 'attribute' && node.data.key === 'foreign key') {
-      let edge = newEdge(edges.length, node.data.references, node.id, color);
+      let foreignKeyCollection = node.parentNode;
+
+      let edge = newEdge(edges.length, node.data.references, node.id, color, foreignKeyCollection);
       edges.push(edge);
 
       index++;
@@ -40,7 +42,7 @@ function addParentAtributtesEdges(edges, key, color) {
     edges.push(newEdge(edges.length, key.references, parentAtributteId, color));
 }
 
-function newEdge(counter, sourceId, target, color) {
+function newEdge(counter, sourceId, target, color, foreignKeyCollection) {
 
   let newColor = randomColor({ luminosity: 'light' });
   colors.push(newColor);
@@ -54,6 +56,8 @@ function newEdge(counter, sourceId, target, color) {
     style: { strokeWidth: '3px', stroke: color },
     markerEnd: { type: MarkerType.ArrowClosed, color: color, width: 10, heigth: 10 },
     animated: true,
-    type: 'smoothstep'
+    type: 'smoothstep',
+    foreignKeyCollection: foreignKeyCollection,
+    primaryKeyCollection: `collection_${sourceId}`
   }
 }
