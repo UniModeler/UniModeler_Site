@@ -1,3 +1,5 @@
+import './index.scss';
+
 import Cabecalho from '../../../components/work_space/cabecalho';
 import CollectionsFlow from '../../../components/react-flow/flow';
 import ActionsBar from '../../../components/work_space/actions_bar';
@@ -5,20 +7,19 @@ import SideBar from '../../../components/work_space/side_bar';
 import { ReactFlowProvider } from 'reactflow';
 import ToasterContainer from '../../../components/toast';
 
-import './index.scss';
 import StructureContext from '../../../util/react-flow/structure/context';
 import callApi from '../../../api/callAPI';
 import { estruturaObjeto } from '../../../api/services/structuresAPI';
 import { useEffect, useState } from 'react';
 import { giveNodeInfo } from '../../../util/react-flow/nodes/createNodes';
 
-import { useBeforeUnload, useBlocker } from 'react-router-dom';
-import UnsavedAlert from '../../../components/work_space/unsavedAlert';
+import { useAutosave } from 'react-autosave';
+import { updateProject } from '../../../api/services/projectsAPI';
 
 export default function WorkSpace({ projectInfo, model, setModel, permission, initialLoad, setInitialLoad }) {
 
   const [structure, setStructure] = useState();
-  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+  const [autoSaving, setAutoSaving] = useState(true);
 
   async function buscarEstruturaObjeto() {
     let struct = await callApi(estruturaObjeto, model);
@@ -27,25 +28,31 @@ export default function WorkSpace({ projectInfo, model, setModel, permission, in
       setStructure(giveNodeInfo(struct));
   }
 
+  async function autoSaveProject(newModel) {
+    await callApi(async () => {
+      let response = await updateProject(projectInfo.id, newModel);
+      if (!response.modifiedCount && autoSaving) {
+        setAutoSaving(false);
+        throw new Error("Projeto não salvo. Verifique a sua rede.")
+      }
+
+      if (response.modifiedCount)
+        setAutoSaving(true);
+    });
+  }
+
   useEffect(() => {
     if (initialLoad) {
       buscarEstruturaObjeto();
       setInitialLoad(false);
-    } else {
-      setHasUnsavedChanges(true);
     }
   }, [model])
 
-  const handleUnsavedEvent = event => {
-    if (!hasUnsavedChanges) return;
-
-    event.preventDefault();
-    event.returnValue = '';
-    return '';
+  useAutosave({
+    data: model,
+    onSave: (newModel) => {if(projectInfo) autoSaveProject(newModel)},
   }
-
-  useBeforeUnload(handleUnsavedEvent, { capture: true });
-  const blocker = useBlocker(hasUnsavedChanges);
+  )
 
   return (
     <ReactFlowProvider>
@@ -56,7 +63,7 @@ export default function WorkSpace({ projectInfo, model, setModel, permission, in
 
           <main>
             <Cabecalho projectInfo={projectInfo} permission={permission} />
-            <ActionsBar projectInfo={projectInfo} projectModel={model} permission={permission} setHasUnsavedChanges={setHasUnsavedChanges} />
+            <ActionsBar projectInfo={projectInfo} projectModel={model} permission={permission} />
 
             <SideBar jsString={model}
               setJsString={setModel}
@@ -66,10 +73,6 @@ export default function WorkSpace({ projectInfo, model, setModel, permission, in
             />
           </main>
 
-
-          {blocker.state === "blocked" &&
-            <UnsavedAlert blocker={blocker} />
-          }
           <CollectionsFlow structure={structure} />
         </div>
       </StructureContext.Provider>

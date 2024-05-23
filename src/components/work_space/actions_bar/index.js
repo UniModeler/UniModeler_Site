@@ -9,7 +9,7 @@ import { createProject, updateProject } from '../../../api/services/projectsAPI'
 import { useEffect, useState } from 'react';
 import SharePopup from '../../sharePopup';
 
-export default function ActionsBar({ projectInfo, projectModel, permission, setHasUnsavedChanges }) {
+export default function ActionsBar({ projectInfo, projectModel, permission }) {
 
   const [info, setInfo] = useState(projectInfo);
   const logged = get('user-login').user;
@@ -26,17 +26,7 @@ export default function ActionsBar({ projectInfo, projectModel, permission, setH
       customUI: () => <SharePopup projectInfo={info} setInfo={setInfo} pathname={pathname} permission={permission} />
     })
   }
-
-  async function saveProject() {
-    if (projectInfo && permission !== 'read') {
-      await callApi(updateProject, projectInfo.id, projectModel);
-
-      toast.success('Salvo!', { position: 'top-center' });
-
-      setHasUnsavedChanges(false);
-    }
-  }
-
+  
   async function newProject() {
     let project = await callApi(createProject, logged.id, 'Untitled Project');
     navigate('/workspace/project/' + project.id);
@@ -45,10 +35,6 @@ export default function ActionsBar({ projectInfo, projectModel, permission, setH
   return (
     <section className="actions-bar">
       <div className={logged ? '' : 'not-logged'}>
-        <button onClick={saveProject}>
-          <img src="/assets/images/icons/save.svg" alt="" />
-        </button>
-
         <button onClick={() => { navigate('/projects') }}>
           <img src="/assets/images/icons/file.svg" alt="" />
         </button>
