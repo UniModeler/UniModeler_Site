@@ -20,7 +20,7 @@ export function addEdges(nodes) {
       index++;
 
     } else if (node.keysInside && node.data.nodeInfo.nestLevel === 0) {
-      addEdgesKeysInside(edges, node.keysInside, node.id, color);
+      addEdgesKeysInside(edges, node.keysInside, node.id, color, node.parentNode);
       index++;
     }
   }
@@ -28,18 +28,18 @@ export function addEdges(nodes) {
   return edges;
 }
 
-function addEdgesKeysInside(edges, keysInside, fatherId, color) {
+function addEdgesKeysInside(edges, keysInside, fatherId, color, foreignKeyCollection) {
   for (let key of keysInside) {
-    edges.push(newEdge(edges.length, key.references, key.id, color));
-    edges.push(newEdge(edges.length, key.references, fatherId, color));
+    edges.push(newEdge(edges.length, key.references, key.id, color, foreignKeyCollection));
+    edges.push(newEdge(edges.length, key.references, fatherId, color, foreignKeyCollection));
 
-    addParentAtributtesEdges(edges, key, color);
+    addParentAtributtesEdges(edges, key, color, foreignKeyCollection);
   }
 }
 
-function addParentAtributtesEdges(edges, key, color) {
+function addParentAtributtesEdges(edges, key, color, foreignKeyCollection) {
   for (let parentAtributteId of key.parentAtributtes)
-    edges.push(newEdge(edges.length, key.references, parentAtributteId, color));
+    edges.push(newEdge(edges.length, key.references, parentAtributteId, color, foreignKeyCollection));
 }
 
 function newEdge(counter, sourceId, target, color, foreignKeyCollection) {
