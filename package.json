@@ -1,14 +1,20 @@
 {
-  "name": "mongo_modeler",
-  "version": "0.1.0",
+  "name": "unimodeler",
   "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
   "dependencies": {
     "@monaco-editor/react": "^4.6.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/prop-types": "^15.7.11",
-    "acorn": "^8.11.2",
     "axios": "^1.6.2",
     "classnames": "^2.5.1",
     "html-to-image": "^1.11.11",
@@ -25,34 +31,17 @@
     "react-perfect-scrollbar": "^1.5.8",
     "react-pro-sidebar": "^1.1.0-alpha.1",
     "react-router-dom": "^6.21.2",
-    "react-router-guard-dirty-state": "^0.0.6",
-    "react-scripts": "5.0.1",
     "reactflow": "^11.10.1",
-    "sass": "^1.69.5",
-    "web-vitals": "^2.1.4"
+    "sass": "^1.69.5"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "devDependencies": {
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@vitejs/plugin-react-swc": "^3.5.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.6",
+    "vite": "^5.2.0"
   }
 }

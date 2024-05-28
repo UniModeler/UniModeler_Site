@@ -26,7 +26,7 @@ export default function ObjectsMenu({ closeMenu, structure }) {
 
           <div>
             {structure.map(collection =>
-                <CollectionInfo infoCollection={collection}/>
+                <CollectionInfo infoCollection={collection} key={collection}/> 
             )}
           </div>
         </div>

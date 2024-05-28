@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './index.scss';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ToasterContainer from '../../components/toast';
 import toast from 'react-hot-toast';
 import { loginAccount } from '../../api/services/accountsAPI';

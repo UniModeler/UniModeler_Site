@@ -17,7 +17,7 @@ export default function SharePopup({ projectInfo, setInfo, pathname, permission 
 
   const changingPermission = permission === 'owner';
 
-  const [translation, replace] = useTranslations('actionsBar');
+  const [translation] = useTranslations('actionsBar');
   const [linkPermission, setLinkPermission] = useState(projectInfo.share.link.permission);
   const [collaborators, setCollaborators] = useState(projectInfo.share.collaborators);
 
@@ -88,13 +88,13 @@ export default function SharePopup({ projectInfo, setInfo, pathname, permission 
       }
 
       <h3>Colaboradores</h3>
-      <PerfectScrollbar style={{maxHeight: '138px', marginBottom: '70px'}}>
+      <PerfectScrollbar style={{ maxHeight: '138px', marginBottom: '70px' }}>
         <section className='collaborators'>
-          {collaborators.map(collaborator => <Collaborator id={collaborator.userId}
-                                  projectInfo={projectInfo}
-                                  collaborators={collaborators}
-                                  updateInfo={updateInfo}
-                                  changingPermission={changingPermission} />)}
+          {collaborators.map(collaborator => <Collaborator id={collaborator.userId} key={collaborator.userId}
+                                              projectInfo={projectInfo}
+                                              collaborators={collaborators}
+                                              updateInfo={updateInfo}
+                                              changingPermission={changingPermission} />)}
         </section>
       </PerfectScrollbar>
 
@@ -104,8 +104,8 @@ export default function SharePopup({ projectInfo, setInfo, pathname, permission 
           {projectInfo.share.link.code ?
             <img src="/assets/images/icons/copy.svg" alt="" />
             :
-            <img src="/assets/images/icons/link.svg" alt="" />                        
-          }                    
+            <img src="/assets/images/icons/link.svg" alt="" />
+          }
         </button>
 
         <div>

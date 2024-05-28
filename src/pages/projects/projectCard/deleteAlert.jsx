@@ -4,7 +4,7 @@ import { deleteProject } from "../../../api/services/projectsAPI";
 export default function DeleteAlert({project, resetProjects, onClose}) {
   return (
     <div className="delete-alert">
-      <p>Deseja realmente excluir o projeto "{project.info.name}"?</p>
+      <p>Deseja realmente excluir o projeto &quot;{project.info.name}&quot;?</p>
 
       <div>
         <button className='btn-yes' onClick={async () => {

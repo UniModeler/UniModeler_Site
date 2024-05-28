@@ -2,6 +2,7 @@ import './index.scss';
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import './init';
 
 import {
   createBrowserRouter,
@@ -18,7 +19,6 @@ import LoginPage from './pages/login';
 import SignUpPage from './pages/signup';
 import Plans from './pages/plans';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,8 +33,12 @@ const router = createBrowserRouter(
   )
 )
 
+console.log(router);
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <RouterProvider router={router} />
   </React.StrictMode>
 );

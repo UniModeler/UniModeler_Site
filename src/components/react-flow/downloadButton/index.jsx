@@ -1,4 +1,3 @@
-import React from 'react';
 import { useReactFlow, getNodesBounds, getViewportForBounds } from 'reactflow';
 import { toPng } from 'html-to-image';
 
@@ -36,7 +35,7 @@ function DownloadButton({ children }) {
     } catch (error) {
       console.log(error);
     }
-  };
+  }
 
   return (
     <button className="download-btn" onClick={onClick}>

@@ -60,7 +60,7 @@ export default function Attribute({ data }) {
             }
 
             {data.references &&
-              <p style={{ display: showInfo ? 'flex' : 'none' }}>References to: '{data.references}'</p>
+              <p style={{ display: showInfo ? 'flex' : 'none' }}>References to: &apos;{data.references}&apos;</p>
             }
           </div>
         </div>

@@ -1,15 +1,14 @@
 import DownloadButton from '../../react-flow/downloadButton';
 import './index.scss';
-import toast from 'react-hot-toast';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { get } from 'local-storage';
 import { confirmAlert } from 'react-confirm-alert';
 import callApi from '../../../api/callAPI';
-import { createProject, updateProject } from '../../../api/services/projectsAPI';
+import { createProject } from '../../../api/services/projectsAPI';
 import { useEffect, useState } from 'react';
 import SharePopup from '../../sharePopup';
 
-export default function ActionsBar({ projectInfo, projectModel, permission }) {
+export default function ActionsBar({ projectInfo, permission }) {
 
   const [info, setInfo] = useState(projectInfo);
   const logged = get('user-login').user;

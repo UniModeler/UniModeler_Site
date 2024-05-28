@@ -46,7 +46,7 @@ export default function CollectionInfo({ infoCollection }) {
         <div className="attributes">
           {
             infoCollection.attributes.map(attribute =>
-              <CollectionField attribute={attribute} />
+              <CollectionField attribute={attribute} key={attribute} />
             )
           }
         </div>
@@ -87,7 +87,7 @@ function CollectionField({ attribute }) {
                 }
 
                 {attribute.references &&
-                  <p>References to: "{attribute.references}"</p>
+                  <p>References to: &quot;{attribute.references}&quot;</p>
                 }
               </div>
             }
@@ -99,7 +99,7 @@ function CollectionField({ attribute }) {
 
       {attribute.attributes && showInfo &&
         attribute.attributes.map(attribute =>
-          <CollectionField attribute={attribute} />
+          <CollectionField attribute={attribute} key={attribute}/>
         )
       }
     </section >

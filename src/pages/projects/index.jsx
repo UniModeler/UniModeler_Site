@@ -80,7 +80,7 @@ export default function Projects() {
 
         {projects.length > 0 ?
           <section className="container-projects">
-            {projects.map(p => <ProjectCard project={p} resetProjects={getProjects} />)}
+            {projects.map(p => <ProjectCard project={p} resetProjects={getProjects} key={p}/>)}
           </section>
 
           :
