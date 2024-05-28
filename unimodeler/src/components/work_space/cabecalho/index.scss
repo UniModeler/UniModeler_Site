@@ -1,0 +1,95 @@
+.workspace .cabecalho {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    z-index: 2;
+
+    padding: 8px 12px;
+    width: 100%;
+
+    background-color: #292929;
+    color: #FFF;
+    box-shadow: 0 4px 4px 0 rgba($color: #000000, $alpha: 0.15);
+
+    >.logo {
+        width: 100%;
+        display: flex;
+        align-items: center;
+
+        img {
+            width: 143px;
+            height: 37px;
+        }   
+    }
+
+    .project-name {
+        width: 100%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2px;
+        color: #DCDCDC;
+
+        h2, input {
+            color: #FFF;
+            font-size: 14px;
+            font-weight: 600;
+
+            border: none;
+            background: transparent;
+            padding: none;
+        
+            width: max-content;
+            text-align: center;
+            min-width: 200px;
+        }
+
+        > div {
+            width: min-content;
+        }
+
+        input:focus-visible {
+            border-bottom: 1px solid rgba($color: #ffffff, $alpha: 0.15);
+            outline: none;
+        }
+
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 0;
+            background: none;
+            border: none;
+        }
+    }
+
+    .user {
+        width: 100%;
+
+        display: flex;
+        justify-content: flex-end;
+
+        > .btn-login {
+            border: none;       
+            background-color: #9535E5;
+            color: #FFF;
+    
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: 500;
+    
+            padding: 8px;
+            cursor: pointer;
+
+            transition: 0.1s;
+        }
+
+        > .btn-login:hover {
+            scale: 1.05;
+        }
+    }
+}

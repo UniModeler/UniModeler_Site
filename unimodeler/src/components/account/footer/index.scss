@@ -1,0 +1,17 @@
+.account-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    padding: 11px;
+    background-color: #292929;
+
+    color: #FFF;
+
+    h3 {
+        font-size: 12px;
+        font-weight: 700;
+    }
+}

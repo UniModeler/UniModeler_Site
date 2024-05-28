@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Kufam:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap');
+
+@font-face {
+  font-family: "Merge One";
+  src: url("../public/assets/fonts/MergeOne-Regular.ttf") format('truetype');
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Inter';
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+button {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.react-confirm-alert-overlay {
+  background-color: rgba(40, 40, 40, 0.8) !important;
+  backdrop-filter: blur(5px);
+}
