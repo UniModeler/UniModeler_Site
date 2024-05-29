@@ -181,7 +181,7 @@
                         }
 
                         li::before {
-                            content: url('../../../public/assets/images/plans/check.svg');
+                            content: url('/assets/images/plans/check.svg');
                             width: 21px;
                             height: 21px;
                             margin-right: 18px;
@@ -213,7 +213,7 @@
             }
 
             .favourite:after {
-                content: url('../../../public/assets/images/plans/favourite-plan.svg');
+                content: url('/assets/images/plans/favourite-plan.svg');
                 width: 65px;
                 height: 42px;
 
