@@ -2,7 +2,7 @@
     justify-content: center;
     background-color: #333;
 
-    > div:not(.cont-toaster) {
+    >div:not(.cont-toaster) {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -14,26 +14,26 @@
 
         box-shadow: 0 0 25px 10px rgba($color: #232323, $alpha: 0.25);
 
-        > img {
+        >img {
             width: 100%;
             max-width: 234px;
             margin-bottom: 20px;
         }
 
-        > .inputs {
+        >.inputs {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             width: 100%;
             gap: 25px;
 
-            > div {
+            >div {
                 display: flex;
                 flex-direction: column;
                 width: 100%;
                 gap: 11px;
 
-                > input {
+                >input {
                     color: #fff;
                     font-size: 16px;
                     font-weight: 700;
@@ -43,13 +43,21 @@
 
                     border: 1px solid #404040;
                     background-color: #303030;
+
+                    transition: 0.3s;
+
+                    &:focus-visible {
+                        outline: none;
+
+                        box-shadow: 0 0 4px 1px #ffffff3d;
+                    }
                 }
 
-                > input::placeholder {
+                >input::placeholder {
                     color: #bbb;
                 }
 
-                > button {
+                >button {
                     background-color: #b89b19;
                     color: #e0e0e0;
 
@@ -66,7 +74,7 @@
                     transition: 0.3s;
                 }
 
-                > button:hover {
+                >button:hover {
                     transform: scale(1.03);
                 }
             }

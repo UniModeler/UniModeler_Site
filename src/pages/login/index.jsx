@@ -41,7 +41,7 @@ export default function LoginPage() {
             <button onClick={login}>Entrar</button>
 
             <div>
-              <Link to={'/cadastro'}>Criar conta</Link>
+              <Link to={'/signup'}>Criar conta</Link>
               <Link>Esqueci a senha</Link>
             </div>
           </div>

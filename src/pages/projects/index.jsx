@@ -57,7 +57,7 @@ export default function Projects() {
   }, [section, location.key])
 
   return (
-    <div className="page projects">
+    <div className="page account-page projects">
       <Header />
 
       <ToasterContainer />

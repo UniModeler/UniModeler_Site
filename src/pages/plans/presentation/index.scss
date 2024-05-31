@@ -1,0 +1,347 @@
+.plans-presentation {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    * {
+        font-family: "Mukta";
+    }
+
+    >p {
+        font-size: 16px;
+        line-height: 22px;
+        max-width: 790px;
+        margin-bottom: 68px;
+    }
+
+    .buttons {
+        display: flex;
+        margin-bottom: 40px;
+
+        button {
+            font-size: 12px;
+            font-weight: 700;
+            font-family: 'Roboto';
+
+            border: 2px #B89B19 solid;
+            color: #FFF;
+            padding: 10px 22px;
+
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .selected {
+            background-color: #B89B19;
+        }
+
+        button:first-child {
+            border-top-left-radius: 15px;
+            border-right-width: 0;
+        }
+
+        button:last-child {
+            border-top-right-radius: 15px;
+            border-left-width: 0;
+        }
+    }
+
+    .container-plans {
+        display: flex;
+        flex-direction: row;
+        gap: 36px;
+
+        >div {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+
+            background-color: #464646;
+            box-shadow: 0 0 25px 1px #0000001a;
+
+            width: 100%;
+            max-width: 275px;
+
+            .plan-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                padding: 40px 22px 25px;
+                border: 1px solid #272F35;
+                border-bottom: none;
+
+                flex-grow: 1;
+
+                >h3 {
+                    color: #BECCD5;
+
+                    font-size: 22px;
+                    font-weight: 900;
+                    text-transform: uppercase;
+                    text-shadow: 0 4px 4px #00000040;
+
+                    margin-bottom: 30px;
+                }
+
+                >img {
+                    width: 88px;
+                    height: 88px;
+                    margin-bottom: 26px;
+                }
+
+                >div {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    width: 100%;
+                    gap: 27px;
+
+                    margin-bottom: 40px;
+
+                    .line {
+                        width: 100%;
+                        height: 1px;
+                        border: 1px #535353 solid;
+                    }
+
+                    h4 {
+                        text-wrap: nowrap;
+
+                        font-size: 22px;
+                        font-weight: 800;
+                        text-shadow: 0 4px 4px #00000040;
+
+                        span {
+                            font-size: 14px;
+                        }
+                    }
+                }
+
+                >ul {
+                    text-align: left;
+                    list-style-type: none;
+                    padding: 0;
+
+                    display: flex;
+                    flex-direction: column;
+                    gap: 4px;
+
+                    li {
+                        display: flex;
+                        align-items: center;
+
+                        font-size: 14px;
+                        line-height: 16px;
+                        color: #96A2A9;
+                    }
+
+                    li::before {
+                        content: url('/assets/images/icons/check.svg');
+                        width: 21px;
+                        height: 21px;
+                        margin-right: 18px;
+                    }
+                }
+            }
+
+            .subscribe {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                background-color: #B89B19;
+
+                text-transform: uppercase;
+
+                padding: 11px;
+                font-size: 14px;
+                font-weight: 900;
+                font-family: 'Roboto';
+            }
+
+            .subscribe.disabled {
+                color: #C1C1C1;
+                background-color: #5F5E41;
+
+                transition: 0.3s;
+            }
+        }
+
+        .favourite:after {
+            content: url('/assets/images/plans/favourite-plan.svg');
+            width: 65px;
+            height: 42px;
+
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+    }
+
+    .buttons {
+        display: flex;
+        margin-bottom: 40px;
+
+        button {
+            font-size: 12px;
+            font-weight: 700;
+            font-family: 'Roboto';
+
+            border: 2px #B89B19 solid;
+            color: #FFF;
+            padding: 10px 22px;
+
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .selected {
+            background-color: #B89B19;
+        }
+
+        button:first-child {
+            border-top-left-radius: 15px;
+            border-right-width: 0;
+        }
+
+        button:last-child {
+            border-top-right-radius: 15px;
+            border-left-width: 0;
+        }
+    }
+
+    .container-plans {
+        display: flex;
+        flex-direction: row;
+        gap: 36px;
+
+        >div {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+
+            background-color: #464646;
+            box-shadow: 0 0 25px 1px #0000001a;
+
+            width: 100%;
+            max-width: 275px;
+
+            .plan-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                padding: 40px 22px 25px;
+                border: 1px solid #272F35;
+                border-bottom: none;
+
+                flex-grow: 1;
+
+                >h3 {
+                    color: #BECCD5;
+
+                    font-size: 22px;
+                    font-weight: 900;
+                    text-transform: uppercase;
+                    text-shadow: 0 4px 4px #00000040;
+
+                    margin-bottom: 30px;
+                }
+
+                >img {
+                    width: 88px;
+                    height: 88px;
+                    margin-bottom: 26px;
+                }
+
+                >div {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    width: 100%;
+                    gap: 27px;
+
+                    margin-bottom: 40px;
+
+                    .line {
+                        width: 100%;
+                        height: 1px;
+                        border: 1px #535353 solid;
+                    }
+
+                    h4 {
+                        text-wrap: nowrap;
+
+                        font-size: 22px;
+                        font-weight: 800;
+                        text-shadow: 0 4px 4px #00000040;
+
+                        span {
+                            font-size: 14px;
+                        }
+                    }
+                }
+
+                >ul {
+                    text-align: left;
+                    list-style-type: none;
+                    padding: 0;
+
+                    display: flex;
+                    flex-direction: column;
+                    gap: 4px;
+
+                    li {
+                        display: flex;
+                        align-items: center;
+
+                        font-size: 14px;
+                        line-height: 16px;
+                        color: #96A2A9;
+                    }
+
+                    li::before {
+                        content: url('/assets/images/plans/check.svg');
+                        width: 21px;
+                        height: 21px;
+                        margin-right: 18px;
+                    }
+                }
+            }
+
+            .subscribe {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                background-color: #B89B19;
+
+                text-transform: uppercase;
+
+                padding: 11px;
+                font-size: 14px;
+                font-weight: 900;
+                font-family: 'Roboto';
+            }
+
+            .subscribe.disabled {
+                color: #C1C1C1;
+                background-color: #5F5E41;
+
+                transition: 0.3s;
+            }
+        }
+
+        .favourite:after {
+            content: url('/assets/images/plans/favourite-plan.svg');
+            width: 65px;
+            height: 42px;
+
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+    }
+}
